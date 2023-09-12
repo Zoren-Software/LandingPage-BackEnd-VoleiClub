@@ -63,6 +63,39 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+          - mariadb:mariadb
+        ports:
+          - 8100:80
+        environment:
+          MYSQL_USERNAME: "${DB_USERNAME}"
+          MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+          PMA_HOST: mariadb
+        networks:
+          - sail
+    
+    portainer:
+        image: portainer/portainer-ce:latest
+        restart: unless-stopped
+        security_opt:
+        - no-new-privileges:true
+        volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - ./portainer-data:/data
+        ports:
+        - 9000:9000
+
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - ${MAILHOG_PORT_SMTP_SERVER:-1025}:1025 # smtp server
+            - ${MAILHOG_PORT_WEB_UI:-8025}:8025 # web ui
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
