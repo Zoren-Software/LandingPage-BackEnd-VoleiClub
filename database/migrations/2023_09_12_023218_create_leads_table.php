@@ -32,7 +32,7 @@ return new class () extends Migration {
                 'experience_level',
                 [
                     'beginner',
-                    'amatuer',
+                    'amateur',
                     'student',
                     'college',
                     'semi-professional',

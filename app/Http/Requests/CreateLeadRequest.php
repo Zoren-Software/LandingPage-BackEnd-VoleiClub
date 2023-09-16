@@ -39,4 +39,15 @@ class CreateLeadRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'email.unique' => __('Leads.email.unique'),
+            'email.required' => __('Leads.email.required'),
+            'name.required' => __('Leads.name.required'),
+            'experience_level.required' => __('Leads.experience_level.required'),
+            'message.string' => __('Leads.message.string'),
+        ];
+    }
 }

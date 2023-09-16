@@ -9,37 +9,188 @@ class CreateLeadTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider  successProvider
+     * @dataProvider  errorProvider
+     * @group create-lead
+     *
      * A basic test example.
      */
-    public function createLead(): void
+    public function createLead(array $data, int $statusCodeExpected, string $messageExpected, string $errorType, bool $errorExpected): void
     {
-        // TODO - Criar os demais casos de teste para validar corretamente as mensagens de erro
-        // TODO - Criar os demais casos de teste para validar corretamente as mensagens de sucesso
-        // TODO - Criar os demais casos de teste para validar corretamente o funcionamento destas rotas
+        if($errorExpected && $messageExpected == 'Leads.email.unique') {
+            $lead = \App\Models\Lead::factory()->create();
+            $data['email'] = $lead->email;
+        }
+
+        $response = $this->rest()->post('api/leads', $data);
+
+        if(!$errorExpected) {
+            $response->assertJsonStructure([
+                'message',
+            ]);
+
+            $response->assertJson([
+                'message' => __($messageExpected),
+            ]);
+        }
+
+        if($errorExpected) {
+            $response->assertJsonStructure([
+                'message',
+                'errors' => [
+                    $errorType
+                ],
+            ]);
+
+            $response->assertJson([
+                'message' => __($messageExpected),
+            ]);
+        }
+
+        $response->assertStatus($statusCodeExpected);
+
+    }
+
+    public static function errorProvider(): array
+    {
         $faker = \Faker\Factory::create();
 
-        $response = $this->post('api/leads', [
-            'name' => $faker->name(),
-            'email' => $faker->unique()->safeEmail(),
-            'experience_level' => $faker->randomElement([
-                'beginner',
-                'amatuer',
-                'student',
-                'college',
-                'semi-professional',
-                'professional',
-                'intermediate',
-                'coach',
-                'instructor',
-                'other',
-            ]),
-            'message' => $faker->text(),
-        ]);
+        return [
+            'create register lead, message is string, error' => [
+                'data' => [
+                    'name' => $faker->name(),
+                    'email' => $faker->unique()->safeEmail(),
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => null
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.message.string',
+                'errorType' => 'message',
+                'errorExpected' => true,
+            ],
+            'create register lead, experience level is required, error' => [
+                'data' => [
+                    'name' => $faker->name(),
+                    'email' => $faker->unique()->safeEmail(),
+                    'experience_level' => null,
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.experience_level.required',
+                'errorType' => 'experience_level',
+                'errorExpected' => true,
+            ],
+            'create register lead, name is required, error' => [
+                'data' => [
+                    'name' => null,
+                    'email' => $faker->unique()->safeEmail(),
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.name.required',
+                'errorType' => 'name',
+                'errorExpected' => true,
+            ],
+            'create register lead, e-mail is required, error' => [
+                'data' => [
+                    'name' => $faker->name(),
+                    'email' => null,
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.email.required',
+                'errorType' => 'email',
+                'errorExpected' => true,
+            ],
+            'create register lead, e-mail already registered, error' => [
+                'data' => [
+                    'name' => $faker->name(),
+                    'email' =>  $faker->unique()->safeEmail(),
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.email.unique',
+                'errorType' => 'email',
+                'errorExpected' => true,
+            ],
+        ];
+    }
 
-        $response->assertJsonStructure([
-            'message',
-        ]);
+    public static function successProvider(): array
+    {
+        $faker = \Faker\Factory::create();
 
-        $response->assertStatus(200);
+        return [
+            'create register lead, new functional lead record, success' => [
+                'data' => [
+                    'name' => $faker->name(),
+                    'email' =>  $faker->unique()->safeEmail(),
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success',
+                'errorType' => 'null',
+                'errorExpected' => false,
+            ],
+        ];
     }
 }
