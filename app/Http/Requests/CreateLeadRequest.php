@@ -24,18 +24,18 @@ class CreateLeadRequest extends FormRequest
         return [
             'email' => [
                 'unique:leads,email',
-                'required'
+                'required',
             ],
             'name' => [
                 'required',
-                'string'
+                'string',
             ],
             'experience_level' => [
                 'required',
             ],
             'message' => [
                 'string',
-                'sometimes'
+                'sometimes',
             ],
         ];
     }

@@ -9,22 +9,24 @@ class CreateLeadTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider  successProvider
      * @dataProvider  errorProvider
+     *
      * @group create-lead
      *
      * A basic test example.
      */
     public function createLead(array $data, int $statusCodeExpected, string $messageExpected, string $errorType, bool $errorExpected): void
     {
-        if($errorExpected && $messageExpected == 'Leads.email.unique') {
+        if ($errorExpected && $messageExpected == 'Leads.email.unique') {
             $lead = \App\Models\Lead::factory()->create();
             $data['email'] = $lead->email;
         }
 
         $response = $this->rest()->post('api/leads', $data);
 
-        if(!$errorExpected) {
+        if (! $errorExpected) {
             $response->assertJsonStructure([
                 'message',
             ]);
@@ -34,11 +36,11 @@ class CreateLeadTest extends TestCase
             ]);
         }
 
-        if($errorExpected) {
+        if ($errorExpected) {
             $response->assertJsonStructure([
                 'message',
                 'errors' => [
-                    $errorType
+                    $errorType,
                 ],
             ]);
 
@@ -72,7 +74,7 @@ class CreateLeadTest extends TestCase
                         'instructor',
                         'other',
                     ]),
-                    'message' => null
+                    'message' => null,
                 ],
                 'statusCodeExpected' => 422,
                 'messageExpected' => 'Leads.message.string',
@@ -140,7 +142,7 @@ class CreateLeadTest extends TestCase
             'create register lead, e-mail already registered, error' => [
                 'data' => [
                     'name' => $faker->name(),
-                    'email' =>  $faker->unique()->safeEmail(),
+                    'email' => $faker->unique()->safeEmail(),
                     'experience_level' => $faker->randomElement([
                         'beginner',
                         'amateur',
@@ -171,7 +173,7 @@ class CreateLeadTest extends TestCase
             'create register lead, new functional lead record, success' => [
                 'data' => [
                     'name' => $faker->name(),
-                    'email' =>  $faker->unique()->safeEmail(),
+                    'email' => $faker->unique()->safeEmail(),
                     'experience_level' => $faker->randomElement([
                         'beginner',
                         'amateur',

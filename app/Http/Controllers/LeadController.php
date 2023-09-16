@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Lead;
 use App\Http\Requests\CreateLeadRequest;
+use App\Models\Lead;
 
 class LeadController extends Controller
 {
