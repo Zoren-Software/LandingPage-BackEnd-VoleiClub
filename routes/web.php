@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/confirm-email', function () {
+    $lead = App\Models\Lead::find(1);
+
+    return new App\Mail\ConfirmEmail($lead);
+});
