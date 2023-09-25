@@ -19,7 +19,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post(
-    '/leads',
-    [LeadController::class, 'store']
+Route::group(
+    [
+        'prefix' => 'leads',
+    ],
+    function () {
+        Route::post(
+            '/',
+            [LeadController::class, 'store']
+        );
+        Route::get(
+            '/confirm-email/{id}',
+            [LeadController::class, 'confirmEmail']
+        )
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('leads.confirm-email');
+    }
 );

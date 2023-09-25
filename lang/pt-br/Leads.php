@@ -9,4 +9,5 @@ return [
     'name.required' => 'O campo nome é obrigatório.',
     'experience_level.required' => 'O campo nível de experiência é obrigatório.',
     'message.string' => 'O campo mensagem deve ser uma string.',
+    'emailConfirmed' => 'Seu e-mail foi confirmado com sucesso.',
 ];
