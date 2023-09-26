@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(
+    [
+        'prefix' => 'leads',
+    ],
+    function () {
+        Route::post(
+            '/',
+            [LeadController::class, 'store']
+        );
+        Route::get(
+            '/confirm-email/{id}',
+            [LeadController::class, 'confirmEmail']
+        )
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('leads.confirm-email');
+    }
+);
