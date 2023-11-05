@@ -11,4 +11,6 @@ return [
     'experience_level.required' => 'Le champ niveau d\'expérience est obligatoire.',
     'message.string' => 'Le champ message doit être une chaîne.',
     'emailConfirmed' => 'Votre email a été confirmé avec succès.',
+    'recaptchaToken.required' => 'Le champ du jeton recaptcha est requis.',
+    'recaptchaToken.string' => 'Le champ du jeton recaptcha doit être une chaîne de caractères.',
 ];

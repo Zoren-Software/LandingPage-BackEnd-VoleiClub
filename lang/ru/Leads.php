@@ -11,4 +11,6 @@ return [
     'experience_level.required' => 'Поле уровня опыта обязательно для заполнения.',
     'message.string' => 'Поле сообщения должно быть строкой.',
     'emailConfirmed' => 'Ваш адрес электронной почты успешно подтвержден.',
+    'recaptchaToken.required' => 'Поле токена recaptcha обязательно для заполнения.',
+    'recaptchaToken.string' => 'Поле токена recaptcha должно быть строкой.',
 ];

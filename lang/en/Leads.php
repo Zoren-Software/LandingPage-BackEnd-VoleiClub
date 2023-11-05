@@ -11,4 +11,6 @@ return [
     'experience_level.required' => 'The experience level field is required.',
     'message.string' => 'The message field must be a string.',
     'emailConfirmed' => 'Your email has been successfully confirmed.',
+    'recaptchaToken.required' => 'The recaptcha token field is required.',
+    'recaptchaToken.string' => 'The recaptcha token field must be a string.',
 ];
