@@ -9,6 +9,6 @@ return [
     'email.required' => 'El campo de correo electrónico es obligatorio.',
     'name.required' => 'El campo de nombre es obligatorio.',
     'experience_level.required' => 'El campo de nivel de experiencia es obligatorio.',
-    'message.string' => 'El campo de mensaje debe ser una cadena.',
-    'emailConfirmed' => 'Tu correo electrónico ha sido confirmado con éxito.',
+    'recaptchaToken.required' => 'El campo del token de recaptcha es obligatorio.',
+    'recaptchaToken.string' => 'El campo del token de recaptcha debe ser una cadena de texto.',
 ];

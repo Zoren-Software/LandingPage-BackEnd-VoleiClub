@@ -11,4 +11,6 @@ return [
     'experience_level.required' => 'Pole poziom doświadczenia jest wymagane.',
     'message.string' => 'Pole wiadomość musi być ciągiem znaków.',
     'emailConfirmed' => 'Twój e-mail został pomyślnie potwierdzony.',
+    'recaptchaToken.required' => 'Pole tokena recaptcha jest wymagane.',
+    'recaptchaToken.string' => 'Pole tokena recaptcha musi być ciągiem znaków.',
 ];

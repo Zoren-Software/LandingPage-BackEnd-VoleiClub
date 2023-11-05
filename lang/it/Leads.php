@@ -11,4 +11,6 @@ return [
     'experience_level.required' => 'Il campo livello di esperienza è obbligatorio.',
     'message.string' => 'Il campo messaggio deve essere una stringa.',
     'emailConfirmed' => 'La tua email è stata confermata con successo.',
+    'recaptchaToken.required' => 'Il campo del token recaptcha è obbligatorio.',
+    'recaptchaToken.string' => 'Il campo del token recaptcha deve essere una stringa.',
 ];
