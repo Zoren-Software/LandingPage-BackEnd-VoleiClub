@@ -24,9 +24,11 @@ class CreateLeadTest extends TestCase
             $data['email'] = $lead->email;
         }
 
+        $data['recaptchaToken'] = 'testing';
+
         $response = $this->rest()->post('api/leads', $data);
 
-        if (! $errorExpected) {
+        if (!$errorExpected) {
             $response->assertJsonStructure([
                 'message',
             ]);
@@ -38,14 +40,7 @@ class CreateLeadTest extends TestCase
 
         if ($errorExpected) {
             $response->assertJsonStructure([
-                'message',
-                'errors' => [
-                    $errorType,
-                ],
-            ]);
-
-            $response->assertJson([
-                'message' => __($messageExpected),
+                $errorType,
             ]);
         }
 

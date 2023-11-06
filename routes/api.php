@@ -36,3 +36,11 @@ Route::group(
         ->name('leads.confirm-email');
     }
 );
+
+// criar rota de teste ping
+Route::get(
+    '/ping',
+    function () {
+        return ['pong' => true];
+    }
+);
