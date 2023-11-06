@@ -73,7 +73,7 @@ services:
         environment:
           MYSQL_USERNAME: "${DB_USERNAME}"
           MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-          PMA_HOST: mariadb
+          PMA_HOST: landingpage-volleytrack.cotjftyqknlg.us-east-1.rds.amazonaws.com
         networks:
           - sail
     

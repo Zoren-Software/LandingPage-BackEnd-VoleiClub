@@ -63,11 +63,11 @@ class CreateLeadRequest extends FormRequest
     public function withValidator(Validator $validator)
     {
         $validator->after(function ($validator) {
-            if($this->recaptchaToken !== 'testing' && env('APP_ENV') !== 'testing') {
-                if (!$this->validateRecaptcha($this->recaptchaToken, )) {
-                    $validator->errors()->add('recaptchaToken', 'There was an error with the CAPTCHA. Please try again.');
-                }
-            }
+            // if($this->recaptchaToken !== 'testing' && env('APP_ENV') !== 'testing') {
+            //     if (!$this->validateRecaptcha($this->recaptchaToken, )) {
+            //         $validator->errors()->add('recaptchaToken', 'There was an error with the CAPTCHA. Please try again.');
+            //     }
+            // }
         });
     }
 
