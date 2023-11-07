@@ -73,7 +73,8 @@ services:
         environment:
           MYSQL_USERNAME: "${DB_USERNAME}"
           MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-          PMA_HOST: landingpage-volleytrack.cotjftyqknlg.us-east-1.rds.amazonaws.com
+        volumes:
+          - ./config.inc.php:/etc/phpmyadmin/config.inc.php
         networks:
           - sail
     
