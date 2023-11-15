@@ -1,12 +1,28 @@
 <x-mail::message>
-# Confirm E-mail
- 
-Please confirm your e-mail address by clicking the link below:
- 
+# {{ trans('Leads.confirm_e-mail')}}
+
+{{ trans("Leads.hello")}} {{ $lead->name }},
+
+{{ trans("Leads.email_confirm_text_1")}} {{ env('APP_NAME') }}! 
+
+{{ trans("Leads.email_confirm_text_2")}}
+
+## {{ trans("Leads.email_confirm_text_3")}}
+
+{{ trans("Leads.email_confirm_text_4")}}
+
+{{ trans("Leads.email_confirm_text_5")}}
+
+{{ trans("Leads.email_confirm_text_6")}}
+
+## {{ trans("Leads.email_confirm_text_7")}}
+
+{{ trans("Leads.email_confirm_text_8")}}
+
 <x-mail::button :url="$url">
-Confirm E-mail
+{{ trans('Leads.button_confirm_e-mail')}}
 </x-mail::button>
- 
-Thanks,<br>
+
+{{ trans("Leads.thanks") }},<br>
 {{ config('app.name') }}
 </x-mail::message>
