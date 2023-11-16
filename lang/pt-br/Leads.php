@@ -3,7 +3,8 @@
 return [
     'success' => 'Seu interesse  no produto  foi registrado com sucesso, nossa ' .
         'equipe entrará em contato em breve para mais detalhes, você agora esta em ' .
-        'nossa fila de espera, assim que o produto for lançado você será notificado.',
+        'nossa fila de espera, assim que o produto for lançado você será notificado. ' .
+        'Agora confirme seu e-mail clicando no link que enviamos para você.',
     'email.unique' => 'O e-mail informado já está cadastrado em nossa base de dados. ' .
         'Logo nossa equipe entrará em contato com você para mais detalhes.',
     'email.required' => 'O campo email é obrigatório.',
