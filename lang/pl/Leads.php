@@ -3,7 +3,8 @@
 return [
     'success' => 'Twoje zainteresowanie produktem zostało pomyślnie zarejestrowane, ' .
         'nasz zespół skontaktuje się z Tobą wkrótce w celu uzyskania więcej szczegółów, jesteś teraz na naszej' .
-        'liście oczekujących, jak tylko produkt zostanie uruchomiony, zostaniesz powiadomiony.',
+        'liście oczekujących, jak tylko produkt zostanie uruchomiony, zostaniesz powiadomiony. ' .
+        'Teraz potwierdź swój e-mail, klikając na link, który wysłaliśmy do Ciebie.',
     'email.unique' => 'Podany adres e-mail jest już zarejestrowany w naszej bazie danych. ' .
         'Nasz zespół skontaktuje się z Tobą wkrótce w celu uzyskania więcej szczegółów.',
     'email.required' => 'Pole e-mail jest wymagane.',

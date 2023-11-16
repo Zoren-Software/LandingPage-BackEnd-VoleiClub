@@ -3,7 +3,8 @@
 return [
     'success' => 'Your interest in the product has been successfully registered, ' .
         'our team will contact you shortly for more details, you are now on our waiting' .
-        'list, as soon as the product is launched you will be notified.',
+        'list, as soon as the product is launched you will be notified. ' .
+        'Now confirm your email by clicking on the link we sent to you.',
     'email.unique' => 'The email provided is already registered in our database. ' .
         'Our team will contact you shortly for more details.',
     'email.required' => 'The e-mail field is required.',
