@@ -23,7 +23,7 @@ return [
         para comenzar a usar el producto.",
     "email_confirm_text_3" => "¿Por qué es importante confirmar su correo electrónico?",
     "email_confirm_text_4" => "**Seguridad**: Queremos asegurarnos de que realmente fue usted quien se registró en nuestro sitio. Esto ayuda a protegerlo a usted y a su cuenta contra accesos no autorizados.",
-    "email_confirm_text_5" => "**Comunicación Eficiente**: Al confirmar su correo electrónico, aseguramos que toda la información importante sobre [Nombre del Producto] le llegue sin inconvenientes.",
+    "email_confirm_text_5" => "**Comunicación Eficiente**: Al confirmar su correo electrónico, aseguramos que toda la información importante sobre VolleyTrack le llegue sin inconvenientes.",
     "email_confirm_text_6" => "**Experiencia Personalizada**: Con la confirmación, podemos ofrecer una experiencia más personalizada y alineada con sus expectativas e intereses.",
     "email_confirm_text_7" => "¿Cómo confirmar?",
     "email_confirm_text_8" => "Es fácil - solo haga clic en el enlace de abajo:",
