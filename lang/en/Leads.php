@@ -25,7 +25,7 @@ return [
         to start using the product.",
     "email_confirm_text_3" => "Why is it important to confirm your email?",
     "email_confirm_text_4" => "**Security**: We want to ensure that it was really you who registered on our site. This helps to protect you and your account against unauthorized access.",
-    "email_confirm_text_5" => "**Efficient Communication**: By confirming your email, we ensure that all important information about [Product Name] reaches you without any issues.",
+    "email_confirm_text_5" => "**Efficient Communication**: By confirming your email, we ensure that all important information about VolleyTrack reaches you without any issues.",
     "email_confirm_text_6" => "**Personalized Experience**: With the confirmation, we can offer a more personalized experience aligned with your expectations and interests.",
     "email_confirm_text_7" => "How to confirm?",
     "email_confirm_text_8" => "It’s easy – just click on the link below:",
