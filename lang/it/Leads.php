@@ -3,7 +3,8 @@
 return [
     'success' => 'Il tuo interesse per il prodotto è stato registrato con successo, ' .
         'il nostro team ti contatterà a breve per ulteriori dettagli, ora sei nella nostra' .
-        'lista d\'attesa, non appena il prodotto sarà lanciato sarai notificato.',
+        'lista d\'attesa, non appena il prodotto sarà lanciato sarai notificato. ' .
+        'Ora conferma la tua e-mail cliccando sul link che ti abbiamo inviato.',
     'email.unique' => 'L\'email fornita è già registrata nel nostro database. ' .
         'Il nostro team ti contatterà a breve per ulteriori dettagli.',
     'email.required' => 'Il campo email è obbligatorio.',
