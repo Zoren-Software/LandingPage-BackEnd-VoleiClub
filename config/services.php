@@ -31,6 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'discord' => [
+        'webhook_errors' => env('DISCORD_ALERT_ERRORS_WEBHOOK'),
+        'webhook_new_leads' => env('DISCORD_ALERT_NEW_LEADS_WEBHOOK'),
+    ],
+
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
