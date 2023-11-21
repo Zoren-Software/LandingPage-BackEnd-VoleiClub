@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Services\DiscordService;
+use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -24,7 +26,11 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            if ($this->shouldReport($e)) {
+                $clientDiscord = new GuzzleClient();
+                $discord = new DiscordService($clientDiscord);
+                $discord->sendError($e, 'Laravel Handler');
+            }
         });
     }
 }
