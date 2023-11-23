@@ -88,7 +88,7 @@ final class DiscordService extends Model
                 ]
             );
         } catch (ClientException $e) {
-            throw new \Throwable('Erro ao enviar mensagem para o Discord');
+            throw new \Exception('Erro ao enviar mensagem para o Discord');
         }
     }
 
