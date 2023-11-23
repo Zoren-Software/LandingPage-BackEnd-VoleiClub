@@ -22,3 +22,9 @@ Route::get('/confirm-email', function () {
 
     return new App\Mail\ConfirmEmail($lead);
 });
+
+Route::get('/after-confirm-email', function () {
+    $lead = App\Models\Lead::find(1);
+
+    return new App\Mail\AfterConfirmationEmail($lead);
+});
