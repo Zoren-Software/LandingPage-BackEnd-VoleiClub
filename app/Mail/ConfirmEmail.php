@@ -38,13 +38,18 @@ class ConfirmEmail extends Mailable
      */
     public function content(): Content
     {
+        $locale = app()->getLocale(); // Obter o idioma atual
+
         return new Content(
             markdown: 'emails.confirmEmail',
             with: [
                 'url' => URL::temporarySignedRoute(
                     'leads.confirm-email',
                     now()->addMinutes(30),
-                    ['id' => $this->lead->id]
+                    [
+                        'id' => $this->lead->id,
+                        'locale' => $locale,
+                    ]
                 ),
             ],
         );
