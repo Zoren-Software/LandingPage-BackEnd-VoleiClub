@@ -24,4 +24,7 @@
 
 {{ trans("Leads.email_signature") }}<br>
 {{ trans("Leads.email_signature_2") }}<br>
+
+{{ trans("Leads.follow_us_on_instagram")}}:
+<a href="https://www.instagram.com/volleytrack_official/" target="_blank">@volleytrack_official</a>
 </x-mail::message>

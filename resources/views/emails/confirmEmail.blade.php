@@ -23,6 +23,7 @@
 {{ trans('Leads.button_confirm_e-mail')}}
 </x-mail::button>
 
-{{ trans("Leads.thanks") }},<br>
-{{ config('app.name') }}
+{{ trans("Leads.email_signature") }}<br>
+{{ trans("Leads.email_signature_2") }}<br>
+
 </x-mail::message>

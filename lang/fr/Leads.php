@@ -42,4 +42,5 @@ return [
     "email_thanks" => "Nous vous remercions encore de vous joindre à nous dans cette aventure passionnante. Nous sommes impatients de voir comment VolleyTrack peut aider à transformer la gestion de votre équipe de volley-ball.",
     "email_signature" => "Cordialement,",
     "email_signature_2" => "L'équipe VolleyTrack",
+    "follow_us_on_instagram" => "Suivez-nous sur Instagram",
 ];

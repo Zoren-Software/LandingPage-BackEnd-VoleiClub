@@ -42,4 +42,5 @@ return [
     "email_thanks" => "Jeszcze raz dziękujemy za dołączenie do nas w tej ekscytującej podróży. Nie możemy się doczekać, aby zobaczyć, jak VolleyTrack pomoże w transformacji zarządzania Twoją drużyną siatkówki.",
     "email_signature" => "Z poważaniem,",
     "email_signature_2" => "Zespół VolleyTrack",
+    "follow_us_on_instagram" => "Obserwuj nas na Instagramie",
 ];
