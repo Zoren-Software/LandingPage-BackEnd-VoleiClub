@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class ConfirmEmail extends Mailable
+class AfterConfirmationEmail extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -29,7 +29,7 @@ class ConfirmEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: trans('Leads.confirm_e-mail'),
+            subject: trans('Leads.email_welcome_VolleyTrack_registration_confirmation'),
         );
     }
 
@@ -38,20 +38,8 @@ class ConfirmEmail extends Mailable
      */
     public function content(): Content
     {
-        $locale = app()->getLocale(); // Obter o idioma atual
-
         return new Content(
-            markdown: 'emails.confirmEmail',
-            with: [
-                'url' => URL::temporarySignedRoute(
-                    'leads.confirm-email',
-                    now()->addMinutes(30),
-                    [
-                        'id' => $this->lead->id,
-                        'locale' => $locale,
-                    ]
-                ),
-            ],
+            markdown: 'emails.afterConfirmationEmail'
         );
     }
 
