@@ -48,6 +48,7 @@ return [
 
         'ses' => [
             'transport' => 'ses',
+            'ping_threshold' => 10,
         ],
 
         'mailgun' => [
