@@ -16,4 +16,28 @@ class Lead extends Model
         'experience_level',
         'message',
     ];
+
+    public function scopeFiltrar($query, $request) {
+        $query->filterId($request)
+            ->filterStatus($request)
+            ->search($request);
+    }
+
+    public function scopeSearch($query, $request) {
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%');
+        }
+    }
+
+    public function scopeFilterId($query, $request) {
+        if ($request->has('id')) {
+            $query->where('id', $request->input('id'));
+        }
+    }
+
+    public function scopeFilterStatus($query, $request) {
+        if ($request->has('status')) {
+            $query->where('status', $request->input('status'));
+        }
+    }
 }

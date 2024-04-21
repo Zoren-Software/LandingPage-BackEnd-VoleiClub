@@ -29,6 +29,10 @@ Route::group(
             [LeadController::class, 'store']
         );
         Route::get(
+            '/',
+            [LeadController::class, 'list']
+        );
+        Route::get(
             '/confirm-email/{id}',
             [LeadController::class, 'confirmEmail']
         )
