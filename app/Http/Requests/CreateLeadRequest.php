@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use GuzzleHttp\Client;
 use Illuminate\Validation\Rule;
 
-class CreateLeadRequest extends FormRequest
+class CreateLeadRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -91,5 +92,37 @@ class CreateLeadRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($validator->errors(), 422));
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'email' => [
+                'description' => __('Leads.email_description'),
+                'required' => true,
+                'value' => 'test@test.com',
+            ],
+            'name' => [
+                'description' => __('Leads.name_description'),
+                'required' => true,
+                'value' => 'John Doe',
+            ],
+            'experience_level' => [
+                'description' => __('Leads.experience_level_description'),
+                'required' => true,
+                'value' => 'beginner',
+            ],
+            'message' => [
+                'description' => __('Leads.message_description'),
+                'required' => false,
+                'value' => 'Hello, I am interested in your services.',
+            ],
+            'recaptchaToken' => [
+                'description' => __('Leads.recaptchaToken_description'),
+                'required' => true,
+                'value' => 'test',
+            ],
+        ];
+
     }
 }

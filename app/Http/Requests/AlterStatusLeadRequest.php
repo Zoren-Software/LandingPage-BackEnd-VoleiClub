@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use GuzzleHttp\Client;
 use Illuminate\Validation\Rule;
 
-class AlterStatusLeadRequest extends FormRequest
+class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -54,6 +55,22 @@ class AlterStatusLeadRequest extends FormRequest
             'status.required' => __('Leads.status_required'),
             'status.string' => __('Leads.status_string'),
             'status.in' => __('Leads.status_in'),
+        ];
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'id' => [
+                'description' => __('Leads.id_description'),
+                'required' => true,
+                'example' => 1,
+            ],
+            'status' => [
+                'description' => __('Leads.status_description'),
+                'required' => true,
+                'example' => 'new',
+            ],
         ];
     }
 }

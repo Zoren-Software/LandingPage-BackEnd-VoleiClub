@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\URL;
 
-class ConfirmEmailRequest extends FormRequest
+class ConfirmEmailRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,6 +29,25 @@ class ConfirmEmailRequest extends FormRequest
                 'string',
                 'exists:leads,id',
             ]
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'id.string' => __('Leads.id_string'),
+            'id.exists' => __('Leads.id_exists'),
+        ];
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'id' => [
+                'description' => __('Leads.id_description'),
+                'required' => true,
+                'value' => '1',
+            ],
         ];
     }
 }
