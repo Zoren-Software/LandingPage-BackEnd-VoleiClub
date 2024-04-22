@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlterStatusLeadRequest;
 use App\Http\Requests\ConfirmEmailRequest;
 use App\Http\Requests\CreateLeadRequest;
 use App\Http\Requests\PaginateLeadsRequest;
@@ -63,5 +64,17 @@ class LeadController extends Controller
         }
 
         return response()->json($leads->paginate());
+    }
+
+    public function alterStatusLead(AlterStatusLeadRequest $request)
+    {
+        $lead = new Lead();
+        $lead = $lead->findOrFail($request->input('id'));
+        $lead->alterStatus($request);
+
+        return response()->json([
+            'message' => __('Leads.success_edit_status'),
+            'data'  => $lead,
+        ]);
     }
 }

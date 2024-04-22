@@ -17,6 +17,14 @@ class Lead extends Model
         'message',
     ];
 
+    public function alterStatus($request) {
+        $this->findOrFail($request->input('id'));
+        $this->status = $request->input('status');
+        $this->save();
+
+        return $this;
+    }
+
     public function scopeFiltrar($query, $request) {
         $query->filterId($request)
             ->filterStatus($request)

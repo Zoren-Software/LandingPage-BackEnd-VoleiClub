@@ -43,4 +43,10 @@ return [
     "email_signature" => "Sincerely,",
     "email_signature_2" => "VolleyTrack Team",
     "follow_us_on_instagram" => "Follow us on Instagram",
+    "id_integer" => "The id field must be an integer.",
+    "id_exists" => "The selected id field is invalid.",
+    "status_in" => "The selected status is invalid.",
+    "status_string" => "The status field must be a string.",
+    "status_required" => "The status field is required.",
+    "success_edit_status" => "The status of the lead has been successfully updated.",
 ];

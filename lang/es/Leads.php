@@ -41,4 +41,10 @@ return [
     "email_signature" => "Atentamente,",
     "email_signature_2" => "Equipo de VolleyTrack",
     "follow_us_on_instagram" => "Síguenos en Instagram",
+    "id_integer" => "El campo id debe ser un número entero.",
+    "id_exists" => "El campo id seleccionado es inválido.",
+    "status_in" => "El estado seleccionado es inválido.",
+    "status_string" => "El campo estado debe ser una cadena de texto.",
+    "status_required" => "El campo estado es obligatorio.",
+    "success_edit_status" => "El estado del lead ha sido actualizado con éxito.",
 ];

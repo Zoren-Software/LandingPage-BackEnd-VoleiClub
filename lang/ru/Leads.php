@@ -43,4 +43,10 @@ return [
     "email_signature" => "С уважением,",
     "email_signature_2" => "Команда VolleyTrack",
     "follow_us_on_instagram" => "Подписывайтесь на нас в Instagram",
+    "id_integer" => "Поле id должно быть целым числом.",
+    "id_exists" => "Выбранное поле id недействительно.",
+    "status_in" => "Выбранный статус недействителен.",
+    "status_string" => "Поле статуса должно быть строкой.",
+    "status_required" => "Поле статуса обязательно для заполнения.",
+    "success_edit_status" => "Статус лида успешно обновлен.",
 ];

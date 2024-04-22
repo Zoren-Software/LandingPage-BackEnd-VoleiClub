@@ -11,8 +11,11 @@
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
         </testsuite>
-        <testsuite name="Listar">
+        <testsuite name="List">
             <file>tests/Feature/ListLeadTest.php</file>
+        </testsuite>
+        <testsuite name="AlterStatusLead">
+            <file>tests/Feature/AlterStatusLeadTest.php</file>
         </testsuite>
     </testsuites>
     <source>

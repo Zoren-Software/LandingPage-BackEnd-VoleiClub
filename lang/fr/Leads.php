@@ -43,4 +43,10 @@ return [
     "email_signature" => "Cordialement,",
     "email_signature_2" => "L'équipe VolleyTrack",
     "follow_us_on_instagram" => "Suivez-nous sur Instagram",
+    "id_integer" => "Le champ id doit être un nombre entier.",
+    "id_exists" => "Le champ id sélectionné est invalide.",
+    "status_in" => "Le statut sélectionné est invalide.",
+    "status_string" => "Le champ statut doit être une chaîne.",
+    "status_required" => "Le champ statut est obligatoire.",
+    "success_edit_status" => "Le statut du lead a été mis à jour avec succès.",
 ];

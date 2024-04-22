@@ -28,6 +28,10 @@ Route::group(
             '/',
             [LeadController::class, 'store']
         );
+        Route::put(
+            '/{id}',
+            [LeadController::class, 'alterStatusLead']
+        );
         Route::get(
             '/',
             [LeadController::class, 'list']
