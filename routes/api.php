@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(
     [
         'prefix' => 'leads',
@@ -27,14 +23,6 @@ Route::group(
         Route::post(
             '/',
             [LeadController::class, 'store']
-        );
-        Route::put(
-            '/{id}',
-            [LeadController::class, 'alterStatusLead']
-        );
-        Route::get(
-            '/',
-            [LeadController::class, 'list']
         );
         Route::get(
             '/confirm-email/{id}',
@@ -45,7 +33,23 @@ Route::group(
     }
 );
 
-// criar rota de teste ping
+Route::group(
+    [
+        'prefix' => 'leads',
+    ],
+    function () {
+        Route::put(
+            '/{id}',
+            [LeadController::class, 'alterStatusLead']
+        );
+        Route::get(
+            '/',
+            [LeadController::class, 'list']
+        );
+    }
+)->middleware('auth:sanctum');
+
+// NOTE - criar rota de teste ping
 Route::get(
     '/ping',
     function () {

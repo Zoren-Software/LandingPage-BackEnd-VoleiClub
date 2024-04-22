@@ -13,6 +13,15 @@ use App\Mail\AfterConfirmationEmail;
 
 class LeadController extends Controller
 {
+    /**
+     * 
+     * @param CreateLeadRequest $request
+     * 
+     * @unauthenticated
+     * @group Leads
+     * 
+     * @return [type]
+     */
     public function store(CreateLeadRequest $request)
     {
         $lead = Lead::create([
@@ -32,6 +41,15 @@ class LeadController extends Controller
         ]);
     }
 
+    /**
+     * @param ConfirmEmailRequest $request
+     * @param int $id
+     * 
+     * @unauthenticated
+     * @group Leads
+     * 
+     * @return [type]
+     */
     public function confirmEmail(ConfirmEmailRequest $request, int $id)
     {
         $lead = Lead::findOrFail($id);
@@ -53,6 +71,13 @@ class LeadController extends Controller
         ]);
     }
 
+    /**
+     * @param PaginateLeadsRequest $request
+     * 
+     * @group Leads
+     * 
+     * @return [type]
+     */
     public function list(PaginateLeadsRequest $request)
     {
         try {
@@ -66,6 +91,13 @@ class LeadController extends Controller
         return response()->json($leads->paginate());
     }
 
+    /**
+     * @param AlterStatusLeadRequest $request
+     * 
+     * @group Leads
+     * 
+     * @return [type]
+     */
     public function alterStatusLead(AlterStatusLeadRequest $request)
     {
         $lead = new Lead();
