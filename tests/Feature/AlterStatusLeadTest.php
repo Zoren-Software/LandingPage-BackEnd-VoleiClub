@@ -10,6 +10,7 @@ class AlterStatusLeadTest extends TestCase
     /**
      * @test
      * 
+     * @dataProvider alterStatusLeadProviderSuccess
      * @dataProvider alterStatusLeadProviderError
      *
      * @group create-lead
@@ -27,8 +28,6 @@ class AlterStatusLeadTest extends TestCase
         }
 
         $response = $this->rest()->put('api/leads/' . $data['id'], $data);
-
-        
 
         if ($statusCodeExpected === 200) {
             $response->assertJsonStructure([
@@ -67,36 +66,6 @@ class AlterStatusLeadTest extends TestCase
         }
         $response->assertStatus($statusCodeExpected);
 
-    }
-
-    public static function alterStatusLeadProviderError(): array
-    {
-        $faker = \Faker\Factory::create();
-
-        return [
-            'alter status lead, alter status with id not must be an integer, error' => [
-                'data' => [
-                    'id' => false,
-                    'message' => $faker->text(),
-                    'status' => 'new',
-                ],
-                'statusCodeExpected' => 422,
-                'messageExpected' => 'Leads.id_integer',
-                'errorType' => 'error',
-                'errorExpected' => true,
-            ],
-            'alter status lead, alter status not exist, error' => [
-                'data' => [
-                    'id' => true,
-                    'message' => $faker->text(),
-                    'status' => 'xablaus',
-                ],
-                'statusCodeExpected' => 422,
-                'messageExpected' => 'Leads.status_in',
-                'errorType' => 'error',
-                'errorExpected' => true,
-            ],
-        ];
     }
 
     public static function alterStatusLeadProviderSuccess(): array
@@ -184,4 +153,33 @@ class AlterStatusLeadTest extends TestCase
         ];
     }
 
+    public static function alterStatusLeadProviderError(): array
+    {
+        $faker = \Faker\Factory::create();
+
+        return [
+            'alter status lead, alter status with id not must be an integer, error' => [
+                'data' => [
+                    'id' => false,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.id_integer',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+            'alter status lead, alter status not exist, error' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'xablaus',
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.status_in',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+        ];
+    }
 }
