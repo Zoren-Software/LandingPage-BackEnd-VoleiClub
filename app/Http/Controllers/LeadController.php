@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ConfirmEmailRequest;
 use App\Http\Requests\CreateLeadRequest;
+use App\Http\Requests\PaginateLeadsRequest;
 use App\Models\Lead;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmEmail;
@@ -49,5 +50,18 @@ class LeadController extends Controller
         return response()->json([
             'message' => __('Leads.emailConfirmed'),
         ]);
+    }
+
+    public function list(PaginateLeadsRequest $request)
+    {
+        try {
+            $leads = Lead::filtrar($request);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+
+        return response()->json($leads->paginate());
     }
 }
