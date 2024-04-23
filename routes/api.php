@@ -40,6 +40,13 @@ Route::post(
 )
 ->name('login');
 
+Route::post(
+    '/logout',
+    [SanctumController::class, 'logout']
+)
+->name('logout')
+->middleware('auth:sanctum');
+
 Route::group(
     [
         'prefix' => 'leads',

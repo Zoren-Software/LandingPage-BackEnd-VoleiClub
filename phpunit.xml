@@ -17,8 +17,11 @@
         <testsuite name="AlterStatusLead">
             <file>tests/Feature/AlterStatusLeadTest.php</file>
         </testsuite>
-        <testsuite name="Sanctum">
-            <file>tests/Feature/SanctumTest.php</file>
+        <testsuite name="SanctumLogin">
+            <file>tests/Feature/SanctumLoginTest.php</file>
+        </testsuite>
+        <testsuite name="SanctumLogout">
+            <file>tests/Feature/SanctumLogoutTest.php</file>
         </testsuite>
     </testsuites>
     <source>

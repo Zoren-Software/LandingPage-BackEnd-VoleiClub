@@ -5,8 +5,10 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class SanctumTest extends TestCase
+class SanctumLoginTest extends TestCase
 {
+    protected $login = false;
+
     /**
      * @test
      *
