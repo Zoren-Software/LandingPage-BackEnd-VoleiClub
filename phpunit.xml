@@ -17,6 +17,9 @@
         <testsuite name="AlterStatusLead">
             <file>tests/Feature/AlterStatusLeadTest.php</file>
         </testsuite>
+        <testsuite name="Sanctum">
+            <file>tests/Feature/SanctumTest.php</file>
+        </testsuite>
     </testsuites>
     <source>
         <include>

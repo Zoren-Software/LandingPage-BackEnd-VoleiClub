@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\LeadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,12 @@ Route::group(
         ->name('leads.confirm-email');
     }
 );
+
+Route::post(
+    '/login',
+    [SanctumController::class, 'login']
+)
+->name('login');
 
 Route::group(
     [

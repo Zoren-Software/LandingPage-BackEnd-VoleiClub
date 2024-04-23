@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v3\LoginRequest;
-use App\Http\Requests\v3\LogoutRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LogoutRequest;
+use App\Models\PersonalAccessToken;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Exception;
@@ -13,7 +14,6 @@ use Throwable;
 
 class SanctumController extends Controller
 {
-
     /**
     * @param LoginRequest $request
     *
@@ -29,15 +29,16 @@ class SanctumController extends Controller
 
             if (!$user || !Hash::check($request->password, $user->password)) {
                 throw ValidationException::withMessages([
-                    'email' => [__('auth.failed')],
+                    'email' => [__('Sanctum.auth.failed')],
                 ]);
             }
 
-            $token = $user->createToken($request->deviceName, ['type' => $request->deviceType]);
-            $token->accessToken->type = $request->deviceType; // Assumindo que você possa acessar o token dessa maneira
+            $token = $user->createToken($request->device_name);
+            $token->accessToken->type = $request->device_type; // Assumindo que você possa acessar o token dessa maneira
             $token->accessToken->save();
 
             return response()->json([
+                'message' => __('Sanctum.auth.login'),
                 'token' => $token->plainTextToken,
                 'data' => $user
             ]);
@@ -56,7 +57,22 @@ class SanctumController extends Controller
     public function logout(LogoutRequest $request)
     {
         try {
-            // TODO - Implementar a lógica de logout
+            $user = User::where('email', $request->email)->first();
+
+            if (!$user) {
+                throw ValidationException::withMessages([
+                    'email' => [__('Sanctum.auth.failed')],
+                ]);
+            }
+
+            $token = explode('|', $request->token);
+
+            PersonalAccessToken::where('id', $token[0])->delete();
+
+            return response()->json([
+                'message' => __('Sanctum.auth.logout')
+            ]);
+
         } catch (Throwable $erro) {
             return throw new Exception($erro->getMessage());
         }
