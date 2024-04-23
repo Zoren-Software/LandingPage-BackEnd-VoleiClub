@@ -13,15 +13,14 @@ abstract class TestCase extends BaseTestCase
      *
      * @var bool
      */
-    protected $login = true;
+    protected $login = false;
 
     /**
      * User token to be used in the tests
      * 
-     * @var [type]
+     * @var String
      */
     protected $token;
-
 
     /**
      *
@@ -56,10 +55,9 @@ abstract class TestCase extends BaseTestCase
                     ]
                 );
 
-//            $this->actingAs($user);
-
             $this->token = $response->json('token');
         }
+
     }
 
     public function setHeaders(array $headers = []): array

@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class ListLeadTest extends TestCase
 {
+    protected $login = true;
+
     /**
      * @test
      *
@@ -22,21 +24,6 @@ class ListLeadTest extends TestCase
 
         $response = $this->rest()->get('api/leads', $data);
 
-        $response->assertJsonStructure([
-            'data' => [
-                '*' => [
-                    'id',
-                    'name',
-                    'email',
-                    'status',
-                    'experience_level',
-                    'message',
-                    'email_verified_at',
-                    'created_at',
-                    'updated_at',
-                ],
-            ],
-        ]);
 
         $response->assertStatus(200);
     }

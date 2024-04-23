@@ -45,12 +45,9 @@ Route::post(
     [SanctumController::class, 'logout']
 )
 ->name('logout')
-->middleware('auth:sanctum');
+->middleware(['auth:sanctum']);
 
-Route::group(
-    [
-        'prefix' => 'leads',
-    ],
+Route::prefix('/leads')->name('leads.')->middleware('auth:sanctum')->group(
     function () {
         Route::put(
             '/{id}',
@@ -61,7 +58,8 @@ Route::group(
             [LeadController::class, 'list']
         );
     }
-)->middleware('auth:sanctum');
+);
+;
 
 // NOTE - criar rota de teste ping
 Route::get(

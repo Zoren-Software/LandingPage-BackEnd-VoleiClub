@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class AlterStatusLeadTest extends TestCase
 {
+    protected $login = true;
+
     /**
      * @test
      * 
