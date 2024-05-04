@@ -26,7 +26,13 @@ class CreateLeadTest extends TestCase
 
         $data['recaptchaToken'] = 'testing';
 
+        if($data['tenant_id'] === false) {
+            unset($data['tenant_id']);
+        }
+
         $response = $this->rest()->post('api/leads', $data);
+
+       // dd($response->json());
 
         if (!$errorExpected) {
             $response->assertJsonStructure([
@@ -42,6 +48,10 @@ class CreateLeadTest extends TestCase
             $response->assertJsonStructure([
                 $errorType,
             ]);
+
+            $response->assertJson([
+                $errorType => [__($messageExpected)],
+            ]);
         }
 
         $response->assertStatus($statusCodeExpected);
@@ -55,6 +65,7 @@ class CreateLeadTest extends TestCase
         return [
             'create register lead, message is string, error' => [
                 'data' => [
+                    'tenant_id' => $faker->uuid(),
                     'name' => $faker->name(),
                     'email' => $faker->unique()->safeEmail(),
                     'experience_level' => $faker->randomElement([
@@ -78,6 +89,7 @@ class CreateLeadTest extends TestCase
             ],
             'create register lead, experience level is required, error' => [
                 'data' => [
+                    'tenant_id' => $faker->uuid(),
                     'name' => $faker->name(),
                     'email' => $faker->unique()->safeEmail(),
                     'experience_level' => null,
@@ -90,6 +102,7 @@ class CreateLeadTest extends TestCase
             ],
             'create register lead, name is required, error' => [
                 'data' => [
+                    'tenant_id' => $faker->uuid(),
                     'name' => null,
                     'email' => $faker->unique()->safeEmail(),
                     'experience_level' => $faker->randomElement([
@@ -113,6 +126,7 @@ class CreateLeadTest extends TestCase
             ],
             'create register lead, e-mail is required, error' => [
                 'data' => [
+                    'tenant_id' => $faker->uuid(),
                     'name' => $faker->name(),
                     'email' => null,
                     'experience_level' => $faker->randomElement([
@@ -136,6 +150,7 @@ class CreateLeadTest extends TestCase
             ],
             'create register lead, e-mail already registered, error' => [
                 'data' => [
+                    'tenant_id' => $faker->uuid(),
                     'name' => $faker->name(),
                     'email' => $faker->unique()->safeEmail(),
                     'experience_level' => $faker->randomElement([
@@ -157,6 +172,54 @@ class CreateLeadTest extends TestCase
                 'errorType' => 'email',
                 'errorExpected' => true,
             ],
+            'create register lead, tenant_id not send, error' => [
+                'data' => [
+                    'tenant_id' => false,
+                    'name' => $faker->name(),
+                    'email' => $faker->unique()->safeEmail(),
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.tenant_id.required',
+                'errorType' => 'tenant_id',
+                'errorExpected' => true,
+            ],
+            'create register lead, tenant_id not string, error' => [
+                'data' => [
+                    'tenant_id' => 123,
+                    'name' => $faker->name(),
+                    'email' => $faker->unique()->safeEmail(),
+                    'experience_level' => $faker->randomElement([
+                        'beginner',
+                        'amateur',
+                        'student',
+                        'college',
+                        'semi-professional',
+                        'professional',
+                        'intermediate',
+                        'coach',
+                        'instructor',
+                        'other',
+                    ]),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.tenant_id.string',
+                'errorType' => 'tenant_id',
+                'errorExpected' => true,
+            ],
         ];
     }
 
@@ -167,6 +230,7 @@ class CreateLeadTest extends TestCase
         return [
             'create register lead, new functional lead record, success' => [
                 'data' => [
+                    'tenant_id' => $faker->uuid(),
                     'name' => $faker->name(),
                     'email' => $faker->unique()->safeEmail(),
                     'experience_level' => $faker->randomElement([

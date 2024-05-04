@@ -23,6 +23,9 @@
         <testsuite name="SanctumLogout">
             <file>tests/Feature/SanctumLogoutTest.php</file>
         </testsuite>
+        <testsuite name="Lead">
+            <file>tests/Feature/CreateLeadTest.php</file>
+        </testsuite>
     </testsuites>
     <source>
         <include>
