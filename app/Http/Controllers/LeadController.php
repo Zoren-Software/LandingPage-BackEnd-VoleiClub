@@ -89,7 +89,14 @@ class LeadController extends Controller
             ], 400);
         }
 
-        return response()->json($leads->paginate());
+        return response()->json(
+            $leads->paginate(
+                $request->input('per_page', 15), 
+                ['*'], 
+                'page', 
+                $request->input('page', 1)
+            ),
+        );
     }
 
     /**
