@@ -49,4 +49,7 @@ return [
     "status_string" => "Pole status musi być ciągiem znaków.",
     "status_required" => "Pole status jest wymagane.",
     "success_edit_status" => "Status leadu został pomyślnie zaktualizowany.",
+    "tenant_id_required" => "Pole tenant_id jest wymagane.",
+    "tenant_id_string" => "Pole tenant_id musi być ciągiem znaków.",
+    "tenant_id_unique" => "Pole tenant_id jest już zarejestrowane w naszej bazie danych.",
 ];

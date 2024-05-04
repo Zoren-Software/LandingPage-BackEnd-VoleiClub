@@ -10,6 +10,7 @@ class Lead extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tenant_id',
         'name',
         'email',
         'status',
@@ -27,6 +28,7 @@ class Lead extends Model
 
     public function scopeFiltrar($query, $request) {
         $query->filterId($request)
+            ->filterTenantId($request)
             ->filterStatus($request)
             ->search($request);
     }
@@ -34,6 +36,12 @@ class Lead extends Model
     public function scopeSearch($query, $request) {
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->input('search') . '%');
+        }
+    }
+
+    public function scopeFilterTenantId($query, $request) {
+        if ($request->has('search')) {
+            $query->where('tenant_id', 'like', '%' . $request->input('search') . '%');
         }
     }
 

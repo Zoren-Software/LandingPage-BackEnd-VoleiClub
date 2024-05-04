@@ -49,4 +49,7 @@ return [
     "status_string" => "Il campo stato deve essere una stringa.",
     "status_required" => "Il campo stato è obbligatorio.",
     "success_edit_status" => "Lo stato del lead è stato aggiornato con successo.",
+    "tenant_id_required" => "Il campo tenant_id è obbligatorio.",
+    "tenant_id_string" => "Il campo tenant_id deve essere una stringa.",
+    "tenant_id_unique" => "Il campo tenant_id è già registrato nel nostro database.",
 ];

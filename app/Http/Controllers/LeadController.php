@@ -25,6 +25,7 @@ class LeadController extends Controller
     public function store(CreateLeadRequest $request)
     {
         $lead = Lead::create([
+            'tenant_id' => request('tenant_id'),
             'name' => request('name'),
             'email' => request('email'),
             'status' => 'new',

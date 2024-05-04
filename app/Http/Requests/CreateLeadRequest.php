@@ -27,13 +27,18 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
     public function rules(): array
     {
         return [
-            'email' => [
-                'unique:leads,email',
+            'tenant_id' => [
                 'required',
+                'string',
+                'unique:leads,tenant_id'
             ],
             'name' => [
                 'required',
                 'string',
+            ],
+            'email' => [
+                'unique:leads,email',
+                'required',
             ],
             'experience_level' => [
                 'required',
@@ -51,6 +56,9 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
     public function messages(): array
     {
         return [
+            'tenant_id.required' => __('Leads.tenant_id.required'),
+            'tenant_id.string' => __('Leads.tenant_id.string'),
+            'tenant_id.unique' => __('Leads.tenant_id.unique'),
             'email.unique' => __('Leads.email.unique'),
             'email.required' => __('Leads.email.required'),
             'name.required' => __('Leads.name.required'),

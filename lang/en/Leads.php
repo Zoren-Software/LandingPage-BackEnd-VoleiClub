@@ -49,4 +49,7 @@ return [
     "status_string" => "The status field must be a string.",
     "status_required" => "The status field is required.",
     "success_edit_status" => "The status of the lead has been successfully updated.",
+    "tenant_id_required" => "The tenant_id field is required.",
+    "tenant_id_string" => "The tenant_id field must be a string.",
+    "tenant_id_unique" => "The tenant_id field is already registered in our database.",
 ];

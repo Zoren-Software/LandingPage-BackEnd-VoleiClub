@@ -49,4 +49,7 @@ return [
     "status_string" => "Поле статуса должно быть строкой.",
     "status_required" => "Поле статуса обязательно для заполнения.",
     "success_edit_status" => "Статус лида успешно обновлен.",
+    "tenant_id_required" => "Поле tenant_id обязательно для заполнения.",
+    "tenant_id_string" => "Поле tenant_id должно быть строкой.",
+    "tenant_id_unique" => "Поле tenant_id уже зарегистрировано в нашей базе данных.",
 ];

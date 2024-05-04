@@ -49,4 +49,7 @@ return [
     "status_string" => "Le champ statut doit être une chaîne.",
     "status_required" => "Le champ statut est obligatoire.",
     "success_edit_status" => "Le statut du lead a été mis à jour avec succès.",
+    "tenant_id_required" => "Le champ tenant_id est obligatoire.",
+    "tenant_id_string" => "Le champ tenant_id doit être une chaîne.",
+    "tenant_id_unique" => "Le champ tenant_id est déjà enregistré dans notre base de données.",
 ];
