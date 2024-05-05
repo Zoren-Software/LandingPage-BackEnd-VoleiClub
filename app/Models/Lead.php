@@ -18,7 +18,8 @@ class Lead extends Model
         'message',
     ];
 
-    public function alterStatus($request) {
+    public function alterStatus($request)
+    {
         $this->findOrFail($request->input('id'));
         $this->status = $request->input('status');
         $this->save();
@@ -26,32 +27,37 @@ class Lead extends Model
         return $this;
     }
 
-    public function scopeFiltrar($query, $request) {
+    public function scopeFiltrar($query, $request)
+    {
         $query->filterId($request)
             ->filterTenantId($request)
             ->filterStatus($request)
             ->search($request);
     }
 
-    public function scopeSearch($query, $request) {
+    public function scopeSearch($query, $request)
+    {
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->input('search') . '%');
         }
     }
 
-    public function scopeFilterTenantId($query, $request) {
+    public function scopeFilterTenantId($query, $request)
+    {
         if ($request->has('search')) {
             $query->where('tenant_id', 'like', '%' . $request->input('search') . '%');
         }
     }
 
-    public function scopeFilterId($query, $request) {
+    public function scopeFilterId($query, $request)
+    {
         if ($request->has('id')) {
             $query->where('id', $request->input('id'));
         }
     }
 
-    public function scopeFilterStatus($query, $request) {
+    public function scopeFilterStatus($query, $request)
+    {
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
         }

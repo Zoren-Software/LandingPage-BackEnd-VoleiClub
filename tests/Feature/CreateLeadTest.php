@@ -26,15 +26,15 @@ class CreateLeadTest extends TestCase
 
         $data['recaptchaToken'] = 'testing';
 
-        if($data['tenant_id'] === false) {
+        if ($data['tenant_id'] === false) {
             unset($data['tenant_id']);
         }
 
         $response = $this->rest()->post('api/leads', $data);
 
-       // dd($response->json());
+        // dd($response->json());
 
-        if (!$errorExpected) {
+        if (! $errorExpected) {
             $response->assertJsonStructure([
                 'message',
             ]);

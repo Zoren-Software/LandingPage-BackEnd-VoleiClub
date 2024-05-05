@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\LeadController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,8 +28,8 @@ Route::group(
             '/confirm-email/{id}',
             [LeadController::class, 'confirmEmail']
         )
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('leads.confirm-email');
+            ->middleware(['signed', 'throttle:6,1'])
+            ->name('leads.confirm-email');
     }
 );
 
@@ -38,14 +37,14 @@ Route::post(
     '/login',
     [SanctumController::class, 'login']
 )
-->name('login');
+    ->name('login');
 
 Route::post(
     '/logout',
     [SanctumController::class, 'logout']
 )
-->name('logout')
-->middleware(['auth:sanctum']);
+    ->name('logout')
+    ->middleware(['auth:sanctum']);
 
 Route::prefix('/leads')->name('leads.')->middleware('auth:sanctum')->group(
     function () {
@@ -59,7 +58,6 @@ Route::prefix('/leads')->name('leads.')->middleware('auth:sanctum')->group(
         );
     }
 );
-;
 
 // NOTE - criar rota de teste ping
 Route::get(

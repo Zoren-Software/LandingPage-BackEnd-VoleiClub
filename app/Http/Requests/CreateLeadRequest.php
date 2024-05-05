@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use GuzzleHttp\Client;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class CreateLeadRequest extends FormRequest implements ScribeInterface
@@ -30,7 +30,7 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
             'tenant_id' => [
                 'required',
                 'string',
-                'unique:leads,tenant_id'
+                'unique:leads,tenant_id',
             ],
             'name' => [
                 'required',
@@ -85,8 +85,8 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
         $form = [
             'form_params' => [
                 'secret' => env('RECAPTCHA_SECRET_KEY'),
-                'response' => $token
-            ]
+                'response' => $token,
+            ],
         ];
 
         $client = new Client();

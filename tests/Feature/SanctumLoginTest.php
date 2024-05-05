@@ -13,12 +13,11 @@ class SanctumLoginTest extends TestCase
      * @test
      *
      * @group sanctum
-     * 
+     *
      * @dataProvider loginSuccessProvider
      * @dataProvider loginErrorProvider
-     *
      */
-    public function login(array $data, int $statusExpected, string|null $typeError): void
+    public function login(array $data, int $statusExpected, ?string $typeError): void
     {
         if ($data['device_type']) {
             $data['device_type'] = 'web';
@@ -47,7 +46,7 @@ class SanctumLoginTest extends TestCase
 
         $response = $this->rest()->post('api/login', $data);
 
-        if($statusExpected == 422) {
+        if ($statusExpected == 422) {
             $response->assertJsonValidationErrors([$typeError]);
         }
 
@@ -66,7 +65,7 @@ class SanctumLoginTest extends TestCase
                     'device_type' => true,
                 ],
                 'statusExpected' => 422,
-                'typeError' => 'email'
+                'typeError' => 'email',
             ],
             'login, logging not send password, error' => [
                 'data' => [
@@ -76,7 +75,7 @@ class SanctumLoginTest extends TestCase
                     'device_type' => true,
                 ],
                 'statusExpected' => 422,
-                'typeError' => 'password'
+                'typeError' => 'password',
             ],
             'login, logging not send device name, error' => [
                 'data' => [
@@ -86,7 +85,7 @@ class SanctumLoginTest extends TestCase
                     'device_type' => true,
                 ],
                 'statusExpected' => 422,
-                'typeError' => 'device_name'
+                'typeError' => 'device_name',
             ],
             'login, logging not send device type, error' => [
                 'data' => [
@@ -96,7 +95,7 @@ class SanctumLoginTest extends TestCase
                     'device_type' => false,
                 ],
                 'statusExpected' => 422,
-                'typeError' => 'device_type'
+                'typeError' => 'device_type',
             ],
         ];
     }

@@ -11,7 +11,7 @@ class AlterStatusLeadTest extends TestCase
 
     /**
      * @test
-     * 
+     *
      * @dataProvider alterStatusLeadProviderSuccess
      * @dataProvider alterStatusLeadProviderError
      *
@@ -23,7 +23,7 @@ class AlterStatusLeadTest extends TestCase
     {
         $lead = \App\Models\Lead::factory()->create();
 
-        if($data['id'] === true) {
+        if ($data['id'] === true) {
             $data['id'] = $lead->id;
         } else {
             $data['id'] = 'lala';
@@ -52,14 +52,14 @@ class AlterStatusLeadTest extends TestCase
                     'status' => $data['status'],
                 ],
             ]);
-    
+
             $response->assertJson([
                 'message' => __($messageExpected),
             ]);
         } else {
             $response->assertJsonStructure([
                 'message',
-                'errors'
+                'errors',
             ]);
 
             $response->assertJson([

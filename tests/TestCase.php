@@ -17,15 +17,11 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * User token to be used in the tests
-     * 
-     * @var String
+     *
+     * @var string
      */
     protected $token;
 
-    /**
-     *
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -33,10 +29,6 @@ abstract class TestCase extends BaseTestCase
         $this->authorization();
     }
 
-    /**
-     * 
-     * @return void
-     */
     public function authorization(): void
     {
         if ($this->login) {

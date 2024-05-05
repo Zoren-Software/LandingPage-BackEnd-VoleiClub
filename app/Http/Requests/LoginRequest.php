@@ -19,8 +19,6 @@ class LoginRequest extends FormRequest implements ScribeInterface
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -28,7 +26,7 @@ class LoginRequest extends FormRequest implements ScribeInterface
             'email' => 'required|email',
             'password' => 'required',
             'device_name' => 'required',
-            'device_type' => 'required|in:web,mobile'
+            'device_type' => 'required|in:web,mobile',
         ];
     }
 
@@ -39,7 +37,7 @@ class LoginRequest extends FormRequest implements ScribeInterface
             'email.email' => 'O campo e-mail deve ser um e-mail válido.',
             'password.required' => 'O campo senha é obrigatório.',
             'device_name.required' => 'O campo device_name é obrigatório.',
-            'device_type.required' => 'O campo device_type é obrigatório, pode ser "web" ou "mobile".'
+            'device_type.required' => 'O campo device_type é obrigatório, pode ser "web" ou "mobile".',
         ];
     }
 
@@ -49,23 +47,23 @@ class LoginRequest extends FormRequest implements ScribeInterface
             'email' => [
                 'description' => 'E-mail do usuário',
                 'example' => 'suporte@multiplier.com.br',
-                'required' => true
+                'required' => true,
             ],
             'password' => [
                 'description' => 'Senha do usuário',
                 'example' => '1234',
-                'required' => true
+                'required' => true,
             ],
             'device_name' => [
                 'description' => 'Nome do dispositivo',
                 'example' => 'iPhone 15 Pro Max',
-                'required' => true
+                'required' => true,
             ],
             'device_type' => [
                 'description' => 'Tipo do dispositivo, apenas "web" ou "mobile" ' .
                     'são aceitos. Com limite de 1 tipo de dispositivo por usuário.',
                 'example' => 'web',
-                'required' => true
+                'required' => true,
             ],
         ];
     }

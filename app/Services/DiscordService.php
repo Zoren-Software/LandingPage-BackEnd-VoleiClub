@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Lead;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Lead;
 
 final class DiscordService extends Model
 {
@@ -25,7 +25,7 @@ final class DiscordService extends Model
         $this->webhookErrors = config('services.discord.webhook_errors');
         $this->webhookNewLead = config('services.discord.webhook_new_leads');
 
-        if (!$this->webhookErrors || !$this->webhookNewLead) {
+        if (! $this->webhookErrors || ! $this->webhookNewLead) {
             throw new \Throwable('Variáveis de conexão do Discord não declaradas');
         }
     }
@@ -63,7 +63,7 @@ final class DiscordService extends Model
                             [
                                 'name' => 'APP_DEBUG:',
                                 'value' => config('app.debug'),
-                            ]
+                            ],
                         ],
                         'author' => [
                             'name' => 'ERROR ' . $author,
@@ -133,7 +133,7 @@ final class DiscordService extends Model
                             [
                                 'name' => 'APP_DEBUG:',
                                 'value' => config('app.debug'),
-                            ]
+                            ],
                         ],
                         'author' => [
                             'name' => 'Landing Page',
@@ -143,7 +143,6 @@ final class DiscordService extends Model
                     ],
                 ],
             ];
-
 
             // if (auth()->user()) {
             //     $data['embeds'][0]['fields'][] = [

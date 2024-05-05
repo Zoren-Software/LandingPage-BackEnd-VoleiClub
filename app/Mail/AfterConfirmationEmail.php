@@ -4,12 +4,10 @@ namespace App\Mail;
 
 use App\Models\Lead;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\URL;
 
 class AfterConfirmationEmail extends Mailable
 {
@@ -21,7 +19,8 @@ class AfterConfirmationEmail extends Mailable
      */
     public function __construct(
         public Lead $lead,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the message envelope.

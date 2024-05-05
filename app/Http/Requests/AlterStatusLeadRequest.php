@@ -4,9 +4,6 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use GuzzleHttp\Client;
 use Illuminate\Validation\Rule;
 
 class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
@@ -41,7 +38,7 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                     'unqualified',
                     'qualified',
                     'bad_email',
-                    'spam'
+                    'spam',
                 ]),
             ],
         ];

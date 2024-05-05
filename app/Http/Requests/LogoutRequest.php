@@ -18,8 +18,6 @@ class LogoutRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -45,12 +43,12 @@ class LogoutRequest extends FormRequest
             'email' => [
                 'description' => 'E-mail do usuário',
                 'example' => 'suporte@multiplier.com.br',
-                'required' => true
+                'required' => true,
             ],
             'token' => [
                 'description' => 'Token de autenticação',
                 'example' => '1|UASHDUAHUDAHSDUHASUD',
-                'required' => true
+                'required' => true,
             ],
         ];
     }

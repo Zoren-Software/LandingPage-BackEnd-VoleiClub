@@ -13,14 +13,13 @@ class SanctumLogoutTest extends TestCase
      * @test
      *
      * @group sanctum
-     * 
+     *
      * @dataProvider logoutSuccessProvider
      * @dataProvider logoutErrorProvider
-     *
      */
-    public function logout(array $data, int $statusExpected, string|null $typeError): void
+    public function logout(array $data, int $statusExpected, ?string $typeError): void
     {
-        if($data['email']) {
+        if ($data['email']) {
             $data['email'] = \App\Models\User::factory()->create()->email;
         }
 
@@ -32,13 +31,14 @@ class SanctumLogoutTest extends TestCase
 
         $response = $this->rest()->post('api/logout', $data);
 
-        if($statusExpected == 422) {
+        if ($statusExpected == 422) {
             $response->assertJsonValidationErrors([$typeError]);
         }
 
         $response->assertStatus($statusExpected);
 
     }
+
     public static function logoutSuccessProvider(): array
     {
         return [

@@ -13,7 +13,7 @@ class ListLeadTest extends TestCase
      * @test
      *
      * @group create-lead
-     * 
+     *
      * @dataProvider listarLeadsProvider
      *
      * A basic test example.
@@ -37,15 +37,14 @@ class ListLeadTest extends TestCase
                 'perPage' => 10,
                 'page' => 2,
                 'perPageEsperado' => 10,
-                'pageEsperado' => 2
+                'pageEsperado' => 2,
             ],
             'listar motivo inabilitação, valores padrão, sucesso' => [
                 'perPage' => 10,
                 'page' => 1,
                 'perPageEsperado' => 10,
-                'pageEsperado' => 1
-            ]
+                'pageEsperado' => 1,
+            ],
         ];
     }
-
 }

@@ -28,7 +28,7 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
             'id' => [
                 'string',
                 'exists:leads,id',
-            ]
+            ],
         ];
     }
 

@@ -6,20 +6,18 @@ use App\Http\Requests\AlterStatusLeadRequest;
 use App\Http\Requests\ConfirmEmailRequest;
 use App\Http\Requests\CreateLeadRequest;
 use App\Http\Requests\PaginateLeadsRequest;
+use App\Mail\AfterConfirmationEmail;
+use App\Mail\ConfirmEmail;
 use App\Models\Lead;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ConfirmEmail;
-use App\Mail\AfterConfirmationEmail;
 
 class LeadController extends Controller
 {
     /**
-     * 
-     * @param CreateLeadRequest $request
-     * 
      * @unauthenticated
+     *
      * @group Leads
-     * 
+     *
      * @return [type]
      */
     public function store(CreateLeadRequest $request)
@@ -43,12 +41,10 @@ class LeadController extends Controller
     }
 
     /**
-     * @param ConfirmEmailRequest $request
-     * @param int $id
-     * 
      * @unauthenticated
+     *
      * @group Leads
-     * 
+     *
      * @return [type]
      */
     public function confirmEmail(ConfirmEmailRequest $request, int $id)
@@ -73,10 +69,8 @@ class LeadController extends Controller
     }
 
     /**
-     * @param PaginateLeadsRequest $request
-     * 
      * @group Leads
-     * 
+     *
      * @return [type]
      */
     public function list(PaginateLeadsRequest $request)
@@ -91,19 +85,17 @@ class LeadController extends Controller
 
         return response()->json(
             $leads->paginate(
-                $request->input('per_page', 15), 
-                ['*'], 
-                'page', 
+                $request->input('per_page', 15),
+                ['*'],
+                'page',
                 $request->input('page', 1)
             ),
         );
     }
 
     /**
-     * @param AlterStatusLeadRequest $request
-     * 
      * @group Leads
-     * 
+     *
      * @return [type]
      */
     public function alterStatusLead(AlterStatusLeadRequest $request)
@@ -114,7 +106,7 @@ class LeadController extends Controller
 
         return response()->json([
             'message' => __('Leads.success_edit_status'),
-            'data'  => $lead,
+            'data' => $lead,
         ]);
     }
 }
