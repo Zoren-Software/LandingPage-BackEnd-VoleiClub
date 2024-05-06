@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rule;
 
-class ConfirmEmailRequest extends FormRequest implements ScribeInterface
+class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,6 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
     public function authorize(): bool
     {
         return true;
-        //return URL::hasValidSignature($this);
     }
 
     /**
@@ -26,8 +25,21 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
     {
         return [
             'id' => [
-                'string',
+                'integer',
                 'exists:leads,id',
+            ],
+            'status' => [
+                'required',
+                'string',
+                Rule::in([
+                    'new',
+                    'contacted',
+                    'converted',
+                    'unqualified',
+                    'qualified',
+                    'bad_email',
+                    'spam',
+                ]),
             ],
         ];
     }
@@ -35,8 +47,11 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
     public function messages(): array
     {
         return [
-            'id.string' => __('Leads.id_string'),
+            'id.integer' => __('Leads.id_integer'),
             'id.exists' => __('Leads.id_exists'),
+            'status.required' => __('Leads.status_required'),
+            'status.string' => __('Leads.status_string'),
+            'status.in' => __('Leads.status_in'),
         ];
     }
 
@@ -46,7 +61,12 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
             'id' => [
                 'description' => __('Leads.id_description'),
                 'required' => true,
-                'value' => '1',
+                'example' => 1,
+            ],
+            'status' => [
+                'description' => __('Leads.status_description'),
+                'required' => true,
+                'example' => 'new',
             ],
         ];
     }

@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\URL;
 
-class ConfirmEmailRequest extends FormRequest implements ScribeInterface
+class PaginateLeadsRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,6 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
     public function authorize(): bool
     {
         return true;
-        //return URL::hasValidSignature($this);
     }
 
     /**
@@ -29,6 +27,9 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
                 'string',
                 'exists:leads,id',
             ],
+            'status' => [
+                'string',
+            ],
         ];
     }
 
@@ -37,6 +38,7 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
         return [
             'id.string' => __('Leads.id_string'),
             'id.exists' => __('Leads.id_exists'),
+            'status.string' => __('Leads.status_string'),
         ];
     }
 
@@ -47,6 +49,11 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
                 'description' => __('Leads.id_description'),
                 'required' => true,
                 'value' => '1',
+            ],
+            'status' => [
+                'description' => __('Leads.status_description'),
+                'required' => false,
+                'value' => 'new',
             ],
         ];
     }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\LeadController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::group(
     [
@@ -32,12 +28,38 @@ Route::group(
             '/confirm-email/{id}',
             [LeadController::class, 'confirmEmail']
         )
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('leads.confirm-email');
+            ->middleware(['signed', 'throttle:6,1'])
+            ->name('leads.confirm-email');
     }
 );
 
-// criar rota de teste ping
+Route::post(
+    '/login',
+    [SanctumController::class, 'login']
+)
+    ->name('login');
+
+Route::post(
+    '/logout',
+    [SanctumController::class, 'logout']
+)
+    ->name('logout')
+    ->middleware(['auth:sanctum']);
+
+Route::prefix('/leads')->name('leads.')->middleware('auth:sanctum')->group(
+    function () {
+        Route::put(
+            '/{id}',
+            [LeadController::class, 'alterStatusLead']
+        );
+        Route::get(
+            '/',
+            [LeadController::class, 'list']
+        );
+    }
+);
+
+// NOTE - criar rota de teste ping
 Route::get(
     '/ping',
     function () {

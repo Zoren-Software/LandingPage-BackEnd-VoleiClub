@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlterStatusLeadRequest;
 use App\Http\Requests\ConfirmEmailRequest;
 use App\Http\Requests\CreateLeadRequest;
+use App\Http\Requests\PaginateLeadsRequest;
+use App\Mail\AfterConfirmationEmail;
+use App\Mail\ConfirmEmail;
 use App\Models\Lead;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ConfirmEmail;
-use App\Mail\AfterConfirmationEmail;
 
 class LeadController extends Controller
 {
+    /**
+     * @unauthenticated
+     *
+     * @group Leads
+     *
+     * @return [type]
+     */
     public function store(CreateLeadRequest $request)
     {
         $lead = Lead::create([
+            'tenant_id' => request('tenant_id'),
             'name' => request('name'),
             'email' => request('email'),
             'status' => 'new',
@@ -30,6 +40,13 @@ class LeadController extends Controller
         ]);
     }
 
+    /**
+     * @unauthenticated
+     *
+     * @group Leads
+     *
+     * @return [type]
+     */
     public function confirmEmail(ConfirmEmailRequest $request, int $id)
     {
         $lead = Lead::findOrFail($id);
@@ -48,6 +65,48 @@ class LeadController extends Controller
 
         return response()->json([
             'message' => __('Leads.emailConfirmed'),
+        ]);
+    }
+
+    /**
+     * @group Leads
+     *
+     * @return [type]
+     */
+    public function list(PaginateLeadsRequest $request)
+    {
+        try {
+            $leads = Lead::filtrar($request);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
+        }
+
+        return response()->json(
+            $leads->paginate(
+                $request->input('per_page', 15),
+                ['*'],
+                'page',
+                $request->input('page', 1)
+            ),
+        );
+    }
+
+    /**
+     * @group Leads
+     *
+     * @return [type]
+     */
+    public function alterStatusLead(AlterStatusLeadRequest $request)
+    {
+        $lead = new Lead();
+        $lead = $lead->findOrFail($request->input('id'));
+        $lead->alterStatus($request);
+
+        return response()->json([
+            'message' => __('Leads.success_edit_status'),
+            'data' => $lead,
         ]);
     }
 }
