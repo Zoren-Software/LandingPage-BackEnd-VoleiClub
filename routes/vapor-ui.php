@@ -18,7 +18,7 @@ Route::get('/vapor/login', function () {
     return view('welcome-vapor-ui');
 })->name('welcome-vapor-ui');
 
-Route::get('/logout', [LoginGitHubController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginGitHubController::class, 'logout'])->name('github.logout');
 
 Route::get('/auth/github/redirect', [LoginGitHubController::class, 'githubRedirect'])->name('github.login');
 
