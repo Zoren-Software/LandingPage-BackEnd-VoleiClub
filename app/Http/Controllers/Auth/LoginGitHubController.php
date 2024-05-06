@@ -34,7 +34,7 @@ class LoginGitHubController extends Controller
 
         $login = $githubService->verifyPermissionUser($githubUser->getNickname());
 
-        if (!$login) {
+        if (! $login) {
             return redirect()->route('welcome-vapor-ui', ['error' => 'Você não tem permissão para acessar o VaporUI']);
         }
 

@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Http\Requests\Interfaces\ScribeInterface;
 use GuzzleHttp\Client;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class CreateLeadRequest extends FormRequest
+class CreateLeadRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +27,18 @@ class CreateLeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => [
-                'unique:leads,email',
+            'tenant_id' => [
                 'required',
+                'string',
+                'unique:leads,tenant_id',
             ],
             'name' => [
                 'required',
                 'string',
+            ],
+            'email' => [
+                'unique:leads,email',
+                'required',
             ],
             'experience_level' => [
                 'required',
@@ -50,6 +56,9 @@ class CreateLeadRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'tenant_id.required' => __('Leads.tenant_id.required'),
+            'tenant_id.string' => __('Leads.tenant_id.string'),
+            'tenant_id.unique' => __('Leads.tenant_id.unique'),
             'email.unique' => __('Leads.email.unique'),
             'email.required' => __('Leads.email.required'),
             'name.required' => __('Leads.name.required'),
@@ -76,8 +85,8 @@ class CreateLeadRequest extends FormRequest
         $form = [
             'form_params' => [
                 'secret' => env('RECAPTCHA_SECRET_KEY'),
-                'response' => $token
-            ]
+                'response' => $token,
+            ],
         ];
 
         $client = new Client();
@@ -91,5 +100,37 @@ class CreateLeadRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($validator->errors(), 422));
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'email' => [
+                'description' => __('Leads.email_description'),
+                'required' => true,
+                'value' => 'test@test.com',
+            ],
+            'name' => [
+                'description' => __('Leads.name_description'),
+                'required' => true,
+                'value' => 'John Doe',
+            ],
+            'experience_level' => [
+                'description' => __('Leads.experience_level_description'),
+                'required' => true,
+                'value' => 'beginner',
+            ],
+            'message' => [
+                'description' => __('Leads.message_description'),
+                'required' => false,
+                'value' => 'Hello, I am interested in your services.',
+            ],
+            'recaptchaToken' => [
+                'description' => __('Leads.recaptchaToken_description'),
+                'required' => true,
+                'value' => 'test',
+            ],
+        ];
+
     }
 }

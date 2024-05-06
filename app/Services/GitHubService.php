@@ -9,8 +9,6 @@ final class GitHubService extends Model
 {
     /**
      * @codeCoverageIgnore
-     *
-     * @param  GuzzleClient  $client
      */
     public function __construct(GuzzleClient $client = null)
     {
@@ -18,7 +16,7 @@ final class GitHubService extends Model
 
         $this->accessToken = config('services.github.access_token');
 
-        if (!$this->accessToken) {
+        if (! $this->accessToken) {
             throw new \Throwable('Variáveis de conexão do GitHub não declaradas');
         }
     }
@@ -30,7 +28,6 @@ final class GitHubService extends Model
      * GitHub API Docs:
      * encurtador.com.br/oLTU0
      *
-     * @param  string  $nickName
      * @return bool
      */
     public function verifyPermissionUser(string $nickName)

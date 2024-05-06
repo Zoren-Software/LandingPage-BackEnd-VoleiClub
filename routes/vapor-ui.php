@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Auth\LoginGitHubController;
 use Illuminate\Support\Facades\Route;
-use Laravel\VaporUi\VaporUi;
 
 /*
 |--------------------------------------------------------------------------
