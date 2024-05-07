@@ -37,8 +37,8 @@ class Lead extends Model
     public function scopeSearch($query, $request)
     {
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->input('search') . '%');
-            $query->orWhere('tenant_id', 'like', '%' . $request->input('search') . '%');
+            $query->where('name', 'like', $request->input('search'));
+            $query->orWhere('tenant_id', 'like', $request->input('search'));
         }
     }
 
