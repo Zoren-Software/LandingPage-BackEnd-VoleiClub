@@ -52,4 +52,5 @@ return [
     'tenant_id_required' => 'O campo tenant_id é obrigatório.',
     'tenant_id_string' => 'O campo tenant_id deve ser uma string.',
     'tenant_id_unique' => 'O campo tenant_id já está cadastrado em nossa base de dados.',
+    'id_lead_required' => 'O campo id do lead é obrigatório.',
 ];

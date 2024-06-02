@@ -52,4 +52,5 @@ return [
     'tenant_id_required' => 'The tenant_id field is required.',
     'tenant_id_string' => 'The tenant_id field must be a string.',
     'tenant_id_unique' => 'The tenant_id field is already registered in our database.',
+    'id_lead_required' => 'The id lead field is required.',
 ];
