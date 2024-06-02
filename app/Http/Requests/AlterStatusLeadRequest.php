@@ -25,6 +25,7 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
     {
         return [
             'id' => [
+                'required',
                 'integer',
                 'exists:leads,id',
             ],
@@ -41,17 +42,24 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                     'spam',
                 ]),
             ],
+            'tenantId' => [
+                'required',
+                'string',
+            ],
         ];
     }
 
     public function messages(): array
     {
         return [
+            'id.required' => __('Leads.id_required'),
             'id.integer' => __('Leads.id_integer'),
             'id.exists' => __('Leads.id_exists'),
             'status.required' => __('Leads.status_required'),
             'status.string' => __('Leads.status_string'),
             'status.in' => __('Leads.status_in'),
+            'tenantId.required' => __('Leads.tenant_id_required'),
+            'tenantId.string' => __('Leads.tenant_id_string'),
         ];
     }
 
@@ -67,6 +75,11 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                 'description' => __('Leads.status_description'),
                 'required' => true,
                 'example' => 'new',
+            ],
+            'tenantId' => [
+                'description' => __('Leads.tenant_id_description'),
+                'required' => true,
+                'example' => 'tenant_id',
             ],
         ];
     }

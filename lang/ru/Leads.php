@@ -52,4 +52,5 @@ return [
     'tenant_id_required' => 'Поле tenant_id обязательно для заполнения.',
     'tenant_id_string' => 'Поле tenant_id должно быть строкой.',
     'tenant_id_unique' => 'Поле tenant_id уже зарегистрировано в нашей базе данных.',
+    'id_lead_required' => 'Поле id лида обязательно для заполнения.',
 ];

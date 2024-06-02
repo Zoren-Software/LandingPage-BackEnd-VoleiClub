@@ -21,7 +21,8 @@ class Lead extends Model
     public function alterStatus($request)
     {
         $this->findOrFail($request->input('id'));
-        $this->status = $request->input('status');
+        $this->status = $request->input('status') ?? $this->status;
+        $this->tenant_id = $request->input('tenantId') ?? $this->tenant_id;
         $this->save();
 
         return $this;

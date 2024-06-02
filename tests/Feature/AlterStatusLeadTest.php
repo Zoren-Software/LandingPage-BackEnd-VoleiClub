@@ -29,6 +29,10 @@ class AlterStatusLeadTest extends TestCase
             $data['id'] = 'lala';
         }
 
+        if($data['tenantId'] === false) {
+            unset($data['tenantId']);
+        }
+
         $response = $this->rest()->put('api/leads/' . $data['id'], $data);
 
         if ($statusCodeExpected === 200) {
@@ -80,6 +84,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'new',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -91,6 +96,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'contacted',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -102,6 +108,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'converted',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -113,6 +120,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'unqualified',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -124,6 +132,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'qualified',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -135,6 +144,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'bad_email',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -146,6 +156,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'spam',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -165,6 +176,7 @@ class AlterStatusLeadTest extends TestCase
                     'id' => false,
                     'message' => $faker->text(),
                     'status' => 'new',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 422,
                 'messageExpected' => 'Leads.id_integer',
@@ -176,9 +188,22 @@ class AlterStatusLeadTest extends TestCase
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'xablaus',
+                    'tenantId' => $faker->word(),
                 ],
                 'statusCodeExpected' => 422,
                 'messageExpected' => 'Leads.status_in',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+            'alter status lead, alter tenantId not specific, error' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => false,
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.tenant_id_required',
                 'errorType' => 'error',
                 'errorExpected' => true,
             ],
