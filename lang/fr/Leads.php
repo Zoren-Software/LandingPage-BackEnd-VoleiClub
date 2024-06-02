@@ -52,4 +52,5 @@ return [
     'tenant_id_required' => 'Le champ tenant_id est obligatoire.',
     'tenant_id_string' => 'Le champ tenant_id doit être une chaîne.',
     'tenant_id_unique' => 'Le champ tenant_id est déjà enregistré dans notre base de données.',
+    'id_lead_required' => 'Le champ id du lead est obligatoire.',
 ];

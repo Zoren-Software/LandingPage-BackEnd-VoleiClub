@@ -52,4 +52,5 @@ return [
     'tenant_id_required' => 'Pole tenant_id jest wymagane.',
     'tenant_id_string' => 'Pole tenant_id musi być ciągiem znaków.',
     'tenant_id_unique' => 'Pole tenant_id jest już zarejestrowane w naszej bazie danych.',
+    'id_lead_required' => 'Pole id leadu jest wymagane.',
 ];
