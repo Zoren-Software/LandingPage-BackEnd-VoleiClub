@@ -40,6 +40,9 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                     'qualified',
                     'bad_email',
                     'spam',
+                    'test',
+                    'trial_period',
+                    'active_customer',
                 ]),
             ],
             'tenantId' => [
