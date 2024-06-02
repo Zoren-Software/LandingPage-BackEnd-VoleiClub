@@ -23,7 +23,8 @@ return new class() extends Migration
                         'bad_email',
                         'spam',
                         'test',
-                        'trial period',
+                        'trial_period',
+                        'active_customer',
                     ]
                 )
                 ->default('new')
