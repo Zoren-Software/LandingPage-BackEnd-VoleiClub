@@ -18,6 +18,11 @@ class Lead extends Model
         'message',
     ];
 
+    public function interactions()
+    {
+        return $this->hasMany(LeadInteraction::class);
+    }
+
     public function alterStatus($request)
     {
         $this->findOrFail($request->input('id'));
@@ -25,7 +30,19 @@ class Lead extends Model
         $this->tenant_id = $request->input('tenantId') ?? $this->tenant_id;
         $this->save();
 
+        $this->createInteraction($request);
+        
         return $this;
+    }
+
+    private function createInteraction($request)
+    {
+        $this->interactions()->create([
+            'status' => $request->input('status') ?? $this->status,
+            'user_id' => auth()->id(),
+            'message' => $request->input('message') ?? null,
+            'notes' => $request->input('notes') ?? null,
+        ]);
     }
 
     public function scopeFiltrar($query, $request)

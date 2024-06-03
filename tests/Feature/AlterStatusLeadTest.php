@@ -199,6 +199,46 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
+            'alter status lead, alter status new with message, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => $faker->word(),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status new with note, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => $faker->word(),
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status new with message and note, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => $faker->word(),
+                    'message' => $faker->text(),
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
         ];
     }
 
