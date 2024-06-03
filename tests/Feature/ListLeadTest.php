@@ -33,13 +33,13 @@ class ListLeadTest extends TestCase
     public static function listarLeadsProvider()
     {
         return [
-            'listar motivo inabilitação, setando valores por página, sucesso' => [
+            'listar leads, setando valores por página, sucesso' => [
                 'perPage' => 10,
                 'page' => 2,
                 'perPageEsperado' => 10,
                 'pageEsperado' => 2,
             ],
-            'listar motivo inabilitação, valores padrão, sucesso' => [
+            'listar leads, valores padrão, sucesso' => [
                 'perPage' => 10,
                 'page' => 1,
                 'perPageEsperado' => 10,

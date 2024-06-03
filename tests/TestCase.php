@@ -16,6 +16,13 @@ abstract class TestCase extends BaseTestCase
     protected $login = false;
 
     /**
+     * User to be used in the tests
+     *
+     * @var \App\Models\User
+     */
+    protected $user;
+
+    /**
      * User token to be used in the tests
      *
      * @var string
@@ -32,7 +39,7 @@ abstract class TestCase extends BaseTestCase
     public function authorization(): void
     {
         if ($this->login) {
-            $user = \App\Models\User::factory()->create();
+            $this->user = \App\Models\User::factory()->create();
 
             $headers = $this->setHeaders();
 
@@ -40,7 +47,7 @@ abstract class TestCase extends BaseTestCase
                 ->postJson(
                     '/api/login',
                     [
-                        'email' => $user->email,
+                        'email' => $this->user->email,
                         'password' => env('USERS_INTERNAL_PASSWORD', 'password'),
                         'device_name' => 'Teste de API',
                         'device_type' => 'web',
