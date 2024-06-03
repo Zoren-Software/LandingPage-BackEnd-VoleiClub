@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Lead;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LeadInteraction>
@@ -19,8 +21,20 @@ class LeadInteractionFactory extends Factory
         $faker = \Faker\Factory::create();
 
         return [
-            //'lead_id' => $faker->randomDigitNotNull(),
-            //'user_id' => $faker->randomDigitNotNull(),
+            'lead_id' => Lead::factory(),
+            'user_id' => User::factory(),
+            'status' => $faker->randomElement([
+                'new',
+                'contacted',
+                'converted',
+                'unqualified',
+                'qualified',
+                'bad_email',
+                'spam',
+                'test',
+                'trial_period',
+                'active_customer',
+            ]),
             'message' => $faker->text(),
             'notes' => $faker->text(),
         ];
