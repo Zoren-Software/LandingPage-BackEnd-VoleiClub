@@ -32,7 +32,7 @@ Route::group(
             ->middleware(['signed', 'throttle:6,1'])
             ->name('leads.confirm-email');
         Route::get(
-            '/{id}/interactions', 
+            '/{leadId}/interactions', 
             [
                 LeadInteractionController::class, 
                 'index'

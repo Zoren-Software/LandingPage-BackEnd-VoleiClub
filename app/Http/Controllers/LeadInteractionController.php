@@ -18,9 +18,9 @@ class LeadInteractionController extends Controller
      * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(int $id, PaginateLeadsInteractionsRequest $request)
+    public function index(int $leadId, PaginateLeadsInteractionsRequest $request)
     {
-        $lead = Lead::findOrFail($id);
+        $lead = Lead::findOrFail($leadId);
 
         $perPage = $request->input('per_page', 15);
 
