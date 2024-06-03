@@ -38,6 +38,15 @@ Route::group(
                 'index'
             ]
         )->name('interactions.index');
+        Route::delete(
+            '/{lead}/interactions/{interaction}', 
+            [
+                LeadInteractionController::class, 
+                'destroy'
+            ]
+        )
+        ->name('leads.interactions.destroy');
+
     }
 );
 
