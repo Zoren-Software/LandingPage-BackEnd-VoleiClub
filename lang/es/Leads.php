@@ -51,4 +51,7 @@ return [
     'tenant_id_string' => 'El campo tenant_id debe ser una cadena de texto.',
     'tenant_id_unique' => 'El campo tenant_id ya está registrado en nuestra base de datos.',
     'id_lead_required' => 'El campo id del lead es obligatorio.',
+    'interaction_does_not_belong' => 'La interacción no pertenece al lead proporcionado.',
+    'interaction_deleted' => 'Interacción eliminada con éxito.',
+    'interaction_updated' => 'Interacción actualizada con éxito.',
 ];
