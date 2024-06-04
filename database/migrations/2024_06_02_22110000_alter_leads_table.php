@@ -13,7 +13,7 @@ return new class() extends Migration
     {
         if (! Schema::hasColumn('leads', 'type')) {
             Schema::table('leads', function (Blueprint $table) {
-                $table->enum('status', 
+                $table->enum('status',
                     [
                         'new',
                         'contacted',
@@ -27,8 +27,8 @@ return new class() extends Migration
                         'active_customer',
                     ]
                 )
-                ->default('new')
-                ->change();
+                    ->default('new')
+                    ->change();
             });
         }
     }
@@ -40,7 +40,7 @@ return new class() extends Migration
     {
         if (Schema::hasColumn('leads', 'type')) {
             Schema::table('leads', function (Blueprint $table) {
-                $table->enum('status', 
+                $table->enum('status',
                     [
                         'new',
                         'contacted',
@@ -51,8 +51,8 @@ return new class() extends Migration
                         'spam',
                     ]
                 )
-                ->default('new')
-                ->change();
+                    ->default('new')
+                    ->change();
             });
         }
     }

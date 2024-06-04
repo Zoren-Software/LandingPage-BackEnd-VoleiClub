@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Lead;
 use App\Models\LeadInteraction;
+use Tests\TestCase;
 
 class DestroyLeadInteractionsTest extends TestCase
 {
@@ -15,7 +15,7 @@ class DestroyLeadInteractionsTest extends TestCase
      * @test
      *
      * @group delete-lead-interaction
-     * 
+     *
      * @dataProvider destroyLeadsInteractionsProvider
      *
      * A basic test example.
@@ -26,7 +26,7 @@ class DestroyLeadInteractionsTest extends TestCase
             ->has(
                 \App\Models\LeadInteraction::factory()
                     ->userId($this->user->id)
-                    ->count(5), 
+                    ->count(5),
                 'interactions'
             )
             ->create();
@@ -36,7 +36,7 @@ class DestroyLeadInteractionsTest extends TestCase
         $leadId = $lead->id;
         $interactionId = $interaction->id;
 
-        if($data['leadId'] === false) {
+        if ($data['leadId'] === false) {
             // NOTE - buscar ultimo lead +1
             $leadId = Lead::orderBy('id', 'desc')->first()->id + 1;
         }
@@ -47,16 +47,17 @@ class DestroyLeadInteractionsTest extends TestCase
 
         $response = $this->rest()->delete("api/leads/$leadId/interactions/$interactionId");
 
-        if($expectedStatusCode === $response->getStatusCode()) {
+        if ($expectedStatusCode === $response->getStatusCode()) {
             $response
                 ->assertJsonStructure([
                     'message',
-                    'status'
+                    'status',
                 ])
                 ->assertStatus(200);
+
             return;
         } else {
-            
+
             $modelError = $data['leadId'] === false ? 'Lead' : 'LeadInteraction';
             $modelIdError = $data['leadId'] === false ? $leadId : $interactionId;
 
@@ -65,36 +66,38 @@ class DestroyLeadInteractionsTest extends TestCase
                     'message',
                 ])
                 ->assertJson([
-                    'message' => 'No query results for model [App\\Models\\' . $modelError . "] " . $modelIdError,
+                    'message' => 'No query results for model [App\\Models\\' . $modelError . '] ' . $modelIdError,
                 ])
                 ->assertStatus(404);
+
             return;
         }
     }
 
-    public static function destroyLeadsInteractionsProvider() {
+    public static function destroyLeadsInteractionsProvider()
+    {
         return [
             'destroy lead interactions, parameters corrects, success' => [
                 'data' => [
                     'leadId' => true,
                     'interactionId' => true,
                 ],
-                'expectedStatusCode' => 200
+                'expectedStatusCode' => 200,
             ],
             'destroy lead interactions, without leadId, error' => [
                 'data' => [
                     'leadId' => false,
                     'interactionId' => true,
                 ],
-                'expectedStatusCode' => 'error'
+                'expectedStatusCode' => 'error',
             ],
             'destroy lead interactions, without interactionId, error' => [
                 'data' => [
                     'leadId' => true,
                     'interactionId' => false,
                 ],
-                'expectedStatusCode' => 'error'
-            ]
+                'expectedStatusCode' => 'error',
+            ],
         ];
     }
 }

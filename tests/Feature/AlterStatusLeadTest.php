@@ -29,7 +29,7 @@ class AlterStatusLeadTest extends TestCase
             $data['id'] = 'lala';
         }
 
-        if($data['tenantId'] === false) {
+        if ($data['tenantId'] === false) {
             unset($data['tenantId']);
         }
 

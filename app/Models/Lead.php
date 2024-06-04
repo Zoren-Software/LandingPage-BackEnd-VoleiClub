@@ -31,7 +31,7 @@ class Lead extends Model
         $this->save();
 
         $this->createInteraction($request);
-        
+
         return $this;
     }
 
