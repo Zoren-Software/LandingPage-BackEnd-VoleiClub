@@ -15,6 +15,8 @@ class LeadInteractionController extends Controller
      * @param int $leadId
      * @param PaginateLeadsInteractionsRequest $request
      * 
+     * @group Lead Interactions
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(int $leadId, PaginateLeadsInteractionsRequest $request)
@@ -31,6 +33,8 @@ class LeadInteractionController extends Controller
     /**
      * @param int $leadId
      * @param int $interactionId
+     * 
+     * @group Lead Interactions
      * 
      * @return [type]
      */
@@ -52,6 +56,8 @@ class LeadInteractionController extends Controller
      * @param EditLeadInteractionRequest $request
      * @param Lead $lead
      * @param LeadInteraction $interaction
+     * 
+     * @group Lead Interactions
      * 
      * @return [type]
      */
