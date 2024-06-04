@@ -24,7 +24,6 @@ class EditLeadInteractionRequest extends FormRequest implements ScribeInterface
     public function rules(): array
     {
         return [
-            //'status' => 'required|in:new,contacted,converted,unqualified,qualified,bad_email,spam',
             'status' => [
                 'required',
                 'string',
@@ -64,30 +63,18 @@ class EditLeadInteractionRequest extends FormRequest implements ScribeInterface
     public function bodyParameters(): array
     {
         return [
-            'email' => [
-                'description' => __('Leads.email_description'),
+            'status' => [
+                'description' => 'The status of the interaction',
+                'example' => 'new',
                 'required' => true,
-                'value' => 'test@test.com',
-            ],
-            'name' => [
-                'description' => __('Leads.name_description'),
-                'required' => true,
-                'value' => 'John Doe',
-            ],
-            'experience_level' => [
-                'description' => __('Leads.experience_level_description'),
-                'required' => true,
-                'value' => 'beginner',
             ],
             'message' => [
-                'description' => __('Leads.message_description'),
-                'required' => false,
-                'value' => 'Hello, I am interested in your services.',
+                'description' => 'The message of the interaction',
+                'example' => 'Hello, how are you? I am contacting you to talk about our product.',
             ],
-            'recaptchaToken' => [
-                'description' => __('Leads.recaptchaToken_description'),
-                'required' => true,
-                'value' => 'test',
+            'notes' => [
+                'description' => 'The notes of the interaction',
+                'example' => 'This is a note about the interaction.',
             ],
         ];
 

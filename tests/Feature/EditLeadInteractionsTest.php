@@ -20,7 +20,7 @@ class EditLeadInteractionsTest extends TestCase
      *
      * A basic test example.
      */
-    public function editLeadsInteractions(array $data, $expectedStatusCode): void
+    public function editLeadsInteractions(array $parameters, array $data, int $expectedStatusCode): void
     {
         $lead = \App\Models\Lead::factory()
             ->has(
@@ -36,16 +36,16 @@ class EditLeadInteractionsTest extends TestCase
         $leadId = $lead->id;
         $interactionId = $interaction->id;
 
-        if ($data['leadId'] === false) {
+        if ($parameters['leadId'] === false) {
             // NOTE - buscar ultimo lead +1
             $leadId = Lead::orderBy('id', 'desc')->first()->id + 1;
         }
-        if ($data['interactionId'] === false) {
+        if ($parameters['interactionId'] === false) {
             // NOTE - buscar ultimo interaction +1
             $interactionId = LeadInteraction::orderBy('id', 'desc')->first()->id + 1;
         }
 
-        $response = $this->rest()->put("api/leads/$leadId/interactions/$interactionId");
+        $response = $this->rest()->put("api/leads/$leadId/interactions/$interactionId", $data);
 
         dd($response->json());
         dd('ola');
@@ -61,8 +61,8 @@ class EditLeadInteractionsTest extends TestCase
             return;
         } else {
 
-            $modelError = $data['leadId'] === false ? 'Lead' : 'LeadInteraction';
-            $modelIdError = $data['leadId'] === false ? $leadId : $interactionId;
+            $modelError = $parameters['leadId'] === false ? 'Lead' : 'LeadInteraction';
+            $modelIdError = $parameters['leadId'] === false ? $leadId : $interactionId;
 
             $response
                 ->assertJsonStructure([
@@ -81,9 +81,14 @@ class EditLeadInteractionsTest extends TestCase
     {
         return [
             'destroy lead interactions, parameters corrects, success' => [
-                'data' => [
+                'parameters' => [
                     'leadId' => true,
                     'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => 'Message test',
+                    'notes' => 'Notes test',
                 ],
                 'expectedStatusCode' => 200,
             ],

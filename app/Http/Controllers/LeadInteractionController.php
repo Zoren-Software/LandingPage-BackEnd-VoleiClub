@@ -53,19 +53,18 @@ class LeadInteractionController extends Controller
     {
         // Verifica se a interação pertence ao lead
         if ($interaction->lead_id !== $lead->id) {
-            return response()->json(['error' => 'Interação não pertence ao lead fornecido.'], 403);
+            return response()->json(['error' => trans('Leads.interaction_does_not_belong')], 403);
         }
 
-        // Validação dos dados
-        $validated = $request->validate([
-            'status' => 'required|in:new,contacted,converted,unqualified,qualified,bad_email,spam',
-            'message' => 'nullable|string',
-            'notes' => 'nullable|string',
-        ]);
+        $interaction->update($request->validated());
 
-        // Atualiza a interação com os dados validados
-        $interaction->update($validated);
-
-        return response()->json(['message' => 'Interação atualizada com sucesso.', 'interaction' => $interaction], 200);
+        return response()->json(
+            [
+                'message' => 'Interação atualizada com sucesso.', 
+                'status' => 'success',
+                'interaction' => $interaction, 
+            ],
+            200
+        );
     }
 }
