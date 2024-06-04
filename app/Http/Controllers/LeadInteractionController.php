@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AlterStatusLeadRequest;
-use App\Http\Requests\ConfirmEmailRequest;
-use App\Http\Requests\CreateLeadRequest;
 use App\Http\Requests\DestroyLeadInteractionRequest;
+use App\Http\Requests\EditLeadInteractionRequest;
 use App\Http\Requests\PaginateLeadsInteractionsRequest;
-use App\Mail\AfterConfirmationEmail;
-use App\Mail\ConfirmEmail;
 use App\Models\Lead;
-use Illuminate\Support\Facades\Mail;
+use App\Models\LeadInteraction;
 use Illuminate\Http\Request;
 
 class LeadInteractionController extends Controller
 {
     /**
-     * @param Lead $lead
-     * 
+     * @param  Lead  $lead
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(int $leadId, PaginateLeadsInteractionsRequest $request)
@@ -32,10 +27,8 @@ class LeadInteractionController extends Controller
     }
 
     /**
-     * @param int $id
-     * @param int $interactionId
-     * @param DestroyLeadInteractionRequest $request
-     * 
+     * @param  int  $id
+     * @param  DestroyLeadInteractionRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(int $leadId, int $interactionId)
@@ -48,7 +41,31 @@ class LeadInteractionController extends Controller
             [
                 'message' => __('Leads.interaction_deleted'),
                 'status' => 'success',
-            ], 
+            ],
         );
+    }
+
+    /**
+     * @param  Request  $request
+     * @return [type]
+     */
+    public function update(EditLeadInteractionRequest $request, Lead $lead, LeadInteraction $interaction)
+    {
+        // Verifica se a interação pertence ao lead
+        if ($interaction->lead_id !== $lead->id) {
+            return response()->json(['error' => 'Interação não pertence ao lead fornecido.'], 403);
+        }
+
+        // Validação dos dados
+        $validated = $request->validate([
+            'status' => 'required|in:new,contacted,converted,unqualified,qualified,bad_email,spam',
+            'message' => 'nullable|string',
+            'notes' => 'nullable|string',
+        ]);
+
+        // Atualiza a interação com os dados validados
+        $interaction->update($validated);
+
+        return response()->json(['message' => 'Interação atualizada com sucesso.', 'interaction' => $interaction], 200);
     }
 }

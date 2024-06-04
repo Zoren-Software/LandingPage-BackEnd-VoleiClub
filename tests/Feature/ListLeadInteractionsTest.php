@@ -24,7 +24,7 @@ class ListLeadInteractionsTest extends TestCase
             ->has(
                 \App\Models\LeadInteraction::factory()
                     ->userId($this->user->id)
-                    ->count(5), 
+                    ->count(5),
                 'interactions'
             )
             ->create();
