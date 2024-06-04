@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 class LeadInteractionController extends Controller
 {
     /**
-     * @param  Lead  $lead
+     * @param int $leadId
+     * @param PaginateLeadsInteractionsRequest $request
+     * 
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(int $leadId, PaginateLeadsInteractionsRequest $request)
@@ -27,9 +29,10 @@ class LeadInteractionController extends Controller
     }
 
     /**
-     * @param  int  $id
-     * @param  DestroyLeadInteractionRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $leadId
+     * @param int $interactionId
+     * 
+     * @return [type]
      */
     public function destroy(int $leadId, int $interactionId)
     {
@@ -46,12 +49,15 @@ class LeadInteractionController extends Controller
     }
 
     /**
-     * @param  Request  $request
+     * @param EditLeadInteractionRequest $request
+     * @param Lead $lead
+     * @param LeadInteraction $interaction
+     * 
      * @return [type]
      */
     public function update(EditLeadInteractionRequest $request, Lead $lead, LeadInteraction $interaction)
     {
-        // Verifica se a interação pertence ao lead
+        // NOTE - Verifica se a interação pertence ao lead
         if ($interaction->lead_id !== $lead->id) {
             return response()->json(['error' => trans('Leads.interaction_does_not_belong')], 403);
         }

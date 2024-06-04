@@ -16,11 +16,12 @@ class EditLeadInteractionsTest extends TestCase
      *
      * @group edit-lead-interaction
      *
-     * @dataProvider editLeadsInteractionsProvider
+     * @dataProvider editLeadsInteractionsProviderSuccess
+     * @dataProvider editLeadsInteractionsProviderError
      *
      * A basic test example.
      */
-    public function editLeadsInteractions(array $parameters, array $data, int $expectedStatusCode): void
+    public function editLeadsInteractions(array $parameters, array $data, $expectedStatusCode, string $expectedMessage): void
     {
         $lead = \App\Models\Lead::factory()
             ->has(
@@ -45,23 +46,32 @@ class EditLeadInteractionsTest extends TestCase
             $interactionId = LeadInteraction::orderBy('id', 'desc')->first()->id + 1;
         }
 
+        if($data['status'] === false) {
+            unset($data['status']);
+        }
+
+        if($data['message'] === false) {
+            unset($data['message']);
+        }
+
+        if($data['notes'] === false) {
+            unset($data['notes']);
+        }
+
         $response = $this->rest()->put("api/leads/$leadId/interactions/$interactionId", $data);
 
-        dd($response->json());
-        dd('ola');
-
-        if ($expectedStatusCode === $response->getStatusCode()) {
+        if ($response->getStatusCode() == 200) {
             $response
                 ->assertJsonStructure([
                     'message',
                     'status',
+                    'interaction'
                 ])
                 ->assertStatus(200);
 
             return;
-        } else {
+        } elseif($response->getStatusCode() == 404) {
 
-            $modelError = $parameters['leadId'] === false ? 'Lead' : 'LeadInteraction';
             $modelIdError = $parameters['leadId'] === false ? $leadId : $interactionId;
 
             $response
@@ -69,18 +79,29 @@ class EditLeadInteractionsTest extends TestCase
                     'message',
                 ])
                 ->assertJson([
-                    'message' => 'No query results for model [App\\Models\\' . $modelError . '] ' . $modelIdError,
+                    'message' => $expectedMessage . $modelIdError,
                 ])
                 ->assertStatus(404);
+
+            return;
+        } else {
+            $response
+                ->assertJsonStructure([
+                    'message',
+                ])
+                ->assertJson([
+                    'message' => trans($expectedMessage),
+                ])
+                ->assertStatus($expectedStatusCode);
 
             return;
         }
     }
 
-    public static function editLeadsInteractionsProvider()
+    public static function editLeadsInteractionsProviderSuccess()
     {
         return [
-            'destroy lead interactions, parameters corrects, success' => [
+            'edit lead interactions, parameters corrects, success' => [
                 'parameters' => [
                     'leadId' => true,
                     'interactionId' => true,
@@ -91,21 +112,105 @@ class EditLeadInteractionsTest extends TestCase
                     'notes' => 'Notes test',
                 ],
                 'expectedStatusCode' => 200,
+                'expectedMessage' => 'success',
             ],
-            // 'destroy lead interactions, without leadId, error' => [
-            //     'data' => [
-            //         'leadId' => false,
-            //         'interactionId' => true,
-            //     ],
-            //     'expectedStatusCode' => 'error'
-            // ],
-            // 'destroy lead interactions, without interactionId, error' => [
-            //     'data' => [
-            //         'leadId' => true,
-            //         'interactionId' => false,
-            //     ],
-            //     'expectedStatusCode' => 'error'
-            // ]
+        ];
+    }
+
+    public static function editLeadsInteractionsProviderError()
+    {
+        return [
+            'edit lead interactions, without leadId, error' => [
+                'parameters' => [
+                    'leadId' => false,
+                    'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => 'Message test',
+                    'notes' => 'Notes test',
+                ],
+                'expectedStatusCode' => 404,
+                'expectedMessage' => 'No query results for model [App\\Models\\Lead] ',
+            ],
+            'edit lead interactions, without interactionId, error' => [
+                'parameters' => [
+                    'leadId' => true,
+                    'interactionId' => false,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => 'Message test',
+                    'notes' => 'Notes test',
+                ],
+                'expectedStatusCode' => 404,
+                'expectedMessage' => 'No query results for model [App\\Models\\LeadInteraction] ',
+            ],
+            'edit lead interactions, without status, error' => [
+                'parameters' => [
+                    'leadId' => true,
+                    'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => false,
+                    'message' => 'Message test',
+                    'notes' => 'Notes test',
+                ],
+                'expectedStatusCode' => 422,
+                'expectedMessage' => 'Leads.status_required'
+            ],
+            'edit lead interactions, without message_required, error' => [
+                'parameters' => [
+                    'leadId' => true,
+                    'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => false,
+                    'notes' => 'Notes test',
+                ],
+                'expectedStatusCode' => 422,
+                'expectedMessage' => 'Leads.message_required'
+            ],
+            'edit lead interactions, without message_string, error' => [
+                'parameters' => [
+                    'leadId' => true,
+                    'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => 123,
+                    'notes' => 'Notes test',
+                ],
+                'expectedStatusCode' => 422,
+                'expectedMessage' => 'Leads.message.string'
+            ],
+            'edit lead interactions, without notes_required, error' => [
+                'parameters' => [
+                    'leadId' => true,
+                    'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => 'Message test',
+                    'notes' => false
+                ],
+                'expectedStatusCode' => 422,
+                'expectedMessage' => 'Leads.notes_required'
+            ],
+            'edit lead interactions, without notes_string, error' => [
+                'parameters' => [
+                    'leadId' => true,
+                    'interactionId' => true,
+                ],
+                'data' => [
+                    'status' => 'new',
+                    'message' => 'Message test',
+                    'notes' => false
+                ],
+                'expectedStatusCode' => 422,
+                'expectedMessage' => 'Leads.notes.string'
+            ],
         ];
     }
 }
