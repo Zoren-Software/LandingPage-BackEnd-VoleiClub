@@ -45,10 +45,6 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                     'active_customer',
                 ]),
             ],
-            'tenantId' => [
-                'required',
-                'string',
-            ],
             'message' => [
                 'nullable',
                 'string',
@@ -69,8 +65,6 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
             'status.required' => __('Leads.status_required'),
             'status.string' => __('Leads.status_string'),
             'status.in' => __('Leads.status_in'),
-            'tenantId.required' => __('Leads.tenant_id_required'),
-            'tenantId.string' => __('Leads.tenant_id_string'),
         ];
     }
 
@@ -86,11 +80,6 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                 'description' => __('Leads.status_description'),
                 'required' => true,
                 'example' => 'new',
-            ],
-            'tenantId' => [
-                'description' => __('Leads.tenant_id_description'),
-                'required' => true,
-                'example' => 'tenant_id',
             ],
             'message' => [
                 'description' => __('Leads.message_description'),
