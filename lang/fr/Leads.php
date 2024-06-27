@@ -53,4 +53,7 @@ return [
     'tenant_id_string' => 'Le champ tenant_id doit être une chaîne.',
     'tenant_id_unique' => 'Le champ tenant_id est déjà enregistré dans notre base de données.',
     'id_lead_required' => 'Le champ id du lead est obligatoire.',
+    'interaction_does_not_belong' => "L'interaction n'appartient pas au lead fourni.",
+    'interaction_deleted' => 'Interaction supprimée avec succès.',
+    'interaction_updated' => 'Interaction mise à jour avec succès.',
 ];

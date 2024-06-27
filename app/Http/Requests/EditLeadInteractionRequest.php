@@ -6,7 +6,7 @@ use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
+class EditLeadInteractionRequest extends FormRequest implements ScribeInterface
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,6 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
     public function rules(): array
     {
         return [
-            'id' => [
-                'required',
-                'integer',
-                'exists:leads,id',
-            ],
             'status' => [
                 'required',
                 'string',
@@ -59,38 +54,29 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
     public function messages(): array
     {
         return [
-            'id.required' => __('Leads.id_required'),
-            'id.integer' => __('Leads.id_integer'),
-            'id.exists' => __('Leads.id_exists'),
-            'status.required' => __('Leads.status_required'),
-            'status.string' => __('Leads.status_string'),
-            'status.in' => __('Leads.status_in'),
+            'lead.required' => __('Leads.lead_required'),
+            'lead.string' => __('Leads.lead_string'),
+            'lead.unique' => __('Leads.lead_unique'),
         ];
     }
 
     public function bodyParameters(): array
     {
         return [
-            'id' => [
-                'description' => __('Leads.id_description'),
-                'required' => true,
-                'example' => 1,
-            ],
             'status' => [
-                'description' => __('Leads.status_description'),
-                'required' => true,
+                'description' => 'The status of the interaction',
                 'example' => 'new',
+                'required' => true,
             ],
             'message' => [
-                'description' => __('Leads.message_description'),
-                'required' => false,
-                'example' => 'Uma mensagem aqui para o lead.',
+                'description' => 'The message of the interaction',
+                'example' => 'Hello, how are you? I am contacting you to talk about our product.',
             ],
             'notes' => [
-                'description' => __('Leads.notes_description'),
-                'required' => false,
-                'example' => 'Uma nota aqui para o lead.',
+                'description' => 'The notes of the interaction',
+                'example' => 'This is a note about the interaction.',
             ],
         ];
+
     }
 }

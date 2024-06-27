@@ -53,4 +53,7 @@ return [
     'tenant_id_string' => 'Поле tenant_id должно быть строкой.',
     'tenant_id_unique' => 'Поле tenant_id уже зарегистрировано в нашей базе данных.',
     'id_lead_required' => 'Поле id лида обязательно для заполнения.',
+    'interaction_does_not_belong' => 'Взаимодействие не принадлежит предоставленному лиду.',
+    'interaction_deleted' => 'Взаимодействие успешно удалено.',
+    'interaction_updated' => 'Взаимодействие успешно обновлено.',
 ];
