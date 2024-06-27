@@ -25,7 +25,10 @@ class LeadInteractionController extends Controller
 
         $perPage = $request->input('per_page', 15);
 
-        $interactions = $lead->interactions()->with('user')->paginate($perPage);
+        $interactions = $lead->interactions()
+            ->with('user')
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
 
         return response()->json($interactions);
     }
