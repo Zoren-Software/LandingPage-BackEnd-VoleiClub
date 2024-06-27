@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\LeadInteractionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,30 @@ Route::group(
         )
             ->middleware(['signed', 'throttle:6,1'])
             ->name('leads.confirm-email');
+        Route::get(
+            '/{leadId}/interactions',
+            [
+                LeadInteractionController::class,
+                'index',
+            ]
+        )
+            ->name('interactions.index');
+        Route::delete(
+            '/{lead}/interactions/{interaction}',
+            [
+                LeadInteractionController::class,
+                'destroy',
+            ]
+        )
+            ->name('leads.interactions.destroy');
+        Route::put(
+            '/{lead}/interactions/{interaction}',
+            [
+                LeadInteractionController::class,
+                'update',
+            ]
+        )
+            ->name('leads.interactions.update');
     }
 );
 

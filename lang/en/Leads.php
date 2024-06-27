@@ -53,4 +53,7 @@ return [
     'tenant_id_string' => 'The tenant_id field must be a string.',
     'tenant_id_unique' => 'The tenant_id field is already registered in our database.',
     'id_lead_required' => 'The id lead field is required.',
+    'interaction_does_not_belong' => 'The interaction does not belong to the provided lead.',
+    'interaction_deleted' => 'Interaction deleted successfully.',
+    'interaction_updated' => 'Interaction updated successfully.',
 ];

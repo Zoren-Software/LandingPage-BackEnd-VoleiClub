@@ -29,7 +29,7 @@ class AlterStatusLeadTest extends TestCase
             $data['id'] = 'lala';
         }
 
-        if($data['tenantId'] === false) {
+        if ($data['tenantId'] === false) {
             unset($data['tenantId']);
         }
 
@@ -79,7 +79,7 @@ class AlterStatusLeadTest extends TestCase
         $faker = \Faker\Factory::create();
 
         return [
-            'alter status lead, alter status new, error' => [
+            'alter status lead, alter status new, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
@@ -91,7 +91,7 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
-            'alter status lead, alter status contacted, error' => [
+            'alter status lead, alter status contacted, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
@@ -103,7 +103,7 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
-            'alter status lead, alter status converted, error' => [
+            'alter status lead, alter status converted, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
@@ -115,7 +115,7 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
-            'alter status lead, alter status unqualified, error' => [
+            'alter status lead, alter status unqualified, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
@@ -127,7 +127,7 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
-            'alter status lead, alter status qualified, error' => [
+            'alter status lead, alter status qualified, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
@@ -139,7 +139,7 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
-            'alter status lead, alter status bad_email, error' => [
+            'alter status lead, alter status bad_email, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
@@ -151,12 +151,88 @@ class AlterStatusLeadTest extends TestCase
                 'errorType' => false,
                 'errorExpected' => false,
             ],
-            'alter status lead, alter status spam, error' => [
+            'alter status lead, alter status spam, success' => [
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
                     'status' => 'spam',
                     'tenantId' => $faker->word(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status test, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'test',
+                    'tenantId' => $faker->word(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status trial period, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'trial_period',
+                    'tenantId' => $faker->word(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status active customer, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'active_customer',
+                    'tenantId' => $faker->word(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status new with message, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => $faker->word(),
+                    'message' => $faker->text(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status new with note, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => $faker->word(),
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 200,
+                'messageExpected' => 'Leads.success_edit_status',
+                'errorType' => false,
+                'errorExpected' => false,
+            ],
+            'alter status lead, alter status new with message and note, success' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status' => 'new',
+                    'tenantId' => $faker->word(),
+                    'message' => $faker->text(),
+                    'notes' => $faker->text(),
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
