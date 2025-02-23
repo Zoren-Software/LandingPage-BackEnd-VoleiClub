@@ -58,7 +58,7 @@ class EditLeadInteractionsTest extends TestCase
             unset($data['notes']);
         }
 
-        $response = $this->rest()->put("api/leads/$leadId/interactions/$interactionId", $data);
+        $response = $this->rest()->putJson("api/leads/$leadId/interactions/$interactionId", $data);
 
         if ($response->getStatusCode() == 200) {
             $response

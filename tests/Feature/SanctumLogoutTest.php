@@ -29,7 +29,7 @@ class SanctumLogoutTest extends TestCase
             unset($data['token']);
         }
 
-        $response = $this->rest()->post('api/logout', $data);
+        $response = $this->rest()->postJson('api/logout', $data);
 
         if ($statusExpected == 422) {
             $response->assertJsonValidationErrors([$typeError]);

@@ -44,7 +44,7 @@ class SanctumLoginTest extends TestCase
             unset($data['email']);
         }
 
-        $response = $this->rest()->post('api/login', $data);
+        $response = $this->rest()->postJson('api/login', $data);
 
         if ($statusExpected == 422) {
             $response->assertJsonValidationErrors([$typeError]);
