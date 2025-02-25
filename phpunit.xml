@@ -26,6 +26,9 @@
         <testsuite name="Lead">
             <file>tests/Feature/CreateLeadTest.php</file>
         </testsuite>
+        <testsuite name="Database">
+            <directory>tests/Feature/Database</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>
