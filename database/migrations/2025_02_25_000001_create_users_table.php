@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (! Schema::hasTable('users')) {
             Schema::create('users', function (Blueprint $table) {
-                $table->bigInteger('id'); // AUTO_INCREMENT será tratado na segunda migration
+                $table->bigInteger('id')->primary();
                 $table->string('github_id')->nullable();
                 $table->string('auth_type')->nullable();
                 $table->string('name');

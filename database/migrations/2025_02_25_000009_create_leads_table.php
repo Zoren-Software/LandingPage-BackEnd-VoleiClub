@@ -10,7 +10,7 @@ return new class extends Migration
     {
         if (! Schema::hasTable('leads')) {
             Schema::create('leads', function (Blueprint $table) {
-                $table->bigInteger('id'); // AUTO_INCREMENT será tratado na segunda migration
+                $table->bigInteger('id')->primary();
                 $table->string('tenant_id')
                     ->nullable();
                 $table->string('name');

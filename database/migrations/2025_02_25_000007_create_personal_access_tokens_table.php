@@ -10,7 +10,7 @@ return new class extends Migration
     {
         if (! Schema::hasTable('personal_access_tokens')) {
             Schema::create('personal_access_tokens', function (Blueprint $table) {
-                $table->bigInteger('id'); // AUTO_INCREMENT será tratado na segunda migration
+                $table->bigInteger('id')->primary();
                 $table->string('tokenable_type', 255);
                 $table->bigInteger('tokenable_id');
                 $table->string('name');

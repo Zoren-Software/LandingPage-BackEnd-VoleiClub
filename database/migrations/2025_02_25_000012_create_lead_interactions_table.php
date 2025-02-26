@@ -13,7 +13,7 @@ return new class() extends Migration
     {
         if (! Schema::hasTable('lead_interactions')) {
             Schema::create('lead_interactions', function (Blueprint $table) {
-                $table->bigInteger('id'); // AUTO_INCREMENT será tratado na segunda migration
+                $table->bigInteger('id')->primary();
                 $table->unsignedBigInteger('lead_id');
                 $table->enum(
                     'status',
@@ -32,9 +32,9 @@ return new class() extends Migration
                 );
                 $table->text('message')->nullable();
                 $table->text('notes')->nullable();
-                $table->unsignedBigInteger('user_id')->nullable();
-                $table->timestamp('created_at')->nullable();
-                $table->timestamp('updated_at')->nullable();
+                $table->unsignedBigInteger('user_id')
+                    ->nullable();
+                $table->timestamps();
             });
         }
     }
