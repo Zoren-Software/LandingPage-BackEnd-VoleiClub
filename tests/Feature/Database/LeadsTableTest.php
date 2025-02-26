@@ -17,6 +17,7 @@ class LeadsTableTest extends BaseDatabaseTest
         'message' => ['type' => 'text'],
         'created_at' => ['type' => 'timestamp', 'nullable' => true],
         'updated_at' => ['type' => 'timestamp', 'nullable' => true],
+        'deleted_at' => ['type' => 'timestamp', 'nullable' => true],
     ];
 
     public static $primaryKey = ['id']; // Chave primária
