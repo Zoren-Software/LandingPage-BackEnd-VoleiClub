@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DestroyLeadInteractionRequest;
 use App\Http\Requests\EditLeadInteractionRequest;
 use App\Http\Requests\PaginateLeadsInteractionsRequest;
 use App\Models\Lead;
 use App\Models\LeadInteraction;
-use Illuminate\Http\Request;
 
 class LeadInteractionController extends Controller
 {
     /**
-     * @param int $leadId
-     * @param PaginateLeadsInteractionsRequest $request
-     * 
      * @group Lead Interactions
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(int $leadId, PaginateLeadsInteractionsRequest $request)
@@ -34,11 +29,8 @@ class LeadInteractionController extends Controller
     }
 
     /**
-     * @param int $leadId
-     * @param int $interactionId
-     * 
      * @group Lead Interactions
-     * 
+     *
      * @return [type]
      */
     public function destroy(int $leadId, int $interactionId)
@@ -56,12 +48,8 @@ class LeadInteractionController extends Controller
     }
 
     /**
-     * @param EditLeadInteractionRequest $request
-     * @param Lead $lead
-     * @param LeadInteraction $interaction
-     * 
      * @group Lead Interactions
-     * 
+     *
      * @return [type]
      */
     public function update(EditLeadInteractionRequest $request, Lead $lead, LeadInteraction $interaction)
@@ -75,9 +63,9 @@ class LeadInteractionController extends Controller
 
         return response()->json(
             [
-                'message' => 'Interação atualizada com sucesso.', 
+                'message' => 'Interação atualizada com sucesso.',
                 'status' => 'success',
-                'interaction' => $interaction, 
+                'interaction' => $interaction,
             ],
             200
         );

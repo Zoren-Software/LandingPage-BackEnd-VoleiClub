@@ -4,7 +4,6 @@ namespace Tests\Feature\Database;
 
 class UserTableTest extends BaseDatabaseTest
 {
-
     protected $table = 'users';
 
     public static $fieldTypes = [

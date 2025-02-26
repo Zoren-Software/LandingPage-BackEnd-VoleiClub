@@ -14,7 +14,7 @@ trait DatabaseAssertions
      */
     private function ensureTableExists()
     {
-        if (!Schema::hasTable($this->table)) {
+        if (! Schema::hasTable($this->table)) {
             $this->fail("The table '{$this->table}' does not exist.");
         }
     }
@@ -90,7 +90,7 @@ trait DatabaseAssertions
         $missingForeignKeys = [];
 
         foreach (static::$foreignKeys as $foreignKey) {
-            if (!hasForeignKeyExist($this->table, $foreignKey)) {
+            if (! hasForeignKeyExist($this->table, $foreignKey)) {
                 $missingForeignKeys[] = $foreignKey;
             }
         }
@@ -163,7 +163,7 @@ trait DatabaseAssertions
         $missingForeignKeys = [];
 
         foreach ($foreignKeys as $foreignKey) {
-            if (!hasForeignKeyExist($this->table, $foreignKey)) {
+            if (! hasForeignKeyExist($this->table, $foreignKey)) {
                 $missingForeignKeys[] = $foreignKey;
             }
         }
@@ -179,7 +179,7 @@ trait DatabaseAssertions
         $missingUniqueKeys = [];
 
         foreach ($uniqueKeys as $uniqueKey) {
-            if (!hasIndexExist($this->table, $uniqueKey)) {
+            if (! hasIndexExist($this->table, $uniqueKey)) {
                 $missingUniqueKeys[] = $uniqueKey;
             }
         }
@@ -239,7 +239,7 @@ trait DatabaseAssertions
                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?
             ', [$databaseName, $this->table, $column]);
 
-            if (!$columnInfo) {
+            if (! $columnInfo) {
                 $mismatchedTypes[] = "Column '{$column}' does not exist in the '{$this->table}' table.";
 
                 continue;

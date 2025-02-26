@@ -46,15 +46,15 @@ class EditLeadInteractionsTest extends TestCase
             $interactionId = LeadInteraction::orderBy('id', 'desc')->first()->id + 1;
         }
 
-        if($data['status'] === false) {
+        if ($data['status'] === false) {
             unset($data['status']);
         }
 
-        if($data['message'] === false) {
+        if ($data['message'] === false) {
             unset($data['message']);
         }
 
-        if($data['notes'] === false) {
+        if ($data['notes'] === false) {
             unset($data['notes']);
         }
 
@@ -65,12 +65,12 @@ class EditLeadInteractionsTest extends TestCase
                 ->assertJsonStructure([
                     'message',
                     'status',
-                    'interaction'
+                    'interaction',
                 ])
                 ->assertStatus(200);
 
             return;
-        } elseif($response->getStatusCode() == 404) {
+        } elseif ($response->getStatusCode() == 404) {
 
             $modelIdError = $parameters['leadId'] === false ? $leadId : $interactionId;
 
@@ -157,7 +157,7 @@ class EditLeadInteractionsTest extends TestCase
                     'notes' => 'Notes test',
                 ],
                 'expectedStatusCode' => 422,
-                'expectedMessage' => 'Leads.status_required'
+                'expectedMessage' => 'Leads.status_required',
             ],
             'edit lead interactions, without message_required, error' => [
                 'parameters' => [
@@ -170,7 +170,7 @@ class EditLeadInteractionsTest extends TestCase
                     'notes' => 'Notes test',
                 ],
                 'expectedStatusCode' => 422,
-                'expectedMessage' => 'Leads.message_required'
+                'expectedMessage' => 'Leads.message_required',
             ],
             'edit lead interactions, without message_string, error' => [
                 'parameters' => [
@@ -183,7 +183,7 @@ class EditLeadInteractionsTest extends TestCase
                     'notes' => 'Notes test',
                 ],
                 'expectedStatusCode' => 422,
-                'expectedMessage' => 'Leads.message.string'
+                'expectedMessage' => 'Leads.message.string',
             ],
             'edit lead interactions, without notes_required, error' => [
                 'parameters' => [
@@ -193,10 +193,10 @@ class EditLeadInteractionsTest extends TestCase
                 'data' => [
                     'status' => 'new',
                     'message' => 'Message test',
-                    'notes' => false
+                    'notes' => false,
                 ],
                 'expectedStatusCode' => 422,
-                'expectedMessage' => 'Leads.notes_required'
+                'expectedMessage' => 'Leads.notes_required',
             ],
             'edit lead interactions, without notes_string, error' => [
                 'parameters' => [
@@ -206,10 +206,10 @@ class EditLeadInteractionsTest extends TestCase
                 'data' => [
                     'status' => 'new',
                     'message' => 'Message test',
-                    'notes' => false
+                    'notes' => false,
                 ],
                 'expectedStatusCode' => 422,
-                'expectedMessage' => 'Leads.notes.string'
+                'expectedMessage' => 'Leads.notes.string',
             ],
         ];
     }

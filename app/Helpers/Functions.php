@@ -25,7 +25,7 @@ function hasForeignKeyExist($table, $nameForeignKey)
             AND CONSTRAINT_NAME = ?
     ', [$databaseName, $table, $nameForeignKey]);
 
-    return !empty($result);
+    return ! empty($result);
 }
 
 function hasIndexExist($table, $nameIndex)
@@ -39,7 +39,7 @@ function hasIndexExist($table, $nameIndex)
             AND INDEX_NAME = ?
     ', [$databaseName, $table, $nameIndex]);
 
-    return !empty($result);
+    return ! empty($result);
 }
 
 function hasEventExist($eventName)
@@ -52,7 +52,7 @@ function hasEventExist($eventName)
             AND EVENT_NAME = ?
     ', [$dbName, $eventName]);
 
-    return !empty($result);
+    return ! empty($result);
 }
 
 function hasAutoIncrement($table, $column = 'id')
@@ -67,7 +67,7 @@ function hasAutoIncrement($table, $column = 'id')
             AND EXTRA = 'auto_increment'
     ", [$databaseName, $table, $column]);
 
-    return !empty($result);
+    return ! empty($result);
 }
 
 /**
@@ -133,7 +133,7 @@ function getPrimaryKeyColumns($table): array
 function hasPrimaryKey($table)
 {
     $databaseName = DB::getDatabaseName();
-    
+
     $result = DB::select("
         SELECT COUNT(*) as count
         FROM information_schema.table_constraints
@@ -142,5 +142,5 @@ function hasPrimaryKey($table)
         AND constraint_type = 'PRIMARY KEY'
     ", [$databaseName, $table]);
 
-    return !empty($result) && $result[0]->count > 0;
+    return ! empty($result) && $result[0]->count > 0;
 }

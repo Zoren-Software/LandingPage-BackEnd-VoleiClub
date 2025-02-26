@@ -4,10 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
-        if (!Schema::hasTable('leads')) {
+        if (! Schema::hasTable('leads')) {
             Schema::create('leads', function (Blueprint $table) {
                 $table->bigInteger('id'); // AUTO_INCREMENT será tratado na segunda migration
                 $table->string('tenant_id')
