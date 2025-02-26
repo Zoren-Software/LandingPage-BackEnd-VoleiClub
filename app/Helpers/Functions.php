@@ -129,3 +129,18 @@ function getPrimaryKeyColumns($table): array
 
     return array_column($primaryKey, 'COLUMN_NAME');
 }
+
+function hasPrimaryKey($table)
+{
+    $databaseName = DB::getDatabaseName();
+    
+    $result = DB::select("
+        SELECT COUNT(*) as count
+        FROM information_schema.table_constraints
+        WHERE table_schema = ?
+        AND table_name = ?
+        AND constraint_type = 'PRIMARY KEY'
+    ", [$databaseName, $table]);
+
+    return !empty($result) && $result[0]->count > 0;
+}
