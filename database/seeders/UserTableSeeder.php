@@ -1,9 +1,8 @@
 <?php
 
-// criar classe para criar o ussuario de acesso ao sistema
-
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,10 +13,14 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::create([
-            'name' => 'Administrator',
-            'email' => env('ADMIN_EMAIL'),
-            'password' => Hash::make(env('ADMIN_PASSWORD')),
-        ]);
+        $adminEmail = env('ADMIN_EMAIL');
+
+        User::updateOrCreate(
+            ['email' => $adminEmail], // Se existir um usuário com esse e-mail, ele será atualizado
+            [
+                'name' => 'Administrator',
+                'password' => Hash::make(env('ADMIN_PASSWORD')),
+            ]
+        );
     }
 }
