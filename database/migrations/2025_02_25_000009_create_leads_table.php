@@ -10,9 +10,12 @@ return new class extends Migration {
         if (!Schema::hasTable('leads')) {
             Schema::create('leads', function (Blueprint $table) {
                 $table->bigInteger('id'); // AUTO_INCREMENT será tratado na segunda migration
+                $table->string('tenant_id')
+                    ->nullable();
                 $table->string('name');
                 $table->string('email');
-                $table->timestamp('email_verified_at')->nullable();
+                $table->timestamp('email_verified_at')
+                    ->nullable();
                 $table->enum(
                     'status',
                     [
@@ -41,8 +44,8 @@ return new class extends Migration {
                     ]
                 )->default('beginner');
                 $table->text('message');
-                $table->timestamp('created_at')->nullable();
-                $table->timestamp('updated_at')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
             });
         }
     }
