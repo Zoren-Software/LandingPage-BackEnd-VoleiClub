@@ -26,6 +26,9 @@ return new class extends Migration {
                         'qualified',
                         'bad_email',
                         'spam',
+                        'test',
+                        'trial_period',
+                        'active_customer',
                     ]
                 )->default('new');
                 $table->enum(
