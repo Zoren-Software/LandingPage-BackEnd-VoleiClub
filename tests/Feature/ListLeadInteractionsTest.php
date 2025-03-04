@@ -32,7 +32,7 @@ class ListLeadInteractionsTest extends TestCase
         $perPageGet = $perPage != null ? '&per_page=' . $perPage : '';
         $pageGet = $page != null ? '&page=' . $page : '';
 
-        $response = $this->rest()->get("api/leads/$lead->id/interactions?$perPageGet" . "$pageGet");
+        $response = $this->rest()->getJson("api/leads/$lead->id/interactions?$perPageGet" . "$pageGet");
 
         $response->assertStatus(200);
     }

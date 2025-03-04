@@ -30,7 +30,7 @@ class CreateLeadTest extends TestCase
             unset($data['tenant_id']);
         }
 
-        $response = $this->rest()->post('api/leads', $data);
+        $response = $this->rest()->postJson('api/leads', $data);
 
         // dd($response->json());
 
