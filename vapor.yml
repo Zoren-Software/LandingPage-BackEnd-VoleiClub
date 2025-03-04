@@ -2,7 +2,7 @@ id: 69947
 name: VolleyTrackLandingPageDev5
 environments:
     production:
-        #domain: api.volleytrack.com
+        domain: api.volleytrack.com
         database: volleytrack
         memory: 1024
         cli-memory: 512
