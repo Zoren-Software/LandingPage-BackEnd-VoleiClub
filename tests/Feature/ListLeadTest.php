@@ -25,7 +25,7 @@ class ListLeadTest extends TestCase
         $perPageGet = $perPage != null ? '&per_page=' . $perPage : '';
         $pageGet = $page != null ? '&page=' . $page : '';
 
-        $response = $this->rest()->get("api/leads?$perPageGet" . "$pageGet");
+        $response = $this->rest()->getJson("api/leads?$perPageGet" . "$pageGet");
 
         $response->assertStatus(200);
     }

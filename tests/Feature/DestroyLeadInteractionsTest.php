@@ -45,7 +45,7 @@ class DestroyLeadInteractionsTest extends TestCase
             $interactionId = LeadInteraction::orderBy('id', 'desc')->first()->id + 1;
         }
 
-        $response = $this->rest()->delete("api/leads/$leadId/interactions/$interactionId");
+        $response = $this->rest()->deleteJson("api/leads/$leadId/interactions/$interactionId");
 
         if ($expectedStatusCode === $response->getStatusCode()) {
             $response
