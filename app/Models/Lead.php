@@ -20,6 +20,12 @@ class Lead extends Model
         'message',
     ];
 
+    protected $casts = [
+        'unsubscribed_at' => 'datetime',
+        'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     public function interactions()
     {
         return $this->hasMany(LeadInteraction::class);

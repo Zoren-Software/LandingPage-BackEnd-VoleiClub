@@ -12,6 +12,7 @@ class LeadsTableTest extends BaseDatabaseTest
         'name' => ['type' => 'varchar', 'length' => 255],
         'email' => ['type' => 'varchar', 'length' => 255],
         'email_verified_at' => ['type' => 'timestamp', 'nullable' => true],
+        'unsubscribed_at' => ['type' => 'timestamp', 'nullable' => true],
         'status' => ['type' => 'enum', 'values' => ['new', 'contacted', 'converted', 'unqualified']],
         'experience_level' => ['type' => 'enum', 'values' => ['beginner', 'amateur', 'student', 'college']],
         'message' => ['type' => 'text'],
