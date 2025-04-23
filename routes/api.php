@@ -16,21 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(
-    [
-        'prefix' => 'leads',
-    ],
-    function () {
+Route::group(['prefix' => 'leads'], function () {
         Route::post(
             '/',
             [LeadController::class, 'store']
         );
+
         Route::get(
             '/confirm-email/{id}',
             [LeadController::class, 'confirmEmail']
         )
             ->middleware(['signed', 'throttle:6,1'])
             ->name('leads.confirm-email');
+
         Route::get(
             '/{leadId}/interactions',
             [
@@ -39,6 +37,7 @@ Route::group(
             ]
         )
             ->name('interactions.index');
+
         Route::delete(
             '/{lead}/interactions/{interaction}',
             [
@@ -47,6 +46,7 @@ Route::group(
             ]
         )
             ->name('leads.interactions.destroy');
+
         Route::put(
             '/{lead}/interactions/{interaction}',
             [
