@@ -17,6 +17,8 @@ return new class extends Migration
                 $table->string('email');
                 $table->timestamp('email_verified_at')
                     ->nullable();
+                $table->timestamp('unsubscribed_at')
+                    ->nullable();
                 $table->enum(
                     'status',
                     [
