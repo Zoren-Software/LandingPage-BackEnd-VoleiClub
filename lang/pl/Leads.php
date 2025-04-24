@@ -5,6 +5,8 @@ return [
         'nasz zespół skontaktuje się z Tobą wkrótce w celu uzyskania więcej szczegółów, jesteś teraz na naszej' .
         'liście oczekujących, jak tylko produkt zostanie uruchomiony, zostaniesz powiadomiony. ' .
         'Teraz potwierdź swój e-mail, klikając na link, który wysłaliśmy do Ciebie.',
+    'unsubscribe_receive_email' => 'Sprawdź swoją skrzynkę e-mail, aby potwierdzić rezygnację z subskrypcji.',
+    'unsubscribe_e-mail' => 'Anuluj subskrypcję E-mail',
     'email.unique' => 'Podany adres e-mail jest już zarejestrowany w naszej bazie danych. ' .
         'Nasz zespół skontaktuje się z Tobą wkrótce w celu uzyskania więcej szczegółów.',
     'email.required' => 'Pole e-mail jest wymagane.',
@@ -56,4 +58,10 @@ return [
     'interaction_does_not_belong' => 'Interakcja nie należy do podanego leadu.',
     'interaction_deleted' => 'Interakcja została pomyślnie usunięta.',
     'interaction_updated' => 'Interakcja została pomyślnie zaktualizowana.',
+    'email_unsubscribe_text_1' => 'Szkoda, że straciłeś zainteresowanie naszym produktem.',
+    'email_unsubscribe_text_2' => 'Ale szanujemy Twoją decyzję. Jeśli zmienisz zdanie, nie wahaj się z nami skontaktować.',
+    'email_unsubscribe_text_3' => 'Jeśli chcesz ponownie dołączyć do naszej listy oczekujących, po prostu odwiedź naszą stronę i zapisz się ponownie. Jesteśmy zawsze do Twojej dyspozycji.',
+    'email_unsubscribe_text_4' => 'Aby kontynuować rezygnację z subskrypcji, kliknij przycisk poniżej:',
+    'button_unsubscribe_e-mail' => 'Wypisz e-mail',
+    'unsubscribe_success' => 'Zostałeś usunięty z naszej listy oczekujących. Jeśli chcesz do niej wrócić, odwiedź naszą stronę internetową.',
 ];

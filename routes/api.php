@@ -17,45 +17,61 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'leads'], function () {
-        Route::post(
-            '/',
-            [LeadController::class, 'store']
-        );
+    Route::post(
+        '/',
+        [LeadController::class, 'store']
+    );
 
-        Route::get(
-            '/confirm-email/{id}',
-            [LeadController::class, 'confirmEmail']
-        )
-            ->middleware(['signed', 'throttle:6,1'])
-            ->name('leads.confirm-email');
+    Route::get(
+        '/confirm-email/{id}',
+        [LeadController::class, 'confirmEmail']
+    )
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('leads.confirm-email');
 
-        Route::get(
-            '/{leadId}/interactions',
-            [
-                LeadInteractionController::class,
-                'index',
-            ]
-        )
-            ->name('interactions.index');
+    Route::get(
+        '/{leadId}/interactions',
+        [
+            LeadInteractionController::class,
+            'index',
+        ]
+    )
+        ->name('interactions.index');
 
-        Route::delete(
-            '/{lead}/interactions/{interaction}',
-            [
-                LeadInteractionController::class,
-                'destroy',
-            ]
-        )
-            ->name('leads.interactions.destroy');
+    Route::delete(
+        '/{lead}/interactions/{interaction}',
+        [
+            LeadInteractionController::class,
+            'destroy',
+        ]
+    )
+        ->name('leads.interactions.destroy');
 
-        Route::put(
-            '/{lead}/interactions/{interaction}',
-            [
-                LeadInteractionController::class,
-                'update',
-            ]
-        )
-            ->name('leads.interactions.update');
-    }
+    Route::put(
+        '/{lead}/interactions/{interaction}',
+        [
+            LeadInteractionController::class,
+            'update',
+        ]
+    )
+        ->name('leads.interactions.update');
+
+    // NOTE - Rota para cancelar o email
+    Route::post(
+        '/unsubscribe',
+        [LeadController::class, 'unsubscribe']
+    )
+        ->name('leads.unsubscribe-email')
+        ->middleware(['throttle:6,1']);
+
+    // NOTE - Rota para confirmar o cancelamento do email
+    Route::get(
+        '/unsubscribe/{id}',
+        [LeadController::class, 'confirmUnsubscribeEmail']
+    )
+        ->name('leads.unsubscribe-email')
+        ->middleware(['signed', 'throttle:6,1']);
+}
 );
 
 Route::post(

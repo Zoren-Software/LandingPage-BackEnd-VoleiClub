@@ -5,6 +5,8 @@ return [
         'our team will contact you shortly for more details, you are now on our waiting' .
         'list, as soon as the product is launched you will be notified. ' .
         'Now confirm your email by clicking on the link we sent to you.',
+    'unsubscribe_receive_email' => 'Check your email to confirm the unsubscription.',
+    'unsubscribe_e-mail' => 'Unsubscribe Email',
     'email.unique' => 'The email provided is already registered in our database. ' .
         'Our team will contact you shortly for more details.',
     'email.required' => 'The e-mail field is required.',
@@ -56,4 +58,10 @@ return [
     'interaction_does_not_belong' => 'The interaction does not belong to the provided lead.',
     'interaction_deleted' => 'Interaction deleted successfully.',
     'interaction_updated' => 'Interaction updated successfully.',
+    'email_unsubscribe_text_1' => 'It’s a pity you’ve lost interest in our product.',
+    'email_unsubscribe_text_2' => 'But we respect your decision. If you change your mind, don’t hesitate to contact us.',
+    'email_unsubscribe_text_3' => 'If you’d like to join our waitlist again, just visit our website and sign up once more. We’re always here to help.',
+    'email_unsubscribe_text_4' => 'To continue your unsubscription, click the button below:',
+    'button_unsubscribe_e-mail' => 'Unsubscribe Email',
+    'unsubscribe_success' => 'You have been removed from our waitlist. If you wish to join again, please visit our website.',
 ];

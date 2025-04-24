@@ -5,6 +5,8 @@ return [
         'il nostro team ti contatterà a breve per ulteriori dettagli, ora sei nella nostra' .
         'lista d\'attesa, non appena il prodotto sarà lanciato sarai notificato. ' .
         'Ora conferma la tua e-mail cliccando sul link che ti abbiamo inviato.',
+    'unsubscribe_receive_email' => 'Controlla la tua email per confermare la cancellazione dell’iscrizione.',
+    'unsubscribe_e-mail' => 'Disiscrivi E-mail',
     'email.unique' => 'L\'email fornita è già registrata nel nostro database. ' .
         'Il nostro team ti contatterà a breve per ulteriori dettagli.',
     'email.required' => 'Il campo email è obbligatorio.',
@@ -56,4 +58,10 @@ return [
     'interaction_does_not_belong' => 'L\'interazione non appartiene al lead fornito.',
     'interaction_deleted' => 'Interazione eliminata con successo.',
     'interaction_updated' => 'Interazione aggiornata con successo.',
+    'email_unsubscribe_text_1' => 'Ci dispiace che tu abbia perso interesse per il nostro prodotto.',
+    'email_unsubscribe_text_2' => 'Ma rispettiamo la tua decisione. Se cambi idea, non esitare a contattarci.',
+    'email_unsubscribe_text_3' => 'Se desideri tornare nella nostra lista d’attesa, visita il nostro sito e iscriviti di nuovo. Siamo sempre qui per aiutarti.',
+    'email_unsubscribe_text_4' => 'Per continuare con la disiscrizione, clicca sul pulsante qui sotto:',
+    'button_unsubscribe_e-mail' => 'Disiscrivi e-mail',
+    'unsubscribe_success' => 'Sei stato rimosso dalla nostra lista d’attesa. Se desideri tornare a farne parte, visita il nostro sito web.',
 ];

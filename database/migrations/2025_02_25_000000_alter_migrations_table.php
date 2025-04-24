@@ -13,7 +13,7 @@ return new class extends Migration
         if (
             Schema::hasTable('migrations') &&
             Schema::hasColumn('migrations', 'id') &&
-            !hasAutoIncrement('migrations')
+            ! hasAutoIncrement('migrations')
         ) {
             DB::statement(
                 'ALTER TABLE `migrations` MODIFY COLUMN `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT'

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AlterStatusLeadRequest;
 use App\Http\Requests\ConfirmEmailRequest;
+use App\Http\Requests\ConfirmUnsubscribeEmailRequest;
 use App\Http\Requests\CreateLeadRequest;
 use App\Http\Requests\PaginateLeadsRequest;
+use App\Http\Requests\UnsubscribeEmailRequest;
 use App\Mail\AfterConfirmationEmail;
 use App\Mail\ConfirmEmail;
+use App\Mail\ConfirmUnsubscribeEmail;
 use App\Models\Lead;
 use Illuminate\Support\Facades\Mail;
 
@@ -65,6 +68,57 @@ class LeadController extends Controller
 
         return response()->json([
             'message' => __('Leads.emailConfirmed'),
+        ]);
+    }
+
+    /**
+     * @unauthenticated
+     *
+     * @group Leads
+     *
+     * @return [type]
+     */
+    public function unsubscribe(UnsubscribeEmailRequest $request)
+    {
+        $lead = Lead::whereEmail($request->email)
+            ->firstOrFail();
+
+        // Definir o locale com base no parâmetro da URL
+        if ($request->has('locale')) {
+            app()->setLocale($request->input('locale'));
+        }
+
+        Mail::mailer('smtp')
+            ->to($lead->email)
+            ->queue(new ConfirmUnsubscribeEmail($lead));
+
+        return response()->json([
+            'message' => __('Leads.unsubscribe_receive_email'),
+        ]);
+    }
+
+    /**
+     * @unauthenticated
+     *
+     * @group Leads
+     *
+     * @return [type]
+     */
+    public function confirmUnsubscribeEmail(ConfirmUnsubscribeEmailRequest $request, int $id)
+    {
+        $lead = Lead::findOrFail($id);
+
+        // Definir o locale com base no parâmetro da URL
+        if ($request->has('locale')) {
+            app()->setLocale($request->input('locale'));
+        }
+
+        $lead->email_verified_at = now();
+        $lead->unsubscribed_at = now();
+        $lead->save();
+
+        return response()->json([
+            'message' => __('Leads.unsubscribe_success'),
         ]);
     }
 
