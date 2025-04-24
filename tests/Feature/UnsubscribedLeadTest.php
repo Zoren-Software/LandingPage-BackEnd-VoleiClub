@@ -64,6 +64,8 @@ class UnsubscribedLeadTest extends TestCase
         $response = $this->rest()
             ->getJson($url);
 
+        dd($response->json());
+
         $response->assertStatus(200);
 
         $response->assertJsonStructure([

@@ -26,7 +26,6 @@ class ConfirmUnsubscribeEmailRequest extends FormRequest implements ScribeInterf
     {
         return [
             'id' => [
-                'required',
                 'string',
             ],
         ];
@@ -35,7 +34,6 @@ class ConfirmUnsubscribeEmailRequest extends FormRequest implements ScribeInterf
     public function messages(): array
     {
         return [
-            'id.required' => __('Leads.id_required'),
             'id.string' => __('Leads.id_string'),
         ];
     }
@@ -45,7 +43,6 @@ class ConfirmUnsubscribeEmailRequest extends FormRequest implements ScribeInterf
         return [
             'id' => [
                 'description' => 'Um ID assinado de um lead válido para o qual você deseja cancelar a inscrição.',
-                'required' => true,
                 'example' => '2?expires=1745459168&locale=pt-br&signature=8fb432ed6c38f78591549cfafde7d3d772b936d523ed2179f2dd80c3b2bf4db0',
             ],
         ];
