@@ -48,7 +48,7 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
                 'sometimes',
             ],
             'recaptchaToken' => [
-                Rule::requiredIf(env('APP_ENV') !== 'testing'),
+                Rule::requiredIf(env('APP_ENV') !== 'testing' && env('APP_ENV') !== 'local'),
             ],
         ];
     }
