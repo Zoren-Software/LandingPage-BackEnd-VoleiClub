@@ -38,7 +38,7 @@ class UnsubscribeEmailRequest extends FormRequest implements ScribeInterface
         return [
             'email.required' => __('Leads.email_required'),
             'email.email' => __('Leads.email_email'),
-            'email.exists' => __('Leads.email_exists'),
+            'email.exists' => __('Leads.email_not_exists'),
         ];
     }
 

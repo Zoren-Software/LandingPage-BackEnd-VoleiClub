@@ -66,4 +66,7 @@ return [
     'button_unsubscribe_e-mail' => 'Desinscrever E-mail',
     'unsubscribe_success' => 'Você foi removido da nossa lista de espera, ' .
         'caso deseje voltar a fazer parte, por favor visite nosso site.',
+    'email_not_exists' => 'O e-mail informado não existe em nossa base de dados.',
+    'email_required' => 'O campo e-mail é obrigatório.',
+    'email_email' => 'O campo e-mail deve ser um endereço de e-mail válido.',
 ];

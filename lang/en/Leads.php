@@ -64,4 +64,7 @@ return [
     'email_unsubscribe_text_4' => 'To continue your unsubscription, click the button below:',
     'button_unsubscribe_e-mail' => 'Unsubscribe Email',
     'unsubscribe_success' => 'You have been removed from our waitlist. If you wish to join again, please visit our website.',
+    'email_not_exists' => 'The provided email does not exist in our database.',
+    'email_required' => 'The email field is required.',
+    'email_email' => 'The email field must be a valid email address.',
 ];

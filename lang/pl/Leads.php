@@ -64,4 +64,7 @@ return [
     'email_unsubscribe_text_4' => 'Aby kontynuować rezygnację z subskrypcji, kliknij przycisk poniżej:',
     'button_unsubscribe_e-mail' => 'Wypisz e-mail',
     'unsubscribe_success' => 'Zostałeś usunięty z naszej listy oczekujących. Jeśli chcesz do niej wrócić, odwiedź naszą stronę internetową.',
+    'email_not_exists' => 'Podany adres e-mail nie istnieje w naszej bazie danych.',
+    'email_required' => 'Pole e-mail jest wymagane.',
+    'email_email' => 'Pole e-mail musi zawierać poprawny adres e-mail.',
 ];

@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
+use App\Models\Lead;
+use Faker\Factory as Faker;
 
 class UnsubscribedLeadTest extends TestCase
 {
@@ -18,7 +20,7 @@ class UnsubscribedLeadTest extends TestCase
      */
     public function unsubscribeLeadSendEmail(): void
     {
-        $lead = \App\Models\Lead::factory()->create();
+        $lead = Lead::factory()->create();
 
         $response = $this->rest()
             ->postJson(
@@ -46,9 +48,98 @@ class UnsubscribedLeadTest extends TestCase
      *
      * A basic test example.
      */
+    public function unsubscribeLeadSendEmailNotExists(): void
+    {
+        do {
+            $email = Faker::create()->unique()->safeEmail();
+        } while (Lead::where('email', $email)->exists());
+        
+        $response = $this->rest()
+            ->postJson(
+                'api/leads/unsubscribe',
+                [
+                    'email' => $email,
+                ]
+            );
+
+        $response->assertStatus(422);
+
+        $response->assertJsonStructure([
+            'message',
+        ]);
+
+        $response->assertJson([
+            'message' => __('Leads.email_not_exists'),
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @group unsubscribed-lead
+     *
+     * A basic test example.
+     */
+    public function unsubscribeLeadSendEmailNotEmail(): void
+    {
+        $response = $this->rest()
+            ->postJson(
+                'api/leads/unsubscribe',
+                [
+                ]
+            );
+
+        $response->assertStatus(422);
+
+        $response->assertJsonStructure([
+            'message',
+        ]);
+
+        $response->assertJson([
+            'message' => __('Leads.email_required'),
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @group unsubscribed-lead
+     *
+     * A basic test example.
+     */
+    public function unsubscribeLeadSendEmailEmailIsInvalid(): void
+    {
+        $emailInvalid = 'invalid-email';
+        
+        $response = $this->rest()
+            ->postJson(
+                'api/leads/unsubscribe',
+                [
+                    'email' => $emailInvalid,
+                ]
+            );
+
+        $response->assertStatus(422);
+
+        $response->assertJsonStructure([
+            'message',
+        ]);
+
+        $response->assertJson([
+            'message' => __('Leads.email_email'),
+        ]);
+    }
+
+    /**
+     * @test
+     *
+     * @group unsubscribed-lead
+     *
+     * A basic test example.
+     */
     public function unsubscribeLeadLinkSignedEmail(): void
     {
-        $lead = \App\Models\Lead::factory()->create();
+        $lead = Lead::factory()->create();
 
         $locale = app()->getLocale();
 
@@ -79,5 +170,41 @@ class UnsubscribedLeadTest extends TestCase
         $this->assertNotNull($lead->unsubscribed_at);
         $this->assertNotNull($lead->email_verified_at);
         $this->assertEquals($lead->unsubscribed_at, $lead->email_verified_at);
+    }
+
+    /**
+     * @test
+     *
+     * @group unsubscribed-lead
+     *
+     * A basic test example.
+     */
+    public function unsubscribeLeadLinkInvalidSignedEmail(): void
+    {
+        $lead = Lead::factory()->create();
+
+        $locale = app()->getLocale();
+
+        $url = URL::temporarySignedRoute(
+            'leads.unsubscribe-email',
+            now()->subMinutes(30),
+            [
+                'id' => $lead->id,
+                'locale' => $locale,
+            ]
+        );
+
+        $response = $this->rest()
+            ->getJson($url);
+
+        $response->assertStatus(403);
+
+        $response->assertJsonStructure([
+            'message',
+        ]);
+
+        $response->assertJson([
+            'message' => 'Invalid signature.',
+        ]);
     }
 }

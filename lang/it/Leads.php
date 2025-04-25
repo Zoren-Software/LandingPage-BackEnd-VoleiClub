@@ -64,4 +64,7 @@ return [
     'email_unsubscribe_text_4' => 'Per continuare con la disiscrizione, clicca sul pulsante qui sotto:',
     'button_unsubscribe_e-mail' => 'Disiscrivi e-mail',
     'unsubscribe_success' => 'Sei stato rimosso dalla nostra lista d’attesa. Se desideri tornare a farne parte, visita il nostro sito web.',
+    'email_not_exists' => "L'e-mail fornita non esiste nel nostro database.",
+    'email_required' => 'Il campo e-mail è obbligatorio.',
+    'email_email' => "Il campo e-mail deve contenere un indirizzo e-mail valido.",
 ];

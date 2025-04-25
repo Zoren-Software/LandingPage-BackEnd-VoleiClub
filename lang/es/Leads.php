@@ -62,4 +62,7 @@ return [
     'email_unsubscribe_text_4' => 'Para continuar con tu cancelación de suscripción, haz clic en el botón de abajo:',
     'button_unsubscribe_e-mail' => 'Cancelar suscripción al correo',
     'unsubscribe_success' => 'Has sido eliminado de nuestra lista de espera. Si deseas volver a formar parte, por favor visita nuestro sitio web.',
+    'email_not_exists' => 'El correo electrónico proporcionado no existe en nuestra base de datos.',
+    'email_required' => 'El campo de correo electrónico es obligatorio.',
+    'email_email' => 'El campo de correo electrónico debe ser una dirección válida.',
 ];
