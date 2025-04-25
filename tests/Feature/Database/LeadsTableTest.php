@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Database;
 
-class LeadsTableTest extends BaseDatabaseTest
+class LeadsTableTest extends BaseDatabase
 {
     protected $table = 'leads';
 

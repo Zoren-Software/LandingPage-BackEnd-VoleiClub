@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Database;
 
-class UserTableTest extends BaseDatabaseTest
+class UserTableTest extends BaseDatabase
 {
     protected $table = 'users';
 
