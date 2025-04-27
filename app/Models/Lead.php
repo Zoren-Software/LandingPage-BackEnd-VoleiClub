@@ -13,9 +13,9 @@ class Lead extends Model
 
     protected $fillable = [
         'tenant_id',
+        'status_id',
         'name',
         'email',
-        'status',
         'experience_level',
         'message',
     ];
