@@ -31,11 +31,14 @@ class AlterStatusLeadTest extends TestCase
         }
 
         if($data['status_id'] !== false) {
-            $data['status_id'] = LeadStatus::whereName($data['status_id'])->first()->id;
+            $data['status_id'] = LeadStatus::whereName($data['status_id'])->first()?->id;
+
+            if ($data['status_id'] === null) {
+                $data['status_id'] = LeadStatus::orderBy('id', 'desc')->first()->id + 1;
+            }
+
         }
         $response = $this->rest()->putJson('api/leads/' . $data['id'], $data);
-
-        dd($response->json());
 
         if ($statusCodeExpected === 200) {
             $response->assertJsonStructure([
@@ -44,7 +47,7 @@ class AlterStatusLeadTest extends TestCase
                     'id',
                     'name',
                     'email',
-                    'status',
+                    'status_id',
                     'experience_level',
                     'message',
                     'email_verified_at',
@@ -55,7 +58,7 @@ class AlterStatusLeadTest extends TestCase
 
             $response->assertJson([
                 'data' => [
-                    'status' => $data['status'],
+                    'status_id' => $data['status_id'],
                 ],
             ]);
 

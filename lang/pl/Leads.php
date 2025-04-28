@@ -50,7 +50,7 @@ return [
     'follow_us_on_instagram' => 'Obserwuj nas na Instagramie',
     'id_integer' => 'Pole id musi być liczbą całkowitą.',
     'id_exists' => 'Wybrane pole id jest nieprawidłowe.',
-    'status_in' => 'Wybrany status jest nieprawidłowy.',
+    'status_in' => 'Wybrany status id jest nieprawidłowy.',
     'status_string' => 'Pole status musi być ciągiem znaków.',
     'status_required' => 'Pole status jest wymagane.',
     'success_edit_status' => 'Status leadu został pomyślnie zaktualizowany.',

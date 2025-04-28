@@ -24,21 +24,10 @@ class EditLeadInteractionRequest extends FormRequest implements ScribeInterface
     public function rules(): array
     {
         return [
-            'status' => [
+            'status_id' => [
                 'required',
-                'string',
-                Rule::in([
-                    'new',
-                    'contacted',
-                    'converted',
-                    'unqualified',
-                    'qualified',
-                    'bad_email',
-                    'spam',
-                    'test',
-                    'trial_period',
-                    'active_customer',
-                ]),
+                'integer',
+                'exists:leads_status,id',
             ],
             'message' => [
                 'nullable',
@@ -63,9 +52,9 @@ class EditLeadInteractionRequest extends FormRequest implements ScribeInterface
     public function bodyParameters(): array
     {
         return [
-            'status' => [
+            'status_id' => [
                 'description' => 'The status of the interaction',
-                'example' => 'new',
+                'example' => '1',
                 'required' => true,
             ],
             'message' => [

@@ -31,6 +31,12 @@
         <testsuite name="UnsubscribedLead">
             <file>tests/Feature/UnsubscribedLeadTest.php</file>
         </testsuite>
+        <testsuite name="DestroyLeadInteractionsTest">
+            <file>tests/Feature/DestroyLeadInteractionsTest.php</file>
+        </testsuite>
+        <testsuite name="EditLeadInteractionsTest">
+            <file>tests/Feature/EditLeadInteractionsTest.php</file>
+        </testsuite>
         <testsuite name="Database">
             <directory>tests/Feature/Database</directory>
         </testsuite>

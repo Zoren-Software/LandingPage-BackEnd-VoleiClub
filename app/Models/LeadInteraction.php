@@ -11,7 +11,7 @@ class LeadInteraction extends Model
 
     protected $fillable = [
         'lead_id',
-        'status',
+        'status_id',
         'user_id',
         'message',
         'notes',

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Lead;
+use App\Models\LeadStatus;
 use App\Models\LeadInteraction;
 use Tests\TestCase;
 
@@ -46,8 +47,14 @@ class EditLeadInteractionsTest extends TestCase
             $interactionId = LeadInteraction::orderBy('id', 'desc')->first()->id + 1;
         }
 
-        if ($data['status'] === false) {
-            unset($data['status']);
+        if ($data['status_id'] === false) {
+            unset($data['status_id']);
+        } else {
+            $data['status_id'] = LeadStatus::whereName($data['status_id'])->first()?->id;
+
+            if ($data['status_id'] === null) {
+                $data['status_id'] = LeadStatus::orderBy('id', 'desc')->first()->id + 1;
+            }
         }
 
         if ($data['message'] === false) {
@@ -59,6 +66,8 @@ class EditLeadInteractionsTest extends TestCase
         }
 
         $response = $this->rest()->putJson("api/leads/$leadId/interactions/$interactionId", $data);
+
+        //dd($response->json(), $data);
 
         if ($response->getStatusCode() == 200) {
             $response
@@ -107,7 +116,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => 'Message test',
                     'notes' => 'Notes test',
                 ],
@@ -126,7 +135,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => 'Message test',
                     'notes' => 'Notes test',
                 ],
@@ -139,7 +148,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => false,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => 'Message test',
                     'notes' => 'Notes test',
                 ],
@@ -152,7 +161,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => false,
+                    'status_id' => false,
                     'message' => 'Message test',
                     'notes' => 'Notes test',
                 ],
@@ -165,7 +174,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => false,
                     'notes' => 'Notes test',
                 ],
@@ -178,7 +187,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => 123,
                     'notes' => 'Notes test',
                 ],
@@ -191,7 +200,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => 'Message test',
                     'notes' => false,
                 ],
@@ -204,7 +213,7 @@ class EditLeadInteractionsTest extends TestCase
                     'interactionId' => true,
                 ],
                 'data' => [
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => 'Message test',
                     'notes' => false,
                 ],

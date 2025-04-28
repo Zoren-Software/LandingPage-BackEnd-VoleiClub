@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Lead;
+use App\Models\LeadStatus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,18 +24,7 @@ class LeadInteractionFactory extends Factory
         return [
             'lead_id' => Lead::factory(),
             'user_id' => User::factory(),
-            'status' => $faker->randomElement([
-                'new',
-                'contacted',
-                'converted',
-                'unqualified',
-                'qualified',
-                'bad_email',
-                'spam',
-                'test',
-                'trial_period',
-                'active_customer',
-            ]),
+            'status_id' => $faker->numberBetween(1, LeadStatus::max('id')),
             'message' => $faker->text(),
             'notes' => $faker->text(),
         ];
