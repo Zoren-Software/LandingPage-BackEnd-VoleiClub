@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\LeadStatus;
-use App\Models\Lead;
+use App\Models\LeadInteraction;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class MigrateDataLeadsStatusTableSeeder extends Seeder
+class MigrateDataLeadsStatusInteractionsTableSeeder extends Seeder
 {
     /**
      * NOTE - Seeder apagável
@@ -19,7 +19,7 @@ class MigrateDataLeadsStatusTableSeeder extends Seeder
         $statuses = LeadStatus::get()->pluck('id', 'name');
 
         foreach ($statuses as $name => $id) {
-            Lead::where('status', $name)
+            LeadInteraction::where('status', $name)
                 ->update(['status_id' => $id]);
         }
     }

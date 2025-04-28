@@ -15,21 +15,9 @@ return new class() extends Migration
             Schema::create('lead_interactions', function (Blueprint $table) {
                 $table->bigInteger('id')->primary();
                 $table->unsignedBigInteger('lead_id');
-                $table->enum(
-                    'status',
-                    [
-                        'new',
-                        'contacted',
-                        'converted',
-                        'unqualified',
-                        'qualified',
-                        'bad_email',
-                        'spam',
-                        'test',
-                        'trial_period',
-                        'active_customer',
-                    ]
-                );
+                $table->unsignedBigInteger('status_id')
+                    ->nullable()
+                    ->default(1);
                 $table->text('message')->nullable();
                 $table->text('notes')->nullable();
                 $table->unsignedBigInteger('user_id')

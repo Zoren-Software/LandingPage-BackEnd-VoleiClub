@@ -16,6 +16,10 @@ return [
     'recaptchaToken.string' => 'El campo del token de recaptcha debe ser una cadena de texto.',
     'confirm_e-mail' => 'Confirmar Correo Electrónico',
     'text_confirm_e-mail' => 'Por favor, confirme su dirección de correo electrónico haciendo clic en el enlace de abajo',
+    'status_id_required' => 'El campo status_id es obligatorio.',
+    'status_id_string' => 'El campo status_id debe ser una cadena de texto.',
+    'status_id_exists' => 'El status_id seleccionado no es válido.',
+
     'button_confirm_e-mail' => 'Confirmar Correo Electrónico',
     'thanks' => 'Gracias',
     'hello' => 'Hola',

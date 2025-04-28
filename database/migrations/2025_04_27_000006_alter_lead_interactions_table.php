@@ -10,26 +10,26 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Schema::hasTable('leads')) {
-            Schema::table('leads', function (Blueprint $table) {
+        if (Schema::hasTable('lead_interactions')) {
+            Schema::table('lead_interactions', function (Blueprint $table) {
 
-                if (!Schema::hasColumn('leads', 'status_id')) {
-                    $table->unsignedBigInteger('status_id')->nullable()->after('tenant_id');
+                if (!Schema::hasColumn('lead_interactions', 'status_id')) {
+                    $table->unsignedBigInteger('status_id')->nullable()->after('lead_id');
                 }
     
-                if (!hasForeignKeyExist('leads', 'status_id')) {
+                if (!hasForeignKeyExist('lead_interactions', 'status_id')) {
                     $table->foreign('status_id')->references('id')->on('leads_status');
                 }
             });
         }
 
         // Migrar os dados antigos para o novo relacionamento
-        (new MigrateDataLeadsStatusTableSeeder())->run();
+        (new MigrateDataLeadsStatusInteractionsTableSeeder())->run();
     }
 
     public function down(): void
     {
-        Schema::table('leads', function (Blueprint $table) {
+        Schema::table('lead_interactions', function (Blueprint $table) {
             $table->dropForeign(['status_id']);
             $table->dropColumn('status_id');
         });

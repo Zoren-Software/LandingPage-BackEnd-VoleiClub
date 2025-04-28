@@ -34,7 +34,7 @@ class Lead extends Model
     public function alterStatus($request)
     {
         $this->findOrFail($request->input('id'));
-        $this->status = $request->input('status') ?? $this->status;
+        $this->status_id = $request->input('status_id') ?? $this->status_id;
         $this->tenant_id = $request->input('tenantId') ?? $this->tenant_id;
         $this->save();
 
@@ -45,8 +45,9 @@ class Lead extends Model
 
     private function createInteraction($request)
     {
+        // TODO - Parei na revisão por aqui
         $this->interactions()->create([
-            'status' => $request->input('status') ?? $this->status,
+            'status_id' => $request->input('status_id') ?? $this->status_id,
             'user_id' => auth()->id(),
             'message' => $request->input('message') ?? null,
             'notes' => $request->input('notes') ?? null,

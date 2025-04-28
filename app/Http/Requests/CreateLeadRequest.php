@@ -105,6 +105,11 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
     public function bodyParameters(): array
     {
         return [
+            'tenant_id' => [
+                'description' => __('Leads.tenant_id_description'),
+                'required' => true,
+                'value' => 'test',
+            ],
             'email' => [
                 'description' => __('Leads.email_description'),
                 'required' => true,
@@ -131,6 +136,5 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
                 'value' => 'test',
             ],
         ];
-
     }
 }

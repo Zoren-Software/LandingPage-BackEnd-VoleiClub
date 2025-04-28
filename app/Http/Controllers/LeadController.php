@@ -25,14 +25,9 @@ class LeadController extends Controller
      */
     public function store(CreateLeadRequest $request)
     {
-        $lead = Lead::create([
-            'tenant_id' => request('tenant_id'),
-            'name' => request('name'),
-            'email' => request('email'),
-            'status' => 'new',
-            'experience_level' => request('experience_level'),
-            'message' => request('message'),
-        ]);
+        $lead = new Lead();
+        $lead->fill($request->all());
+        $lead->save();
 
         Mail::mailer('smtp')
             ->to($lead->email)
