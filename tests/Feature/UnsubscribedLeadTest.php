@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Lead;
+use App\Models\LeadStatus;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
@@ -167,9 +168,13 @@ class UnsubscribedLeadTest extends TestCase
 
         $lead->refresh();
 
+        $idStatusUnsubscribed = LeadStatus::where('name', 'unsubscribed')->first()->id;
+
         $this->assertNotNull($lead->unsubscribed_at);
         $this->assertNotNull($lead->email_verified_at);
         $this->assertEquals($lead->unsubscribed_at, $lead->email_verified_at);
+
+        $this->assertEquals($lead->status_id, $idStatusUnsubscribed);
     }
 
     /**

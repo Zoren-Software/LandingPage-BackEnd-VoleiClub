@@ -12,6 +12,7 @@ use App\Mail\AfterConfirmationEmail;
 use App\Mail\ConfirmEmail;
 use App\Mail\ConfirmUnsubscribeEmail;
 use App\Models\Lead;
+use App\Models\LeadStatus;
 use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
@@ -110,6 +111,9 @@ class LeadController extends Controller
 
         $lead->email_verified_at = now();
         $lead->unsubscribed_at = now();
+
+        $lead->status_id = LeadStatus::where('name', 'unsubscribed')->first()->id;
+
         $lead->save();
 
         return response()->json([
@@ -124,14 +128,8 @@ class LeadController extends Controller
      */
     public function list(PaginateLeadsRequest $request)
     {
-        try {
-            $leads = Lead::with('status')
-                ->filtrar($request);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 400);
-        }
+        $leads = Lead::with('status')
+            ->filtrar($request);
 
         return response()->json(
             $leads->paginate(

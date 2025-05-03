@@ -1,6 +1,7 @@
 <?php
 
 use Database\Seeders\MigrateDataLeadsStatusTableSeeder;
+use Database\Seeders\MigrateDataLeadsStatusIDTableSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,8 +23,17 @@ return new class extends Migration
             });
         }
 
-        // Migrar os dados antigos para o novo relacionamento
-        (new MigrateDataLeadsStatusTableSeeder())->run();
+        if (Schema::hasTable('leads')) {
+            Schema::table('leads', function (Blueprint $table) {
+                if (Schema::hasColumn('leads', 'status')) {
+                    // Migrar os dados antigos para o novo relacionamento
+                    (new MigrateDataLeadsStatusTableSeeder())->run();
+                } else {
+                    (new MigrateDataLeadsStatusIDTableSeeder())->run();
+                }
+
+            });
+        }
     }
 
     public function down(): void
