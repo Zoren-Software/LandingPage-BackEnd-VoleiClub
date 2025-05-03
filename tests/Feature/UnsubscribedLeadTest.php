@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\URL;
-use Tests\TestCase;
 use App\Models\Lead;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\URL;
+use Tests\TestCase;
 
 class UnsubscribedLeadTest extends TestCase
 {
@@ -53,7 +53,7 @@ class UnsubscribedLeadTest extends TestCase
         do {
             $email = Faker::create()->unique()->safeEmail();
         } while (Lead::where('email', $email)->exists());
-        
+
         $response = $this->rest()
             ->postJson(
                 'api/leads/unsubscribe',
@@ -110,7 +110,7 @@ class UnsubscribedLeadTest extends TestCase
     public function unsubscribeLeadSendEmailEmailIsInvalid(): void
     {
         $emailInvalid = 'invalid-email';
-        
+
         $response = $this->rest()
             ->postJson(
                 'api/leads/unsubscribe',

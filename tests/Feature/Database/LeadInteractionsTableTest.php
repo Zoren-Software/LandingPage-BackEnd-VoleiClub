@@ -24,7 +24,7 @@ class LeadInteractionsTableTest extends BaseDatabase
     public static $foreignKeys = [
         'lead_interactions_lead_id_foreign',
         'lead_interactions_user_id_foreign',
-        'lead_interactions_status_id_foreign'
+        'lead_interactions_status_id_foreign',
     ]; // Definição das chaves estrangeiras
 
     public static $uniqueKeys = []; // Nenhuma chave única definida

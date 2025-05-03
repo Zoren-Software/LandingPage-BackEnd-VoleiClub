@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\LeadStatus;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class LeadsStatusTableSeeder extends Seeder
 {
@@ -24,7 +23,7 @@ class LeadsStatusTableSeeder extends Seeder
             'test',
             'trial_period',
             'active_customer',
-            'unsubscribe'
+            'unsubscribe',
         ];
 
         foreach ($statuses as $status) {

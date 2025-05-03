@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\LeadStatus;
+use Tests\TestCase;
 
 class AlterStatusLeadTest extends TestCase
 {
@@ -30,7 +30,7 @@ class AlterStatusLeadTest extends TestCase
             $data['id'] = 'lala';
         }
 
-        if($data['status_id'] !== false) {
+        if ($data['status_id'] !== false) {
             $data['status_id'] = LeadStatus::whereName($data['status_id'])->first()?->id;
 
             if ($data['status_id'] === null) {

@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Lead;
-use App\Models\LeadStatus;
 use App\Models\LeadInteraction;
+use App\Models\LeadStatus;
 use Tests\TestCase;
 
 class EditLeadInteractionsTest extends TestCase

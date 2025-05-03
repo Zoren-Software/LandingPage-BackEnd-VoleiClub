@@ -53,7 +53,7 @@ class ListLeadStatusTest extends TestCase
         $perPageGet = $perPage != null ? '&per_page=' . $perPage : '';
         $pageGet = $page != null ? '&page=' . $page : '';
 
-        if($search != false) {
+        if ($search != false) {
             $searchGet = '&search=' . $search;
         } else {
             $searchGet = '';
@@ -64,7 +64,7 @@ class ListLeadStatusTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJsonStructure($this->dataStructure);
-        
+
         $this->assertEquals($perPageEsperado, $response['per_page']);
         $this->assertEquals($pageEsperado, $response['current_page']);
     }

@@ -20,7 +20,7 @@ return new class extends Migration
     public function down(): void
     {
         if (Schema::hasTable('leads')) {
-            if (!Schema::hasColumn('leads', 'status')) {
+            if (! Schema::hasColumn('leads', 'status')) {
                 Schema::table('leads', function (Blueprint $table) {
                     $table->enum(
                         'status',

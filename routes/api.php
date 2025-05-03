@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\LeadController;
-use App\Http\Controllers\LeadStatusController;
 use App\Http\Controllers\LeadInteractionController;
+use App\Http\Controllers\LeadStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -111,7 +111,6 @@ Route::middleware('auth:sanctum')->group(function () {
         }
     );
 });
-
 
 // NOTE - criar rota de teste ping
 Route::get(

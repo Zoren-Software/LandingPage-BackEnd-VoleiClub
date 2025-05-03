@@ -68,7 +68,7 @@ return [
     'button_unsubscribe_e-mail' => 'Se désabonner de l’e-mail',
     'unsubscribe_success' => 'Vous avez été retiré de notre liste d’attente. Si vous souhaitez y revenir, veuillez visiter notre site web.',
     'email_not_exists' => "L'adresse e-mail fournie n'existe pas dans notre base de données.",
-    'email_required' => "Le champ e-mail est obligatoire.",
-    'email_email' => "Le champ e-mail doit contenir une adresse e-mail valide.",
+    'email_required' => 'Le champ e-mail est obligatoire.',
+    'email_email' => 'Le champ e-mail doit contenir une adresse e-mail valide.',
     'name_description' => 'Le champ nom doit être une chaîne de caractères.',
 ];

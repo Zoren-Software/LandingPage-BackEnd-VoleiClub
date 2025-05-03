@@ -2,16 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\LeadStatus;
 use App\Models\LeadInteraction;
+use App\Models\LeadStatus;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class MigrateDataLeadsStatusInteractionsTableSeeder extends Seeder
 {
     /**
      * NOTE - Seeder apagável
-     * 
+     *
      * Seed the application's database.
      */
     public function run(): void

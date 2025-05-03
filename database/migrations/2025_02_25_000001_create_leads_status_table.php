@@ -1,15 +1,15 @@
 <?php
 
+use Database\Seeders\LeadsStatusTableSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Database\Seeders\LeadsStatusTableSeeder;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('leads_status')) {
+        if (! Schema::hasTable('leads_status')) {
             Schema::create('leads_status', function (Blueprint $table) {
                 $table->id();
                 $table->string('name')->unique();

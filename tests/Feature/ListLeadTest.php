@@ -31,7 +31,7 @@ class ListLeadTest extends TestCase
                     'created_at',
                     'updated_at',
                     'deleted_at',
-                ]
+                ],
             ],
         ],
         'first_page_url',
@@ -74,7 +74,7 @@ class ListLeadTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJsonStructure($this->dataStructure);
-        
+
         $this->assertEquals($perPageEsperado, $response['per_page']);
         $this->assertEquals($pageEsperado, $response['current_page']);
     }

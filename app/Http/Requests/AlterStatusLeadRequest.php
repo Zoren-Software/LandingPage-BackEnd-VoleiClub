@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
 {

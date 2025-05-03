@@ -26,7 +26,7 @@ class LeadsTableTest extends BaseDatabase
     public static $autoIncrements = ['id']; // Campos auto_increment
 
     public static $foreignKeys = [
-        'leads_status_id_foreign'
+        'leads_status_id_foreign',
     ];
 
     public static $uniqueKeys = [

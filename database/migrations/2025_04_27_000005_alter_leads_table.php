@@ -1,10 +1,9 @@
 <?php
 
+use Database\Seeders\MigrateDataLeadsStatusTableSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
-use Database\Seeders\MigrateDataLeadsStatusTableSeeder;
 
 return new class extends Migration
 {
@@ -13,11 +12,11 @@ return new class extends Migration
         if (Schema::hasTable('leads')) {
             Schema::table('leads', function (Blueprint $table) {
 
-                if (!Schema::hasColumn('leads', 'status_id')) {
+                if (! Schema::hasColumn('leads', 'status_id')) {
                     $table->unsignedBigInteger('status_id')->nullable()->after('tenant_id');
                 }
-    
-                if (!hasForeignKeyExist('leads', 'status_id')) {
+
+                if (! hasForeignKeyExist('leads', 'status_id')) {
                     $table->foreign('status_id')->references('id')->on('leads_status');
                 }
             });
