@@ -56,6 +56,9 @@ class LeadController extends Controller
         }
 
         $lead->email_verified_at = now();
+
+        $lead->status_id = LeadStatus::where('name', 'email_confirmed')->first()->id;
+
         $lead->save();
 
         Mail::mailer('smtp')

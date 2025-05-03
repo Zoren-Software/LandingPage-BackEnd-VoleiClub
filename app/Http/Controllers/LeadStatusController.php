@@ -14,14 +14,8 @@ class LeadStatusController extends Controller
      */
     public function list(PaginateLeadsStatusRequest $request)
     {
-        try {
-            $leads = LeadStatus::query()
-                ->filtrar($request);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 400);
-        }
+        $leads = LeadStatus::query()
+            ->filtrar($request);
 
         return response()->json(
             $leads->paginate(

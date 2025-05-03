@@ -24,6 +24,7 @@ class LeadsStatusTableSeeder extends Seeder
             'trial_period',
             'active_customer',
             'unsubscribed',
+            'email_confirmed',
         ];
 
         foreach ($statuses as $status) {
