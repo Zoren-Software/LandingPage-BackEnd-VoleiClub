@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\LeadStatusController;
 use App\Http\Controllers\LeadInteractionController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,18 +88,30 @@ Route::post(
     ->name('logout')
     ->middleware(['auth:sanctum']);
 
-Route::prefix('/leads')->name('leads.')->middleware('auth:sanctum')->group(
-    function () {
-        Route::put(
-            '/{id}',
-            [LeadController::class, 'alterStatusLead']
-        );
-        Route::get(
-            '/',
-            [LeadController::class, 'list']
-        );
-    }
-);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('/leads')->name('leads.')->group(
+        function () {
+            Route::put(
+                '/{id}',
+                [LeadController::class, 'alterStatusLead']
+            );
+            Route::get(
+                '/',
+                [LeadController::class, 'list']
+            );
+        }
+    );
+
+    Route::prefix('/leads-status')->name('leads-status.')->group(
+        function () {
+            Route::get(
+                '/',
+                [LeadStatusController::class, 'list']
+            );
+        }
+    );
+});
+
 
 // NOTE - criar rota de teste ping
 Route::get(

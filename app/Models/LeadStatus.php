@@ -18,4 +18,13 @@ class LeadStatus extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function scopeFiltrar($query, $request)
+    {
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%');
+        }
+
+        return $query;
+    }
 }

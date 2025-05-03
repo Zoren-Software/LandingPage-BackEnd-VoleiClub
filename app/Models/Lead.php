@@ -82,4 +82,9 @@ class Lead extends Model
             $query->where('status', $request->input('status'));
         }
     }
+
+    public function status()
+    {
+        return $this->belongsTo(LeadStatus::class, 'status_id');
+    }
 }

@@ -5,7 +5,7 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ListLeadTest extends TestCase
+class ListLeadStatusTest extends TestCase
 {
     protected $login = true;
 
@@ -14,24 +14,10 @@ class ListLeadTest extends TestCase
         'data' => [
             '*' => [
                 'id',
-                'tenant_id',
-                'status_id',
                 'name',
-                'email',
-                'email_verified_at',
-                'unsubscribed_at',
-                'experience_level',
-                'message',
                 'created_at',
                 'updated_at',
                 'deleted_at',
-                'status' => [
-                    'id',
-                    'name',
-                    'created_at',
-                    'updated_at',
-                    'deleted_at',
-                ]
             ],
         ],
         'first_page_url',
@@ -62,14 +48,18 @@ class ListLeadTest extends TestCase
      *
      * A basic test example.
      */
-    public function listLeads($perPage, $page, int $perPageEsperado, int $pageEsperado): void
+    public function listLeadsStatus($perPage, $page, int $perPageEsperado, int $pageEsperado, string|bool $search): void
     {
-        \App\Models\Lead::factory()->create();
-
         $perPageGet = $perPage != null ? '&per_page=' . $perPage : '';
         $pageGet = $page != null ? '&page=' . $page : '';
 
-        $response = $this->rest()->getJson("api/leads?$perPageGet" . "$pageGet");
+        if($search != false) {
+            $searchGet = '&search=' . $search;
+        } else {
+            $searchGet = '';
+        }
+
+        $response = $this->rest()->getJson("api/leads-status?$perPageGet" . "$pageGet" . "$searchGet");
 
         $response->assertStatus(200);
 
@@ -82,17 +72,26 @@ class ListLeadTest extends TestCase
     public static function listarLeadsProvider()
     {
         return [
-            'listar leads, setando valores por página, sucesso' => [
+            'listar leads status, setando valores por página, sucesso' => [
                 'perPage' => 10,
                 'page' => 2,
                 'perPageEsperado' => 10,
                 'pageEsperado' => 2,
+                'search' => false,
             ],
-            'listar leads, valores padrão, sucesso' => [
+            'listar leads status, valores padrão, sucesso' => [
                 'perPage' => 10,
                 'page' => 1,
                 'perPageEsperado' => 10,
                 'pageEsperado' => 1,
+                'search' => false,
+            ],
+            'listar leads status, valores com filtro name, sucesso' => [
+                'perPage' => 10,
+                'page' => 1,
+                'perPageEsperado' => 10,
+                'pageEsperado' => 1,
+                'search' => 'n',
             ],
         ];
     }

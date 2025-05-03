@@ -125,7 +125,8 @@ class LeadController extends Controller
     public function list(PaginateLeadsRequest $request)
     {
         try {
-            $leads = Lead::filtrar($request);
+            $leads = Lead::with('status')
+                ->filtrar($request);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),

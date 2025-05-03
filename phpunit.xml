@@ -28,6 +28,9 @@
         <testsuite name="Lead">
             <file>tests/Feature/CreateLeadTest.php</file>
         </testsuite>
+        <testsuite name="LeadStatus">
+            <file>tests/Feature/ListLeadStatusTest.php</file>
+        </testsuite>
         <testsuite name="UnsubscribedLead">
             <file>tests/Feature/UnsubscribedLeadTest.php</file>
         </testsuite>

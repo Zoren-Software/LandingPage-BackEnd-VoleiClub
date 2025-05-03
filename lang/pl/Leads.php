@@ -70,4 +70,5 @@ return [
     'email_not_exists' => 'Podany adres e-mail nie istnieje w naszej bazie danych.',
     'email_required' => 'Pole e-mail jest wymagane.',
     'email_email' => 'Pole e-mail musi zawierać poprawny adres e-mail.',
+    'name_description' => 'Pole imię musi być ciągiem znaków.',
 ];

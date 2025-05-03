@@ -70,4 +70,5 @@ return [
     'email_not_exists' => 'The provided email does not exist in our database.',
     'email_required' => 'The email field is required.',
     'email_email' => 'The email field must be a valid email address.',
+    'name_description' => 'The name field must be a string.',
 ];

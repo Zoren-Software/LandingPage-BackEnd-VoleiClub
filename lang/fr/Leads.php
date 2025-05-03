@@ -70,4 +70,5 @@ return [
     'email_not_exists' => "L'adresse e-mail fournie n'existe pas dans notre base de données.",
     'email_required' => "Le champ e-mail est obligatoire.",
     'email_email' => "Le champ e-mail doit contenir une adresse e-mail valide.",
+    'name_description' => 'Le champ nom doit être une chaîne de caractères.',
 ];

@@ -69,4 +69,5 @@ return [
     'email_not_exists' => 'El correo electrónico proporcionado no existe en nuestra base de datos.',
     'email_required' => 'El campo de correo electrónico es obligatorio.',
     'email_email' => 'El campo de correo electrónico debe ser una dirección válida.',
+    'name_description' => 'El campo de nombre debe ser una cadena de texto.',
 ];
