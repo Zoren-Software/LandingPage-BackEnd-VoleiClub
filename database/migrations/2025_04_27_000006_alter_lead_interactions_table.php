@@ -1,7 +1,7 @@
 <?php
 
-use Database\Seeders\MigrateDataLeadsStatusInteractionsTableSeeder;
 use Database\Seeders\MigrateDataLeadsStatusIDInteractionsTableSeeder;
+use Database\Seeders\MigrateDataLeadsStatusInteractionsTableSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,7 +28,7 @@ return new class extends Migration
                 if (Schema::hasColumn('lead_interactions', 'status')) {
                     // Migrar os dados antigos para o novo relacionamento
                     (new MigrateDataLeadsStatusInteractionsTableSeeder())->run();
-                    
+
                 } else {
                     (new MigrateDataLeadsStatusIDInteractionsTableSeeder())->run();
                 }

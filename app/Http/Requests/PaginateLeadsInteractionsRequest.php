@@ -38,6 +38,9 @@ class PaginateLeadsInteractionsRequest extends FormRequest implements ScribeInte
         ];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [

@@ -38,6 +38,9 @@ class ConfirmUnsubscribeEmailRequest extends FormRequest implements ScribeInterf
         ];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [

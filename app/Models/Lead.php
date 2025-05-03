@@ -66,20 +66,21 @@ class Lead extends Model
         if ($request->has('search')) {
             $query->where('name', 'like', $request->input('search'));
             $query->orWhere('tenant_id', 'like', $request->input('search'));
+            $query->filterId($request);
         }
     }
 
     public function scopeFilterId($query, $request)
     {
-        if ($request->has('id')) {
-            $query->where('id', $request->input('id'));
-        }
+        $query->orWhere('id', $request->input('search'));
     }
 
     public function scopeFilterStatus($query, $request)
     {
         if ($request->has('status')) {
-            $query->where('status', $request->input('status'));
+            $query->whereHas('status', function ($query) use ($request) {
+                $query->where('name', $request->input('status'));
+            });
         }
     }
 

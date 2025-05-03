@@ -40,6 +40,9 @@ class ConfirmEmailRequest extends FormRequest implements ScribeInterface
         ];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [

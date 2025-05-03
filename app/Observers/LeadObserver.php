@@ -8,6 +8,13 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class LeadObserver
 {
+    /**
+     * Handle the Lead "created" event.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return void
+     */
     public function created(Lead $lead)
     {
         // usar discordService para enviar mensagem

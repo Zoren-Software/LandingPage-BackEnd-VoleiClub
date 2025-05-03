@@ -37,6 +37,9 @@ class LogoutRequest extends FormRequest
         ];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [

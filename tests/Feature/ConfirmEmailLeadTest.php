@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Lead;
 use App\Models\LeadStatus;
-use Faker\Factory as Faker;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 

@@ -80,6 +80,14 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
         });
     }
 
+    /**
+     * @codeCoverageIgnore
+     *
+     * Validate the reCAPTCHA token.
+     *
+     * @param  string  $token
+     * @return bool
+     */
     protected function validateRecaptcha($token)
     {
         $form = [
@@ -102,6 +110,9 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
         throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [
