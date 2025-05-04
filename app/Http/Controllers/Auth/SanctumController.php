@@ -52,14 +52,6 @@ class SanctumController extends Controller
      */
     public function logout(LogoutRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user) {
-            throw ValidationException::withMessages([
-                'email' => [__('Sanctum.auth.failed')],
-            ]);
-        }
-
         $token = explode('|', $request->token);
 
         PersonalAccessToken::where('id', $token[0])->delete();

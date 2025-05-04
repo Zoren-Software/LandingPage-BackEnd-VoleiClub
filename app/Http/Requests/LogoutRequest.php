@@ -22,8 +22,15 @@ class LogoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'token' => 'required|string',
+            'email' => [
+                'required',
+                'email',
+                'exists:users,email',
+            ],
+            'token' => [
+                'required',
+                'string',
+            ],
         ];
     }
 

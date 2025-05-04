@@ -19,7 +19,9 @@ class SanctumLogoutTest extends TestCase
      */
     public function logout(array $data, int $statusExpected, ?string $typeError): void
     {
-        if ($data['email']) {
+        if($data['email'] === 'not_exist') {
+            $data['email'] = 'not_exist@not_exist.com';
+        } elseif ($data['email']) {
             $data['email'] = \App\Models\User::factory()->create()->email;
         }
 
@@ -59,6 +61,14 @@ class SanctumLogoutTest extends TestCase
             'logout, logout not send email, error' => [
                 'data' => [
                     'email' => false,
+                    'token' => true,
+                ],
+                'statusExpected' => 422,
+                'typeError' => 'email',
+            ],
+            'logout, logout send email not exists, error' => [
+                'data' => [
+                    'email' => 'not_exist',
                     'token' => true,
                 ],
                 'statusExpected' => 422,
