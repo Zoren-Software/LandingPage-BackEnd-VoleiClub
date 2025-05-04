@@ -71,4 +71,6 @@ return [
     'email_required' => 'The email field is required.',
     'email_email' => 'The email field must be a valid email address.',
     'name_description' => 'The name field must be a string.',
+    'status_id_blocked' => 'This status cannot be set manually; it requires an action from the lead.',
+
 ];

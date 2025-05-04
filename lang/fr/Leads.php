@@ -71,4 +71,5 @@ return [
     'email_required' => 'Le champ e-mail est obligatoire.',
     'email_email' => 'Le champ e-mail doit contenir une adresse e-mail valide.',
     'name_description' => 'Le champ nom doit être une chaîne de caractères.',
+    'status_id_blocked' => 'Ce statut ne peut pas être défini manuellement ; il nécessite une action du lead lui-même.',
 ];

@@ -71,4 +71,6 @@ return [
     'email_required' => 'Pole e-mail jest wymagane.',
     'email_email' => 'Pole e-mail musi zawierać poprawny adres e-mail.',
     'name_description' => 'Pole imię musi być ciągiem znaków.',
+    'status_id_blocked' => "Ten status nie może być ustawiony ręcznie; wymaga działania samego leada.",
+
 ];

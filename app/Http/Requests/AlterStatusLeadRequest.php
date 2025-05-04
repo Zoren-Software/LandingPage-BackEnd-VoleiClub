@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\StatusLeadValidRule;
 
 class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
 {
@@ -32,6 +33,7 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                 'required',
                 'integer',
                 'exists:leads_status,id',
+                new StatusLeadValidRule,
             ],
             'message' => [
                 'nullable',
@@ -69,7 +71,7 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                 'required' => true,
                 'example' => 1,
             ],
-            'status' => [
+            'status_id' => [
                 'description' => __('Leads.status_description'),
                 'required' => true,
                 'example' => 'new',

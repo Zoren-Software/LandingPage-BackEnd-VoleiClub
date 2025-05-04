@@ -73,4 +73,5 @@ return [
     'email_required' => 'O campo e-mail é obrigatório.',
     'email_email' => 'O campo e-mail deve ser um endereço de e-mail válido.',
     'name_description' => 'O campo nome deve ser uma string.',
+    'status_id_blocked' => 'Este status não pode ser definido manualmente, requer a ação do próprio lead.',
 ];

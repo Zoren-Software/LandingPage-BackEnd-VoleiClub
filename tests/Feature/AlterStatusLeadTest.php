@@ -31,6 +31,7 @@ class AlterStatusLeadTest extends TestCase
         }
 
         if ($data['status_id'] !== false) {
+
             $data['status_id'] = LeadStatus::whereName($data['status_id'])->first()?->id;
 
             if ($data['status_id'] === null) {
@@ -254,10 +255,34 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status_id' => 'xablaus',
+                    'status_id' => null,
                 ],
                 'statusCodeExpected' => 422,
                 'messageExpected' => 'Leads.status_in',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+            'alter status lead, alter status is blocked unsubscribed, error' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status_id' => 'unsubscribed',
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.status_id_blocked',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+            'alter status lead, alter status is blocked email_confirmed, error' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status_id' => 'email_confirmed',
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.status_id_blocked',
                 'errorType' => 'error',
                 'errorExpected' => true,
             ],
