@@ -23,27 +23,26 @@ class SanctumController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        try {
-            $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-            if (! $user || ! Hash::check($request->password, $user->password)) {
-                throw ValidationException::withMessages([
-                    'email' => [__('Sanctum.auth.failed')],
-                ]);
-            }
-
-            $token = $user->createToken($request->device_name);
-            $token->accessToken->type = $request->device_type; // Assumindo que você possa acessar o token dessa maneira
-            $token->accessToken->save();
-
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => __('Sanctum.auth.login'),
-                'token' => $token->plainTextToken,
-                'data' => $user,
-            ]);
-        } catch (Throwable $erro) {
-            return throw new Exception($erro->getMessage());
+                'message' => __('Sanctum.auth.failed'),
+                'errors' => [
+                    'password' => __('Sanctum.auth.failed'),
+                ],
+            ], 422);
         }
+
+        $token = $user->createToken($request->device_name);
+        $token->accessToken->type = $request->device_type; // Assumindo que você possa acessar o token dessa maneira
+        $token->accessToken->save();
+
+        return response()->json([
+            'message' => __('Sanctum.auth.login'),
+            'token' => $token->plainTextToken,
+            'data' => $user,
+        ]);
     }
 
     /**
@@ -53,25 +52,20 @@ class SanctumController extends Controller
      */
     public function logout(LogoutRequest $request)
     {
-        try {
-            $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-            if (! $user) {
-                throw ValidationException::withMessages([
-                    'email' => [__('Sanctum.auth.failed')],
-                ]);
-            }
-
-            $token = explode('|', $request->token);
-
-            PersonalAccessToken::where('id', $token[0])->delete();
-
-            return response()->json([
-                'message' => __('Sanctum.auth.logout'),
+        if (! $user) {
+            throw ValidationException::withMessages([
+                'email' => [__('Sanctum.auth.failed')],
             ]);
-
-        } catch (Throwable $erro) {
-            return throw new Exception($erro->getMessage());
         }
+
+        $token = explode('|', $request->token);
+
+        PersonalAccessToken::where('id', $token[0])->delete();
+
+        return response()->json([
+            'message' => __('Sanctum.auth.logout'),
+        ]);
     }
 }

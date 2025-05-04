@@ -31,7 +31,9 @@ class SanctumLoginTest extends TestCase
             unset($data['device_name']);
         }
 
-        if ($data['password']) {
+        if (($data['password']) === 'incorrect_password') {
+            $data['password'] = 'incorrect_password';
+        } elseif ($data['password']) {
             $data['password'] = 'password';
         } else {
             unset($data['password']);
@@ -71,6 +73,16 @@ class SanctumLoginTest extends TestCase
                 'data' => [
                     'email' => true,
                     'password' => false,
+                    'device_name' => true,
+                    'device_type' => true,
+                ],
+                'statusExpected' => 422,
+                'typeError' => 'password',
+            ],
+            'login, logging send password incorrect, error' => [
+                'data' => [
+                    'email' => true,
+                    'password' => 'incorrect_password',
                     'device_name' => true,
                     'device_type' => true,
                 ],
