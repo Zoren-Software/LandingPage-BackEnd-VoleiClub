@@ -39,9 +39,8 @@ function hasIndexExist($table, $nameIndex)
 
 /**
  * @codeCoverageIgnore
- * 
- * @param mixed $eventName
- * 
+ *
+ * @param  mixed  $eventName
  * @return [type]
  */
 function hasEventExist($eventName)
@@ -134,9 +133,8 @@ function getPrimaryKeyColumns($table): array
 
 /**
  * @codeCoverageIgnore
- * 
- * @param mixed $table
- * 
+ *
+ * @param  mixed  $table
  * @return [type]
  */
 function hasPrimaryKey($table)

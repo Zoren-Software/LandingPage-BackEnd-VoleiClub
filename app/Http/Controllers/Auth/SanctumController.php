@@ -7,10 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\LogoutRequest;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
-use Exception;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-use Throwable;
 
 class SanctumController extends Controller
 {

@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
-use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\StatusLeadValidRule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
 {
