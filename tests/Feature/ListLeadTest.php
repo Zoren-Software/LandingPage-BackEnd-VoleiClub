@@ -3,6 +3,9 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Lead;
+use App\Models\LeadInteraction;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ListLeadTest extends TestCase
@@ -53,6 +56,18 @@ class ListLeadTest extends TestCase
         'total',
     ];
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        LeadInteraction::truncate();
+        Lead::truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    }
+
     /**
      * @test
      *
@@ -70,7 +85,10 @@ class ListLeadTest extends TestCase
         string|bool $search,
         string|bool $status
     ): void {
-        \App\Models\Lead::factory()->create();
+
+        \App\Models\Lead::factory()
+            ->count(100)
+            ->create();
 
         $perPageGet = $perPage != null ? '&per_page=' . $perPage : '';
         $pageGet = $page != null ? '&page=' . $page : '';
