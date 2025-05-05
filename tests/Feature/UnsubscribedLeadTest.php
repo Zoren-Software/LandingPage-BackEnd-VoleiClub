@@ -145,7 +145,7 @@ class UnsubscribedLeadTest extends TestCase
         $locale = app()->getLocale();
 
         $url = URL::temporarySignedRoute(
-            'leads.unsubscribe-email',
+            'leads.confirm-unsubscribe-email',
             now()->addMinutes(30),
             [
                 'id' => $lead->id,
@@ -191,7 +191,7 @@ class UnsubscribedLeadTest extends TestCase
         $locale = app()->getLocale();
 
         $url = URL::temporarySignedRoute(
-            'leads.unsubscribe-email',
+            'leads.confirm-unsubscribe-email',
             now()->subMinutes(30),
             [
                 'id' => $lead->id,
