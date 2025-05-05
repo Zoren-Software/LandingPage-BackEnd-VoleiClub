@@ -31,6 +31,8 @@ class EventServiceProvider extends ServiceProvider
     }
 
     /**
+     * @codeCoverageIgnore
+     * 
      * Determine if events and listeners should be automatically discovered.
      */
     public function shouldDiscoverEvents(): bool
