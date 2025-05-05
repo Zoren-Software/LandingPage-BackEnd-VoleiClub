@@ -45,7 +45,6 @@ class Lead extends Model
 
     private function createInteraction($request)
     {
-        // TODO - Parei na revisão por aqui
         $this->interactions()->create([
             'status_id' => $request->input('status_id') ?? $this->status_id,
             'user_id' => auth()->id(),

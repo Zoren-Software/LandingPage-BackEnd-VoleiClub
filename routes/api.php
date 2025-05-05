@@ -70,7 +70,7 @@ Route::group(['prefix' => 'leads'], function () {
         '/unsubscribe/{id}',
         [LeadController::class, 'confirmUnsubscribeEmail']
     )
-        ->name('leads.unsubscribe-email')
+        ->name('leads.confirm-unsubscribe-email')
         ->middleware(['signed', 'throttle:6,1']);
 }
 );

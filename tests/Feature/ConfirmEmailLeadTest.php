@@ -71,7 +71,7 @@ class ConfirmEmailLeadTest extends TestCase
         $locale = app()->getLocale();
 
         $url = URL::temporarySignedRoute(
-            'leads.unsubscribe-email',
+            'leads.confirm-email',
             now()->subMinutes(30),
             [
                 'id' => $lead->id,
