@@ -55,7 +55,7 @@ class Lead extends Model
 
     public function scopeFiltrar($query, $request)
     {
-        $query->filterId($request)
+        $query
             ->filterStatus($request)
             ->search($request);
     }
@@ -65,20 +65,14 @@ class Lead extends Model
         if ($request->has('search')) {
             $query->where('name', 'like', $request->input('search'));
             $query->orWhere('tenant_id', 'like', $request->input('search'));
-            $query->filterId($request);
         }
-    }
-
-    public function scopeFilterId($query, $request)
-    {
-        $query->orWhere('id', $request->input('search'));
     }
 
     public function scopeFilterStatus($query, $request)
     {
         if ($request->has('status')) {
             $query->whereHas('status', function ($query) use ($request) {
-                $query->where('name', $request->input('status'));
+                $query->where('id', $request->input('status'));
             });
         }
     }
