@@ -17,6 +17,8 @@ class VaporUiServiceProvider extends ServiceProvider
     }
 
     /**
+     * @codeCoverageIgnore
+     *
      * Register the Vapor UI gate.
      *
      * This gate determines who can access Vapor UI in non-local environments.

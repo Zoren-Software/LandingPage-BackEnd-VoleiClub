@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Database;
 
-class LeadInteractionsTableTest extends BaseDatabaseTest
+class LeadInteractionsTableTest extends BaseDatabase
 {
     protected $table = 'lead_interactions';
 
     public static $fieldTypes = [
         'id' => ['type' => 'bigint', 'unsigned' => true],
         'lead_id' => ['type' => 'bigint', 'unsigned' => true],
-        'status' => ['type' => 'enum', 'values' => ['new', 'contacted', 'converted', 'unqualified']],
+        'status_id' => ['type' => 'bigint', 'unsigned' => true, 'nullable' => true],
         'message' => ['type' => 'text', 'nullable' => true],
         'notes' => ['type' => 'text', 'nullable' => true],
         'user_id' => ['type' => 'bigint', 'unsigned' => true, 'nullable' => true],
@@ -24,6 +24,7 @@ class LeadInteractionsTableTest extends BaseDatabaseTest
     public static $foreignKeys = [
         'lead_interactions_lead_id_foreign',
         'lead_interactions_user_id_foreign',
+        'lead_interactions_status_id_foreign',
     ]; // Definição das chaves estrangeiras
 
     public static $uniqueKeys = []; // Nenhuma chave única definida

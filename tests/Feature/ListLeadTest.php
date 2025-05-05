@@ -9,6 +9,50 @@ class ListLeadTest extends TestCase
 {
     protected $login = true;
 
+    private $dataStructure = [
+        'current_page',
+        'data' => [
+            '*' => [
+                'id',
+                'tenant_id',
+                'status_id',
+                'name',
+                'email',
+                'email_verified_at',
+                'unsubscribed_at',
+                'experience_level',
+                'message',
+                'created_at',
+                'updated_at',
+                'deleted_at',
+                'status' => [
+                    'id',
+                    'name',
+                    'created_at',
+                    'updated_at',
+                    'deleted_at',
+                ],
+            ],
+        ],
+        'first_page_url',
+        'from',
+        'last_page',
+        'last_page_url',
+        'links' => [
+            '*' => [
+                'url',
+                'label',
+                'active',
+            ],
+        ],
+        'next_page_url',
+        'path',
+        'per_page',
+        'prev_page_url',
+        'to',
+        'total',
+    ];
+
     /**
      * @test
      *
@@ -18,16 +62,29 @@ class ListLeadTest extends TestCase
      *
      * A basic test example.
      */
-    public function listLeads($perPage, $page, int $perPageEsperado, int $pageEsperado): void
-    {
+    public function listLeads(
+        int $perPage,
+        int $page,
+        int $perPageEsperado,
+        int $pageEsperado,
+        string|bool $search,
+        string|bool $status
+    ): void {
         \App\Models\Lead::factory()->create();
 
         $perPageGet = $perPage != null ? '&per_page=' . $perPage : '';
         $pageGet = $page != null ? '&page=' . $page : '';
+        $search = $search != false ? '&search=' . $search : '';
+        $status = $status != false ? '&status=' . $status : '';
 
-        $response = $this->rest()->getJson("api/leads?$perPageGet" . "$pageGet");
+        $response = $this->rest()->getJson("api/leads?$perPageGet" . "$pageGet" . "$search" . "$status");
 
         $response->assertStatus(200);
+
+        $response->assertJsonStructure($this->dataStructure);
+
+        $this->assertEquals($perPageEsperado, $response['per_page']);
+        $this->assertEquals($pageEsperado, $response['current_page']);
     }
 
     public static function listarLeadsProvider()
@@ -38,12 +95,32 @@ class ListLeadTest extends TestCase
                 'page' => 2,
                 'perPageEsperado' => 10,
                 'pageEsperado' => 2,
+                'search' => false,
+                'status' => false,
             ],
             'listar leads, valores padrão, sucesso' => [
                 'perPage' => 10,
                 'page' => 1,
                 'perPageEsperado' => 10,
                 'pageEsperado' => 1,
+                'search' => false,
+                'status' => false,
+            ],
+            'listar leads, valores padrão com filtro search, sucesso' => [
+                'perPage' => 10,
+                'page' => 1,
+                'perPageEsperado' => 10,
+                'pageEsperado' => 1,
+                'search' => 't',
+                'status' => false,
+            ],
+            'listar leads, valores padrão com filtro status, sucesso' => [
+                'perPage' => 10,
+                'page' => 1,
+                'perPageEsperado' => 10,
+                'pageEsperado' => 1,
+                'search' => 't',
+                'status' => 'email_confirmed',
             ],
         ];
     }

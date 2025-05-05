@@ -25,7 +25,7 @@ class TotalTablesCentralTest extends TestCase
         $totalTables = count($tables);
 
         $this->assertEquals(
-            7,
+            8,
             $totalTables,
             PHP_EOL . PHP_EOL .
             'O número total de tabelas está incorreto.' . PHP_EOL .

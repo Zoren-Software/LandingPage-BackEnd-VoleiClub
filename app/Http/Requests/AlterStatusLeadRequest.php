@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Interfaces\ScribeInterface;
+use App\Rules\StatusLeadValidRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
 {
@@ -29,21 +29,11 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                 'integer',
                 'exists:leads,id',
             ],
-            'status' => [
+            'status_id' => [
                 'required',
-                'string',
-                Rule::in([
-                    'new',
-                    'contacted',
-                    'converted',
-                    'unqualified',
-                    'qualified',
-                    'bad_email',
-                    'spam',
-                    'test',
-                    'trial_period',
-                    'active_customer',
-                ]),
+                'integer',
+                'exists:leads_status,id',
+                new StatusLeadValidRule,
             ],
             'message' => [
                 'nullable',
@@ -62,12 +52,17 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
             'id.required' => __('Leads.id_required'),
             'id.integer' => __('Leads.id_integer'),
             'id.exists' => __('Leads.id_exists'),
-            'status.required' => __('Leads.status_required'),
-            'status.string' => __('Leads.status_string'),
-            'status.in' => __('Leads.status_in'),
+            'status_id_required' => __('Leads.status_id_required'),
+            'status_id_string' => __('Leads.status_id_string'),
+            'status_id_exists' => __('Leads.status_id_exists'),
+            'message.string' => __('Leads.message_string'),
+            'notes.string' => __('Leads.notes_string'),
         ];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [
@@ -76,7 +71,7 @@ class AlterStatusLeadRequest extends FormRequest implements ScribeInterface
                 'required' => true,
                 'example' => 1,
             ],
-            'status' => [
+            'status_id' => [
                 'description' => __('Leads.status_description'),
                 'required' => true,
                 'example' => 'new',

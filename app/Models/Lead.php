@@ -13,11 +13,17 @@ class Lead extends Model
 
     protected $fillable = [
         'tenant_id',
+        'status_id',
         'name',
         'email',
-        'status',
         'experience_level',
         'message',
+    ];
+
+    protected $casts = [
+        'unsubscribed_at' => 'datetime',
+        'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function interactions()
@@ -28,7 +34,7 @@ class Lead extends Model
     public function alterStatus($request)
     {
         $this->findOrFail($request->input('id'));
-        $this->status = $request->input('status') ?? $this->status;
+        $this->status_id = $request->input('status_id') ?? $this->status_id;
         $this->tenant_id = $request->input('tenantId') ?? $this->tenant_id;
         $this->save();
 
@@ -39,8 +45,9 @@ class Lead extends Model
 
     private function createInteraction($request)
     {
+        // TODO - Parei na revisão por aqui
         $this->interactions()->create([
-            'status' => $request->input('status') ?? $this->status,
+            'status_id' => $request->input('status_id') ?? $this->status_id,
             'user_id' => auth()->id(),
             'message' => $request->input('message') ?? null,
             'notes' => $request->input('notes') ?? null,
@@ -59,20 +66,26 @@ class Lead extends Model
         if ($request->has('search')) {
             $query->where('name', 'like', $request->input('search'));
             $query->orWhere('tenant_id', 'like', $request->input('search'));
+            $query->filterId($request);
         }
     }
 
     public function scopeFilterId($query, $request)
     {
-        if ($request->has('id')) {
-            $query->where('id', $request->input('id'));
-        }
+        $query->orWhere('id', $request->input('search'));
     }
 
     public function scopeFilterStatus($query, $request)
     {
         if ($request->has('status')) {
-            $query->where('status', $request->input('status'));
+            $query->whereHas('status', function ($query) use ($request) {
+                $query->where('name', $request->input('status'));
+            });
         }
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(LeadStatus::class, 'status_id');
     }
 }

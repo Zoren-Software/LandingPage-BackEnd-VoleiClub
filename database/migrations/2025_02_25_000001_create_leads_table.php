@@ -13,25 +13,15 @@ return new class extends Migration
                 $table->bigInteger('id')->primary();
                 $table->string('tenant_id')
                     ->nullable();
+                $table->unsignedBigInteger('status_id')
+                    ->nullable()
+                    ->default(1);
                 $table->string('name');
                 $table->string('email');
                 $table->timestamp('email_verified_at')
                     ->nullable();
-                $table->enum(
-                    'status',
-                    [
-                        'new',
-                        'contacted',
-                        'converted',
-                        'unqualified',
-                        'qualified',
-                        'bad_email',
-                        'spam',
-                        'test',
-                        'trial_period',
-                        'active_customer',
-                    ]
-                )->default('new');
+                $table->timestamp('unsubscribed_at')
+                    ->nullable();
                 $table->enum(
                     'experience_level',
                     [

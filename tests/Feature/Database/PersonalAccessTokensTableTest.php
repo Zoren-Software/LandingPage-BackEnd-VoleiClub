@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Database;
 
-class PersonalAccessTokensTableTest extends BaseDatabaseTest
+class PersonalAccessTokensTableTest extends BaseDatabase
 {
     protected $table = 'personal_access_tokens';
 

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\LeadStatus;
 use Tests\TestCase;
 
 class AlterStatusLeadTest extends TestCase
@@ -29,6 +30,15 @@ class AlterStatusLeadTest extends TestCase
             $data['id'] = 'lala';
         }
 
+        if ($data['status_id'] !== false) {
+
+            $data['status_id'] = LeadStatus::whereName($data['status_id'])->first()?->id;
+
+            if ($data['status_id'] === null) {
+                $data['status_id'] = LeadStatus::orderBy('id', 'desc')->first()->id + 1;
+            }
+
+        }
         $response = $this->rest()->putJson('api/leads/' . $data['id'], $data);
 
         if ($statusCodeExpected === 200) {
@@ -38,7 +48,7 @@ class AlterStatusLeadTest extends TestCase
                     'id',
                     'name',
                     'email',
-                    'status',
+                    'status_id',
                     'experience_level',
                     'message',
                     'email_verified_at',
@@ -49,7 +59,7 @@ class AlterStatusLeadTest extends TestCase
 
             $response->assertJson([
                 'data' => [
-                    'status' => $data['status'],
+                    'status_id' => $data['status_id'],
                 ],
             ]);
 
@@ -79,7 +89,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'new',
+                    'status_id' => 'new',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -90,7 +100,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'contacted',
+                    'status_id' => 'contacted',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -101,7 +111,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'converted',
+                    'status_id' => 'converted',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -112,7 +122,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'unqualified',
+                    'status_id' => 'unqualified',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -123,7 +133,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'qualified',
+                    'status_id' => 'qualified',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -134,7 +144,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'bad_email',
+                    'status_id' => 'bad_email',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -145,7 +155,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'spam',
+                    'status_id' => 'spam',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -156,7 +166,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'test',
+                    'status_id' => 'test',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -167,7 +177,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'trial_period',
+                    'status_id' => 'trial_period',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -178,7 +188,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'active_customer',
+                    'status_id' => 'active_customer',
                 ],
                 'statusCodeExpected' => 200,
                 'messageExpected' => 'Leads.success_edit_status',
@@ -189,7 +199,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => $faker->text(),
                 ],
                 'statusCodeExpected' => 200,
@@ -201,7 +211,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'notes' => $faker->text(),
                 ],
                 'statusCodeExpected' => 200,
@@ -213,7 +223,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'new',
+                    'status_id' => 'new',
                     'message' => $faker->text(),
                     'notes' => $faker->text(),
                 ],
@@ -234,7 +244,7 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => false,
                     'message' => $faker->text(),
-                    'status' => 'new',
+                    'status_id' => 'new',
                 ],
                 'statusCodeExpected' => 422,
                 'messageExpected' => 'Leads.id_integer',
@@ -245,10 +255,34 @@ class AlterStatusLeadTest extends TestCase
                 'data' => [
                     'id' => true,
                     'message' => $faker->text(),
-                    'status' => 'xablaus',
+                    'status_id' => null,
                 ],
                 'statusCodeExpected' => 422,
                 'messageExpected' => 'Leads.status_in',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+            'alter status lead, alter status is blocked unsubscribed, error' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status_id' => 'unsubscribed',
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.status_id_blocked',
+                'errorType' => 'error',
+                'errorExpected' => true,
+            ],
+            'alter status lead, alter status is blocked email_confirmed, error' => [
+                'data' => [
+                    'id' => true,
+                    'message' => $faker->text(),
+                    'status_id' => 'email_confirmed',
+                    'notes' => $faker->text(),
+                ],
+                'statusCodeExpected' => 422,
+                'messageExpected' => 'Leads.status_id_blocked',
                 'errorType' => 'error',
                 'errorExpected' => true,
             ],
