@@ -5,6 +5,8 @@ return [
         'our team will contact you shortly for more details, you are now on our waiting' .
         'list, as soon as the product is launched you will be notified. ' .
         'Now confirm your email by clicking on the link we sent to you.',
+    'unsubscribe_receive_email' => 'Check your email to confirm the unsubscription.',
+    'unsubscribe_e-mail' => 'Unsubscribe Email',
     'email.unique' => 'The email provided is already registered in our database. ' .
         'Our team will contact you shortly for more details.',
     'email.required' => 'The e-mail field is required.',
@@ -14,6 +16,9 @@ return [
     'emailConfirmed' => 'Your email has been successfully confirmed.',
     'recaptchaToken.required' => 'The recaptcha token field is required.',
     'recaptchaToken.string' => 'The recaptcha token field must be a string.',
+    'status_id_required' => 'The status_id field is required.',
+    'status_id_string' => 'The status_id field must be a string.',
+    'status_id_exists' => 'The selected status_id is invalid.',
     'confirm_e-mail' => 'Confirm Email',
     'text_confirm_e-mail' => 'Please confirm your email address by clicking the link below',
     'button_confirm_e-mail' => 'Confirm Email',
@@ -45,9 +50,9 @@ return [
     'follow_us_on_instagram' => 'Follow us on Instagram',
     'id_integer' => 'The id field must be an integer.',
     'id_exists' => 'The selected id field is invalid.',
-    'status_in' => 'The selected status is invalid.',
+    'status_in' => 'The selected status id is invalid.',
     'status_string' => 'The status field must be a string.',
-    'status_required' => 'The status field is required.',
+    'status_required' => 'The status id field is required.',
     'success_edit_status' => 'The status of the lead has been successfully updated.',
     'tenant_id_required' => 'The tenant_id field is required.',
     'tenant_id_string' => 'The tenant_id field must be a string.',
@@ -56,4 +61,16 @@ return [
     'interaction_does_not_belong' => 'The interaction does not belong to the provided lead.',
     'interaction_deleted' => 'Interaction deleted successfully.',
     'interaction_updated' => 'Interaction updated successfully.',
+    'email_unsubscribe_text_1' => 'It’s a pity you’ve lost interest in our product.',
+    'email_unsubscribe_text_2' => 'But we respect your decision. If you change your mind, don’t hesitate to contact us.',
+    'email_unsubscribe_text_3' => 'If you’d like to join our waitlist again, just visit our website and sign up once more. We’re always here to help.',
+    'email_unsubscribe_text_4' => 'To continue your unsubscription, click the button below:',
+    'button_unsubscribe_e-mail' => 'Unsubscribe Email',
+    'unsubscribe_success' => 'You have been removed from our waitlist. If you wish to join again, please visit our website.',
+    'email_not_exists' => 'The provided email does not exist in our database.',
+    'email_required' => 'The email field is required.',
+    'email_email' => 'The email field must be a valid email address.',
+    'name_description' => 'The name field must be a string.',
+    'status_id_blocked' => 'This status cannot be set manually; it requires an action from the lead.',
+
 ];

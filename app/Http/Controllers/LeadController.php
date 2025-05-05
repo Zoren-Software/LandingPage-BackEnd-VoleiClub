@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AlterStatusLeadRequest;
 use App\Http\Requests\ConfirmEmailRequest;
+use App\Http\Requests\ConfirmUnsubscribeEmailRequest;
 use App\Http\Requests\CreateLeadRequest;
 use App\Http\Requests\PaginateLeadsRequest;
+use App\Http\Requests\UnsubscribeEmailRequest;
 use App\Mail\AfterConfirmationEmail;
 use App\Mail\ConfirmEmail;
+use App\Mail\ConfirmUnsubscribeEmail;
 use App\Models\Lead;
+use App\Models\LeadStatus;
 use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
@@ -22,14 +26,9 @@ class LeadController extends Controller
      */
     public function store(CreateLeadRequest $request)
     {
-        $lead = Lead::create([
-            'tenant_id' => request('tenant_id'),
-            'name' => request('name'),
-            'email' => request('email'),
-            'status' => 'new',
-            'experience_level' => request('experience_level'),
-            'message' => request('message'),
-        ]);
+        $lead = new Lead();
+        $lead->fill($request->all());
+        $lead->save();
 
         Mail::mailer('smtp')
             ->to($lead->email)
@@ -57,6 +56,9 @@ class LeadController extends Controller
         }
 
         $lead->email_verified_at = now();
+
+        $lead->status_id = LeadStatus::where('name', 'email_confirmed')->first()->id;
+
         $lead->save();
 
         Mail::mailer('smtp')
@@ -69,19 +71,68 @@ class LeadController extends Controller
     }
 
     /**
+     * @unauthenticated
+     *
+     * @group Leads
+     *
+     * @return [type]
+     */
+    public function unsubscribe(UnsubscribeEmailRequest $request)
+    {
+        $lead = Lead::whereEmail($request->email)
+            ->firstOrFail();
+
+        // Definir o locale com base no parâmetro da URL
+        if ($request->has('locale')) {
+            app()->setLocale($request->input('locale'));
+        }
+
+        Mail::mailer('smtp')
+            ->to($lead->email)
+            ->queue(new ConfirmUnsubscribeEmail($lead));
+
+        return response()->json([
+            'message' => __('Leads.unsubscribe_receive_email'),
+        ]);
+    }
+
+    /**
+     * @unauthenticated
+     *
+     * @group Leads
+     *
+     * @return [type]
+     */
+    public function confirmUnsubscribeEmail(ConfirmUnsubscribeEmailRequest $request, int $id)
+    {
+        $lead = Lead::findOrFail($id);
+
+        // Definir o locale com base no parâmetro da URL
+        if ($request->has('locale')) {
+            app()->setLocale($request->input('locale'));
+        }
+
+        $lead->email_verified_at = now();
+        $lead->unsubscribed_at = now();
+
+        $lead->status_id = LeadStatus::where('name', 'unsubscribed')->first()->id;
+
+        $lead->save();
+
+        return response()->json([
+            'message' => __('Leads.unsubscribe_success'),
+        ]);
+    }
+
+    /**
      * @group Leads
      *
      * @return [type]
      */
     public function list(PaginateLeadsRequest $request)
     {
-        try {
-            $leads = Lead::filtrar($request);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 400);
-        }
+        $leads = Lead::with('status')
+            ->filtrar($request);
 
         return response()->json(
             $leads->paginate(

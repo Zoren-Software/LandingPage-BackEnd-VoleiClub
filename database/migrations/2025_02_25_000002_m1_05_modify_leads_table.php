@@ -24,6 +24,12 @@ return new class extends Migration
                 $table->unique('email', 'leads_email_unique');
             });
         }
+
+        if (Schema::hasTable('leads') && Schema::hasColumn('leads', 'status_id')) {
+            Schema::table('leads', function (Blueprint $table) {
+                $table->foreign('status_id')->references('id')->on('leads_status');
+            });
+        }
     }
 
     public function down(): void

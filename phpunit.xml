@@ -3,6 +3,8 @@
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="vendor/autoload.php"
     colors="true"
+    cacheResultFile="./coverage-cache/phpunit.cache"
+    cacheDirectory="./coverage-cache"
 >
     <testsuites>
         <testsuite name="Unit">
@@ -26,6 +28,21 @@
         <testsuite name="Lead">
             <file>tests/Feature/CreateLeadTest.php</file>
         </testsuite>
+        <testsuite name="LeadStatus">
+            <file>tests/Feature/ListLeadStatusTest.php</file>
+        </testsuite>
+        <testsuite name="ConfirmEmailLead">
+            <file>tests/Feature/ConfirmEmailLeadTest.php</file>
+        </testsuite>
+        <testsuite name="UnsubscribedLead">
+            <file>tests/Feature/UnsubscribedLeadTest.php</file>
+        </testsuite>
+        <testsuite name="DestroyLeadInteractionsTest">
+            <file>tests/Feature/DestroyLeadInteractionsTest.php</file>
+        </testsuite>
+        <testsuite name="EditLeadInteractionsTest">
+            <file>tests/Feature/EditLeadInteractionsTest.php</file>
+        </testsuite>
         <testsuite name="Database">
             <directory>tests/Feature/Database</directory>
         </testsuite>
@@ -35,6 +52,11 @@
             <directory>app</directory>
         </include>
     </source>
+    <coverage>
+        <report>
+        <html outputDirectory="reports" lowUpperBound="50" highLowerBound="90"/>
+        </report>
+    </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>

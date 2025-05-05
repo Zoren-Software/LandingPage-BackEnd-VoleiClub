@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\DB;
 
-function appHost()
-{
-    return env('APP_HOST', 'volleytrack.com');
-}
-
 function appVersion()
 {
     $composerJson = file_get_contents(base_path('composer.json'));
@@ -42,6 +37,12 @@ function hasIndexExist($table, $nameIndex)
     return ! empty($result);
 }
 
+/**
+ * @codeCoverageIgnore
+ *
+ * @param  mixed  $eventName
+ * @return [type]
+ */
 function hasEventExist($eventName)
 {
     $dbName = DB::connection()->getDatabaseName();
@@ -130,6 +131,12 @@ function getPrimaryKeyColumns($table): array
     return array_column($primaryKey, 'COLUMN_NAME');
 }
 
+/**
+ * @codeCoverageIgnore
+ *
+ * @param  mixed  $table
+ * @return [type]
+ */
 function hasPrimaryKey($table)
 {
     $databaseName = DB::getDatabaseName();

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Database;
 
-class PasswordResetTokensTableTest extends BaseDatabaseTest
+class PasswordResetTokensTableTest extends BaseDatabase
 {
     protected $table = 'password_reset_tokens';
 

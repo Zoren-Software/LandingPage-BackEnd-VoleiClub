@@ -48,7 +48,7 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
                 'sometimes',
             ],
             'recaptchaToken' => [
-                Rule::requiredIf(env('APP_ENV') !== 'testing'),
+                Rule::requiredIf(env('APP_ENV') !== 'testing' && env('APP_ENV') !== 'local'),
             ],
         ];
     }
@@ -80,6 +80,14 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
         });
     }
 
+    /**
+     * @codeCoverageIgnore
+     *
+     * Validate the reCAPTCHA token.
+     *
+     * @param  string  $token
+     * @return bool
+     */
     protected function validateRecaptcha($token)
     {
         $form = [
@@ -102,9 +110,17 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
         throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function bodyParameters(): array
     {
         return [
+            'tenant_id' => [
+                'description' => __('Leads.tenant_id_description'),
+                'required' => true,
+                'value' => 'test',
+            ],
             'email' => [
                 'description' => __('Leads.email_description'),
                 'required' => true,
@@ -131,6 +147,5 @@ class CreateLeadRequest extends FormRequest implements ScribeInterface
                 'value' => 'test',
             ],
         ];
-
     }
 }

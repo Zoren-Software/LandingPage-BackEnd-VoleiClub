@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Database;
 
-class MigrationsTest extends BaseDatabaseTest
+class MigrationsTest extends BaseDatabase
 {
     protected $table = 'migrations';
 

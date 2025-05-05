@@ -18,13 +18,19 @@ Route::get('/', function () {
 });
 
 Route::get('/confirm-email', function () {
-    $lead = App\Models\Lead::find(1);
+    $lead = App\Models\Lead::find(2);
 
     return new App\Mail\ConfirmEmail($lead);
 });
 
+Route::get('/unsubscribe-email', function () {
+    $lead = App\Models\Lead::find(2);
+
+    return new App\Mail\ConfirmUnsubscribeEmail($lead);
+});
+
 Route::get('/after-confirm-email', function () {
-    $lead = App\Models\Lead::find(1);
+    $lead = App\Models\Lead::find(2);
 
     return new App\Mail\AfterConfirmationEmail($lead);
 });

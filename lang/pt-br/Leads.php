@@ -5,6 +5,8 @@ return [
         'equipe entrará em contato em breve para mais detalhes, você agora esta em ' .
         'nossa fila de espera, assim que o produto for lançado você será notificado. ' .
         'Agora confirme seu e-mail clicando no link que enviamos para você.',
+    'unsubscribe_receive_email' => 'Verifique seu e-mail para confirmar o cancelamento de inscrição.',
+    'unsubscribe_e-mail' => 'Confirmar Cancelamento de Inscrição',
     'email.unique' => 'O e-mail informado já está cadastrado em nossa base de dados. ' .
         'Logo nossa equipe entrará em contato com você para mais detalhes.',
     'email.required' => 'O campo email é obrigatório.',
@@ -14,6 +16,9 @@ return [
     'emailConfirmed' => 'Seu e-mail foi confirmado com sucesso.',
     'recaptchaToken.required' => 'O campo do token recaptcha é obrigatório.',
     'recaptchaToken.string' => 'O campo do token recaptcha deve ser uma string.',
+    'status_id_required' => 'O campo status_id é obrigatório.',
+    'status_id_string' => 'O campo status_id deve ser uma string.',
+    'status_id_exists' => 'O campo status_id selecionado é inválido.',
     'confirm_e-mail' => 'Confirmar e-mail',
     'text_confirm_e-mail' => 'Por favor confirme seu endereço de e-mail clicando no link abaixo',
     'button_confirm_e-mail' => 'Confirmar e-mail',
@@ -45,9 +50,9 @@ return [
     'follow_us_on_instagram' => 'Siga-nos no Instagram',
     'id_integer' => 'O campo id deve ser um número inteiro.',
     'id_exists' => 'O campo id selecionado é inválido.',
-    'status_in' => 'O campo status selecionado é inválido.',
+    'status_in' => 'O campo status id selecionado é inválido.',
     'status_string' => 'O campo status deve ser uma string.',
-    'status_required' => 'O campo status é obrigatório.',
+    'status_required' => 'O campo status id é obrigatório.',
     'success_edit_status' => 'O status do lead foi atualizado com sucesso.',
     'tenant_id_required' => 'O campo tenant_id é obrigatório.',
     'tenant_id_string' => 'O campo tenant_id deve ser uma string.',
@@ -56,4 +61,17 @@ return [
     'interaction_does_not_belong' => 'A interação não pertence ao lead fornecido.',
     'interaction_deleted' => 'Interação excluída com sucesso.',
     'interaction_updated' => 'Interação atualizada com sucesso.',
+    'email_unsubscribe_text_1' => 'É uma pena que tenha perdido o interesse em nosso produto ',
+    'email_unsubscribe_text_2' => 'Mas respeitamos sua decisão. Se mudar de ideia, não hesite em entrar em contato conosco.',
+    'email_unsubscribe_text_3' => 'Se você quiser fazer parte da nossa lista de espera novamente, ' .
+        'basta visitar nosso site e se inscrever novamente. Estamos sempre aqui para ajudar.',
+    'email_unsubscribe_text_4' => 'Para continuar sua desinscrição, clique no botão abaixo:',
+    'button_unsubscribe_e-mail' => 'Desinscrever E-mail',
+    'unsubscribe_success' => 'Você foi removido da nossa lista de espera, ' .
+        'caso deseje voltar a fazer parte, por favor visite nosso site.',
+    'email_not_exists' => 'O e-mail informado não existe em nossa base de dados.',
+    'email_required' => 'O campo e-mail é obrigatório.',
+    'email_email' => 'O campo e-mail deve ser um endereço de e-mail válido.',
+    'name_description' => 'O campo nome deve ser uma string.',
+    'status_id_blocked' => 'Este status não pode ser definido manualmente, requer a ação do próprio lead.',
 ];
