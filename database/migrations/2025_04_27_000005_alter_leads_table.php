@@ -17,7 +17,7 @@ return new class extends Migration
                     $table->unsignedBigInteger('status_id')->nullable()->after('tenant_id');
                 }
 
-                if (! hasForeignKeyExist('leads', 'status_id')) {
+                if (! hasForeignKeyExist('leads', 'leads_status_id_foreign')) {
                     $table->foreign('status_id')->references('id')->on('leads_status');
                 }
             });

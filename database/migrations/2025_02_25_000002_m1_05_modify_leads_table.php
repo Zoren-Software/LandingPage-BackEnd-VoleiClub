@@ -25,7 +25,7 @@ return new class extends Migration
             });
         }
 
-        if (Schema::hasTable('leads') && ! Schema::hasColumn('leads', 'status_id')) {
+        if (Schema::hasTable('leads') && Schema::hasColumn('leads', 'status_id')) {
             Schema::table('leads', function (Blueprint $table) {
                 $table->foreign('status_id')->references('id')->on('leads_status');
             });
